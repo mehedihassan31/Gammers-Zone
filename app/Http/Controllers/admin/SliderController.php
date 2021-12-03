@@ -33,7 +33,6 @@ class SliderController extends Controller
         $host=$_SERVER['HTTP_HOST'];
 
         $location="http://".$host."/storage/".$photoName;
-
        $results=slider::insert(['photo'=>$location,'link'=>$link,'title'=>$name]);
        if($results==true){
         return 1 ;

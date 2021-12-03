@@ -20,6 +20,12 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
+Route::get('/apidoc',function(){
+    return view('ApiDoc');
+
+});
+
 Route::get('/login',[LoginController::class,'loginIndex']);
 Route::post('/onlogin',[LoginController::class,'onLogin']);
 Route::get('/logout',[LoginController::class,'onlogout']);

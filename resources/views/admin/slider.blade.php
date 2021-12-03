@@ -240,12 +240,12 @@ axios.get('/getSliderData')
     });
 
     //services delete
-$('.serviceDeletebtn').click(function(){
+$('.serviceDeletebtn').click(function(event){
   var id=$(this).data('id');
   var photo =$(this).data('photo');
   $('#serconfmdeltebtn').attr({ "data-id":id,"data-photo":photo});
   $('#deleteModal').modal('show');
-
+  event.preventDefault();
 
 })
 
@@ -283,14 +283,14 @@ $('.dataTables_length').addClass('bs-select');
 
 
 
-$('#serconfmdeltebtn').click(function(){
+$('#serconfmdeltebtn').click(function(event){
   var id=$(this).data('id');
   var photo =$(this).data('photo');
   var myFormdata=new FormData();
   myFormdata.append('id',id);
   myFormdata.append('oldphotourl',photo);
   sliderDelete(myFormdata);
-
+  event.preventDefault();
 })
 
 function sliderDelete(myFormdata){
