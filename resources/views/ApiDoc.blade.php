@@ -22,17 +22,46 @@
     </div>
 
     <div class="container mt-5">
+
+        <div class="card mt-4 mb-4">
+            <div class="row mb-4">
+                    <div class="col-lg-12">
+                        <div class="col-lg-6">
+                            <h3>Header Type</h3>
+                            <code>Accept:application/json</code>
+                            <p class="bg-light input-group"> <strong>GET | POST | </strong> https://(base-url)/api/</p>
+                    </div>
+                    <div class="col-lg-9">
+                        <h4>
+                            Demo
+                        </h4>
+                        <code>
+
+                        </code>
+                    </div>
+
+                    </div>
+            </div>
+    </div>
+
+
+
+
+
+
+
+
         <div class="card">
                 <div class="row mb-4">
 
                         <div class="col-lg-12">
-                            <div class="col-lg-3">
+                            <div class="col-lg-6">
                                 <h3>Slider</h3>
-                                <p class="bg-light input-group">https://(base-url)/api/sliderdata</p>
+                                <p class="bg-light input-group"><strong>GET | </strong> https://(base-url)/api/sliderdata</p>
                         </div>
                         <div class="col-lg-9">
                             <h4>
-                                demo
+                                Demo
                             </h4>
                             <code>
                             [
@@ -59,17 +88,20 @@
 
                 </div>
         </div>
+
+
+
+
         <div class="card mt-4 mb-4">
                 <div class="row mb-4">
-
                         <div class="col-lg-12">
-                            <div class="col-lg-3">
+                            <div class="col-lg-6">
                                 <h3>Register</h3>
-                                <p class="bg-light input-group">https://(base-url)/api/register</p>
+                                <p class="bg-light input-group"> <strong>POST | </strong>https://(base-url)/api/register</p>
                         </div>
                         <div class="col-lg-9">
                             <h4>
-                                demo
+                                Demo
                             </h4>
                             <code>
                                 {
@@ -85,24 +117,99 @@
                                     "token": "1|6jlPBKvC09qHM56z2TaYJLs9fyf1oKMousqPE06G"
                                 }
                             </code><br>
-                                <code>
-                                    fname,lname,username(unique),email(unique): all fields are requred
+                                <h5>
+                                    fname,lname,username(unique),email(unique): all fields are required
 
-                                </code>
-
+                                </h5>
                         </div>
 
                         </div>
+                </div>
+        </div>
+        <div class="card mt-4 mb-4">
+                <div class="row mb-4">
+                        <div class="col-lg-12">
+                            <div class="col-lg-6">
+                                <h3>Log In</h3>
+                                <p class="bg-light input-group"> <strong>POST | </strong>https://(base-url)/api/login</p>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>
+                                Demo
+                            </h4>
+                            <code>
+                                {
+                                    "user": {
+                                        "id": 1,
+                                        "fname": "mehedi",
+                                        "lname": "hassan",
+                                        "username": "mehedi",
+                                        "email": "mehedi@admin.com",
+                                        "phone": null,
+                                        "balance": null,
+                                        "winbalance": null,
+                                        "Dpbalance": null,
+                                        "reference": null,
+                                        "email_verified_at": null,
+                                        "created_at": "2021-12-03T12:59:58.000000Z",
+                                        "updated_at": "2021-12-03T12:59:58.000000Z"
+                                    },
+                                    "token": "11|fpZv6No53YiIM0fb1ajfc4x3x4idFYrwMbMODNeB"
+                                }
+                            </code><br>
+                                <h6>
+                                   email:<br>
+                                   password:
 
+                                </h6>
+                        </div>
+
+                        </div>
                 </div>
         </div>
 
 
 
 
+
+        <div class="card mt-4 mb-4">
+                <div class="row mb-4">
+                        <div class="col-lg-12">
+                            <div class="col-lg-6">
+                                <h3>Products</h3>
+                                <p class="bg-light input-group"> <strong>Get | </strong>https://(base-url)/api/products</p>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>
+                                Demo
+                            </h4>
+                            <code>
+                                [
+                                    {
+                                        "id": 1,
+                                        "p_name": "198 uC",
+                                        "price": 320,
+                                        "sale_price": 300,
+                                        "photo": "#",
+                                        "icon": "#",
+                                        "category": "pubg Uc",
+                                        "created_at": null,
+                                        "updated_at": null
+                                    }
+                                ]
+                            </code>
+                        </div>
+
+                        </div>
+                </div>
+        </div>
+
+
+
+
+
+
     </div>
 
-
-    
 </body>
 </html>
