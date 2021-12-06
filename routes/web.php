@@ -4,11 +4,11 @@ use App\Http\Controllers\admin\ContactController;
 use App\Http\Controllers\admin\coursesController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\LoginController;
+use App\Http\Controllers\admin\ProductsController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\ProjectsController;
 use App\Http\Controllers\admin\Reviewcontroller;
 use App\Http\Controllers\admin\VisitorController;
-use App\Http\Controllers\admin\ServicesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,12 +39,12 @@ Route::get('/visitor',[VisitorController::class,'VisitorIndex']);
 
 //service admin
 
-Route::get('/services',[ServicesController::class,'ServicesIndex']);
-Route::get('/getServicesData',[ServicesController::class,'getServicesData']);
-Route::post('/ServicesDelete',[ServicesController::class,'ServiceDelete']);
-Route::post('/ServicesDetails',[ServicesController::class,'getdetails']);
-Route::post('/ServicesUpdate',[ServicesController::class,'serviceUpdate']);
-Route::post('/ServicesAdd',[ServicesController::class,'serviceAdd']);
+Route::get('/products',[ProductsController::class,'ProductsIndex']);
+Route::get('/getProductsData',[ProductsController::class,'getProductsData']);
+Route::post('/ProductsDelete',[ProductsController::class,'productDelete']);
+Route::post('/ProductsDetails',[ProductsController::class,'getProductDetails']);
+Route::post('/ProductsUpdate',[ProductsController::class,'productUpdate']);
+Route::post('/ProductsAdd',[ProductsController::class,'productAdd']);
 
 //Slider admin
 

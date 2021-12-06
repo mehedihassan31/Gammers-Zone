@@ -11,9 +11,9 @@
     <table id="serviceDatatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
       <thead>
         <tr>
-          <th class="th-sm">Image</th>
-          <th class="th-sm">Name</th>
-          <th class="th-sm">Description</th>
+          <th class="th-sm">Diamond Quantity</th>
+          <th class="th-sm">price</th>
+          <th class="th-sm">Sale Price</th>
           <th class="th-sm">Edit</th>
           <th class="th-sm">Delete</th>
         </tr>
@@ -54,12 +54,6 @@
 
 
 
-<!-- Button trigger modal -->
-{{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-    Launch demo modal
-  </button> --}}
-  
-
 
 
 
@@ -71,7 +65,7 @@
       <div class="modal-content">
 
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Delete Services</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -113,13 +107,13 @@
                 <h5 id="serviceeditid" class="mt-4 text-center"> </h5>
                 <!-- Name input -->
                 <div class="form-outline mb-4">
-                  <input type="text" id="srid1" class="form-control" placeholder="Service name ">
+                  <input type="text" id="srid1" class="form-control" placeholder="Diamond Quantity">
                 </div>
                 <div class="form-outline mb-4">
-                  <input type="text" id="srid2" class="form-control" placeholder="Service Description">
+                  <input type="text" id="srid2" class="form-control" placeholder="Price">
                 </div>
                 <div class="form-outline mb-4">
-                  <input type="text" id="srid3" class="form-control" placeholder="Image Link">
+                  <input type="text" id="srid3" class="form-control" placeholder="Sale Price">
                 </div>
 
             </div>
@@ -150,7 +144,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> 
 
 
 
@@ -164,7 +158,7 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add New service</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add New Products</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -177,14 +171,15 @@
             <h6></h6>
               <!-- Name input -->
               <div class="form-outline mb-4">
-                <input type="text" id="sraddid1" class="form-control" placeholder="Service name ">
+                <input type="text" id="sraddid1" class="form-control" placeholder="Diamond Quantity ">
               </div>
               <div class="form-outline mb-4">
-                <input type="text" id="sraddid2" class="form-control" placeholder="Service Description">
+                <input type="text" id="sraddid2" class="form-control" placeholder="Price">
               </div>
               <div class="form-outline mb-4">
-                <input type="text" id="sraddid3" class="form-control" placeholder="Image Link">
+                <input type="text" id="sraddid3" class="form-control" placeholder="Sale Price">
               </div>
+
 
           </div>
 
@@ -217,14 +212,13 @@
 
 @section('script')
 <script type="text/javascript" >
-getServicesData();
+getProductsData();
 
 
+function getProductsData(){
 
-function getServicesData(){
 
-
-axios.get('/getServicesData')
+axios.get('/getProductsData')
 .then(function (response){
 
   if(response.status==200)
@@ -238,9 +232,9 @@ axios.get('/getServicesData')
     var jsonData=response.data;
     $.each(jsonData,function(i,item){
     $('<tr>').html(
-    "<td><img class='table-img' src='"+jsonData[i].service_img+"'></td>"+
-    "<td>"+jsonData[i].service_name+ "</td>"+
-    "<td>"+jsonData[i].service_des+"</td>"+
+    "<td>"+jsonData[i].p_name+ "</td>"+
+    "<td>"+jsonData[i].price+"</td>"+
+    "<td>"+jsonData[i].sale_price+"</td>"+
     "<td> <a class='serviceeditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit'></i></a>Edit</td>"+
     "<td><a class='serviceDeletebtn'  data-id='"+jsonData[i].id+"' ><i class='fas fa-trash-alt'></i></a></td>"
      ).appendTo('#servicetable');
@@ -258,7 +252,7 @@ $('.serviceDeletebtn').click(function(){
     $('.serviceeditbtn').click(function(){
        var id=$(this).data('id');
       $('#serviceeditid').html(id);
-       serviceDetails(id);
+      productDetails(id);
       $('#EditModal').modal('show')
     })
 
@@ -290,29 +284,30 @@ $('.dataTables_length').addClass('bs-select');
 
 
 
+
 $('#serconfmdeltebtn').click(function(){
   var id=$(this).data('id');
-  serviceDelete(id);
+  productDelete(id);
 
 
 })
 
-function serviceDelete(deleteid){
+function productDelete(deleteid){
 
-  axios.post('/ServicesDelete',{id:deleteid})
+  axios.post('/ProductsDelete',{id:deleteid})
   .then(function(response){
 
     if(response.data==1)
     {
       $('#deleteModal').modal('hide');
       toastr.success("Delete success");
-      getServicesData();
+      getProductsData();
 
     }else{
     
       $('#deleteModal').modal('hide');
       toastr.error("Delete Faild");
-      getServicesData();
+      getProductsData();
     }
 
   
@@ -326,17 +321,15 @@ function serviceDelete(deleteid){
 
 }
 
+ // each service update Details
 
-// each service update Details
+function productDetails(detailid){
 
-function serviceDetails(detailid){
-
-  axios.post('/ServicesDetails',{id:detailid})
+  axios.post('/ProductsDetails',{id:detailid})
   .then(function(response){
 
     if(response.status==200){
 
-      
 
       $('#detailsf').removeClass('d-none');
       $('#loaderdivd').addClass('d-none');
@@ -344,9 +337,9 @@ function serviceDetails(detailid){
 
       var jsonData=response.data;
 
-      $('#srid1').val(jsonData[0].service_name);
-      $('#srid2').val(jsonData[0].service_des);
-      $('#srid3').val(jsonData[0].service_img);
+      $('#srid1').val(jsonData[0].diamond);
+      $('#srid2').val(jsonData[0].price);
+      $('#srid3').val(jsonData[0].sale_price);
 
     }else{
       $('#wrongdivd').removeClass('d-none');
@@ -372,35 +365,31 @@ function serviceDetails(detailid){
     //services edit confirm
     $('#serconfmEditbtn').click(function(){
       var id=$('#serviceeditid').html();
-      var name=$('#srid1').val();
-      var des=$('#srid2').val();
-      var img=$('#srid3').val();
+      var diamond=$('#srid1').val();
+      var price=$('#srid2').val();
+      var saleprice=$('#srid3').val();
 
-      serviceUpdate(id,name,des,img);
+      serviceUpdate(id,diamond,price,saleprice;
 
     })
 
     
-function serviceUpdate(serid,serName,serDes,serImg){
+function productUpdate(id,diamond,price,saleprice){
 
-  if(serName.length==0){
+  if(diamond.length==0){
 
-    toastr.error("Name link emty");
+    toastr.error("Diamond is empty");
     
-  }else if(serDes.length==0){
-    toastr.error("Des link emty");
+  }else if(price.length==0){
+    toastr.error("Price is empty");
 
-  }
-  else if(serImg.length==0){
-    toastr.error("Image link emty");
+  } else{
 
-  }else{
-
-                  axios.post('/ServicesUpdate',{
-                    id:serid,
-                    name:serName,
-                    des:serDes,
-                    img:serImg
+                  axios.post('/ProductsUpdate',{
+                    id:id,
+                    diamond:serName,
+                    price:price,
+                    saleprice:saleprice
                   })
                   .then(function(response){
 
@@ -408,13 +397,13 @@ function serviceUpdate(serid,serName,serDes,serImg){
                     {
                       $('#EditModal').modal('hide');
                       toastr.success("Update success");
-                      getServicesData();
+                      getProductsData();
                 
                     }else{
                     
                       $('#EditModal').modal('hide');
                       toastr.error("Update Faild");
-                      getServicesData();
+                      getproductsData();
                     }
                 
                 
@@ -431,7 +420,7 @@ function serviceUpdate(serid,serName,serDes,serImg){
 }
 
 
-// service add
+// // service add
 
 $('#addnewbtn').click(function(){
 
@@ -444,11 +433,11 @@ $('#addModal').modal('show');
 
 
 $('#serconfmaddbtn').click(function(){
-  var name=$('#sraddid1').val();
-  var des=$('#sraddid2').val();
-  var img=$('#sraddid3').val();
+  var diamond=$('#sraddid1').val();
+  var price=$('#sraddid2').val();
+  var saleprice=$('#sraddid3').val();
 
-  serviceAdd(name,des,img);
+  serviceAdd(diamond,price,saleprice);
 
 });
 
@@ -456,24 +445,21 @@ $('#serconfmaddbtn').click(function(){
 // service add method
 
 
-function serviceAdd(serName,serDes,serImg){
+function serviceAdd(diamond,price,saleprice){
 
-  if(serName.length==0){
+  if(diamond.length==0){
 
-    toastr.error("Name link emty");
+    toastr.error("Diamond is empty");
     
-  }else if(serDes.length==0){
-    toastr.error("Des link emty");
+  }else if(saleprice.length==0){
+    toastr.error("Price is empty");
 
   }
-  else if(serImg.length==0){
-    toastr.error("Image link emty");
-
-  }else{ 
-    axios.post('/ServicesAdd',{ 
-                    name:serName,
-                    des:serDes,
-                    img:serImg
+else{ 
+    axios.post('/ProductsAdd',{ 
+                    diamond:diamond,
+                    price:price,
+                    saleprice:saleprice
                   })
                   .then(function(response){
 
@@ -481,13 +467,13 @@ function serviceAdd(serName,serDes,serImg){
                     {
                       $('#addModal').modal('hide');
                       toastr.success("add success");
-                      getServicesData();
+                      getProducrtsData();
                 
                     }else{
                     
                       $('#addModal').modal('hide');
                       toastr.error("add Faild");
-                      getServicesData();
+                      getProductsData();
                     }
 
                   }).catch(function (error) {
