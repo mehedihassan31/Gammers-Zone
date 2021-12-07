@@ -214,10 +214,7 @@
 <script type="text/javascript" >
 getProductsData();
 
-
 function getProductsData(){
-
-
 axios.get('/getProductsData')
 .then(function (response){
 
@@ -232,7 +229,7 @@ axios.get('/getProductsData')
     var jsonData=response.data;
     $.each(jsonData,function(i,item){
     $('<tr>').html(
-    "<td>"+jsonData[i].p_name+ "</td>"+
+    "<td>"+jsonData[i].diamond+ "</td>"+
     "<td>"+jsonData[i].price+"</td>"+
     "<td>"+jsonData[i].sale_price+"</td>"+
     "<td> <a class='serviceeditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit'></i></a>Edit</td>"+
@@ -310,11 +307,7 @@ function productDelete(deleteid){
       getProductsData();
     }
 
-  
-
-
   }).catch(function (error) {
-
 
 });
 
@@ -369,7 +362,7 @@ function productDetails(detailid){
       var price=$('#srid2').val();
       var saleprice=$('#srid3').val();
 
-      serviceUpdate(id,diamond,price,saleprice;
+      productUpdate(id,diamond,price,saleprice);
 
     })
 
@@ -377,7 +370,6 @@ function productDetails(detailid){
 function productUpdate(id,diamond,price,saleprice){
 
   if(diamond.length==0){
-
     toastr.error("Diamond is empty");
     
   }else if(price.length==0){
@@ -387,7 +379,7 @@ function productUpdate(id,diamond,price,saleprice){
 
                   axios.post('/ProductsUpdate',{
                     id:id,
-                    diamond:serName,
+                    diamond:diamond,
                     price:price,
                     saleprice:saleprice
                   })
@@ -413,10 +405,6 @@ function productUpdate(id,diamond,price,saleprice){
                 });
 
     }
-
- 
-
-
 }
 
 
@@ -447,43 +435,37 @@ $('#serconfmaddbtn').click(function(){
 
 function serviceAdd(diamond,price,saleprice){
 
-  if(diamond.length==0){
+      if(diamond.length==0){
+        toastr.error("Diamond is empty");  
+      }else if(price.length==0){
+        toastr.error("Price is empty");
+      }else{ 
+        axios.post('/ProductsAdd',{ 
+                        diamond:diamond,
+                        price:price,
+                        saleprice:saleprice
+                      })
+                      .then(function(response){
 
-    toastr.error("Diamond is empty");
-    
-  }else if(saleprice.length==0){
-    toastr.error("Price is empty");
-
-  }
-else{ 
-    axios.post('/ProductsAdd',{ 
-                    diamond:diamond,
-                    price:price,
-                    saleprice:saleprice
-                  })
-                  .then(function(response){
-
-                    if(response.data==1)
-                    {
-                      $('#addModal').modal('hide');
-                      toastr.success("add success");
-                      getProducrtsData();
-                
-                    }else{
+                        if(response.data==1)
+                        {
+                          $('#addModal').modal('hide');
+                          toastr.success("add success");
+                          getProductsData();
                     
-                      $('#addModal').modal('hide');
-                      toastr.error("add Faild");
-                      getProductsData();
-                    }
+                        }else{
+                        
+                          $('#addModal').modal('hide');
+                          toastr.error("add Faild");
+                          getProductsData();
+                        }
 
-                  }).catch(function (error) {
-                
+                      }).catch(function (error) {
+                    
 
-                });
+                    });
 
-    }
-
- 
+        }
 
 
 }

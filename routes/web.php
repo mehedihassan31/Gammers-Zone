@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\ContactController;
 use App\Http\Controllers\admin\coursesController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\LoginController;
+use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductsController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\ProjectsController;
@@ -29,15 +30,10 @@ Route::get('/apidoc',function(){
 Route::get('/login',[LoginController::class,'loginIndex']);
 Route::post('/onlogin',[LoginController::class,'onLogin']);
 Route::get('/logout',[LoginController::class,'onlogout']);
-
-
-
-
-
 Route::get('/',[HomeController::class,'HomeIndex']);
 Route::get('/visitor',[VisitorController::class,'VisitorIndex']);
 
-//service admin
+//Product admin
 
 Route::get('/products',[ProductsController::class,'ProductsIndex']);
 Route::get('/getProductsData',[ProductsController::class,'getProductsData']);
@@ -54,6 +50,16 @@ Route::post('/SliderDelete',[SliderController::class,'SliderDelete']);
 Route::post('/SliderDetails',[SliderController::class,'getdetails']);
 Route::post('/SliderUpdate',[SliderController::class,'SliderUpdate']);
 Route::post('/SliderAdd',[SliderController::class,'sliderAdd']);
+
+
+
+
+// Order manage
+
+Route::get('/order',[OrderController::class,'OrderIndex']);
+Route::get('/getAllOrder',[OrderController::class,'getOrderData']);
+Route::post('/StatusUpdate',[OrderController::class,'sUpdate']);
+
 
 
 
@@ -97,13 +103,6 @@ Route::post('/ReviewDetails',[Reviewcontroller::class,'getreviewdetails']);
 
 
 
-
-Route::get('/slider',[SliderController::class,'sliderIndex']);
-
-Route::post('/sliderupload',[SliderController::class,'sliderUpload']);
-Route::get('/sliderall',[SliderController::class,'sliderJson']);
-Route::get('/sliderjsonbyid/{id}',[SliderController::class,'sliderJsonById']);
-Route::post('/sliderdelete',[SliderController::class,'sliderDelete']);
 
 
 

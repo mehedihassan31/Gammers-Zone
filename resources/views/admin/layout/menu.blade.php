@@ -20,7 +20,7 @@
                     <li class="nav-devider mt-0" style="margin-bottom: 5px"></li>
                     <li> <a href="{{url('/')}}" ><span> <i class="fas fa-home"></i> </span><span class="hide-menu">Home</span></a></li>
                    <li> <a href="{{url('/products')}}" ><span> <i class="fas fa-globe"></i> </span><span class="hide-menu">Products</span></a></li>
-                   <li> <a href="#" ><span> <i class="fas fa-users"></i> </span><span class="hide-menu">test</span></a></li>
+                   <li> <a href="{{url('/order')}}" ><span> <i class="fas fa-users"></i> </span><span class="hide-menu">Order</span></a></li>
                    <li> <a href="{{url('/courses')}}" ><span> <i class="fas fa-book-open"></i> </span><span class="hide-menu">Courses</span></a></li>
                    <li> <a href="{{url('/projects')}}" ><span> <i class="fas fa-tasks"></i> </span><span class="hide-menu">Projects</span></a></li>
                    <li> <a href="{{url('/contact')}}" ><span> <i class="far fa-envelope"></i> </span><span class="hide-menu">Contact</span></a></li>

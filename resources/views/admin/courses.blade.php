@@ -4,30 +4,29 @@
 
 <div id="mainDivCourse" class="container d-none">
     <div class="row">
-    <div class="col-md-12 p-5">
+        <div class="col-md-12 p-5">
 
-        <button id="addCoursebtn" class="btn btn-sm mr-3 btn-danger">Add New</button>
+                <button id="addCoursebtn" class="btn btn-sm mr-3 btn-danger">Add New</button>
 
-    <table id="coursedatatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-      <thead>
-        <tr>
-          <th class="th-sm">Name</th>
-          <th class="th-sm">Course fee</th>
-          <th class="th-sm">Class</th>
-          <th class="th-sm">Enroll</th>
-          <th class="th-sm">Details</th>
-          <th class="th-sm">Edit</th>
-          <th class="th-sm">Delete</th>
-        </tr>
-      </thead>
-      <tbody id="course_table">
-	
-
-      </tbody>
-    </table>
+            <table id="coursedatatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th class="th-sm">Name</th>
+                  <th class="th-sm">Course fee</th>
+                  <th class="th-sm">Class</th>
+                  <th class="th-sm">Enroll</th>
+                  <th class="th-sm">Details</th>
+                  <th class="th-sm">Edit</th>
+                  <th class="th-sm">Delete</th>
+                </tr>
+              </thead>
+              <tbody id="course_table">
+          
+              </tbody>
+            </table>
+        </div>
     </div>
-    </div>
-    </div>
+</div>
 
 
 
@@ -184,13 +183,13 @@ aria-hidden="true">
 
 @section('script')
 <script>
-getCoursesData();
+getOrderData();
 
 
 
 
-function getCoursesData(){
-  axios.get('/getCoursesData')
+function getOrderData(){
+  axios.get('/getAllOrder')
         .then(function(response){
           if(response.status==200){
             $('#mainDivCourse').removeClass('d-none');
@@ -249,6 +248,8 @@ $('#addCoursebtn').click(function(){
   $('#addCourseModal').modal('show');
 
 })
+
+
 
 
 $('#CourseAddConfirmBtn').click(function(){
