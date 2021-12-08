@@ -29,11 +29,9 @@ class OrderController extends Controller
         
     }
 
-    function StatusUpdate(Request $request){
+    function sUpdate(Request $request){
         $id=$request->input('id');
         $status=$request->input('status');
-
-
         $orderstatus=order::where('id','=',$id)->update(['status'=>$status]);
 
         if($orderstatus==true)

@@ -11,13 +11,10 @@ class order extends Model
 {
     use HasFactory;
     protected $table="order";
-    protected $fillable = [
-        'product_id',
-        'user_id',
-        'game_id',
-        'status',
-        'price',
-    ];
+    protected $primaryKey='id';
+    public $incrementing=true;
+    public $keyType='int';
+    public $timestamps=false;
 
     public function product() {
         return $this->belongsTo(ProductsModel::class);

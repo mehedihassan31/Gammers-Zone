@@ -9,6 +9,8 @@ use App\Http\Controllers\admin\ProductsController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\ProjectsController;
 use App\Http\Controllers\admin\Reviewcontroller;
+use App\Http\Controllers\admin\transectionController;
+use App\Http\Controllers\admin\usersController;
 use App\Http\Controllers\admin\VisitorController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,7 +35,7 @@ Route::get('/logout',[LoginController::class,'onlogout']);
 Route::get('/',[HomeController::class,'HomeIndex']);
 Route::get('/visitor',[VisitorController::class,'VisitorIndex']);
 
-//Product admin
+//Product admin-----------------
 
 Route::get('/products',[ProductsController::class,'ProductsIndex']);
 Route::get('/getProductsData',[ProductsController::class,'getProductsData']);
@@ -42,7 +44,7 @@ Route::post('/ProductsDetails',[ProductsController::class,'getProductDetails']);
 Route::post('/ProductsUpdate',[ProductsController::class,'productUpdate']);
 Route::post('/ProductsAdd',[ProductsController::class,'productAdd']);
 
-//Slider admin
+//Slider admin--------------------
 
 Route::get('/slider',[SliderController::class,'SliderIndex']);
 Route::get('/getSliderData',[SliderController::class,'getSliderData']);
@@ -52,13 +54,36 @@ Route::post('/SliderUpdate',[SliderController::class,'SliderUpdate']);
 Route::post('/SliderAdd',[SliderController::class,'sliderAdd']);
 
 
-
-
-// Order manage
+// Order manage--------------------
 
 Route::get('/order',[OrderController::class,'OrderIndex']);
 Route::get('/getAllOrder',[OrderController::class,'getOrderData']);
 Route::post('/StatusUpdate',[OrderController::class,'sUpdate']);
+
+// Users------------------
+Route::get('/users',[usersController::class,'UsersIndex']);
+Route::get('/getUsersData',[usersController::class,'getUsersData']);
+Route::post('/UsersDelete',[usersController::class,'userDelete']);
+Route::post('/UsersDetails',[usersController::class,'getUserDetails']);
+Route::post('/balanceAdd',[usersController::class,'balanceAdd']);
+Route::post('/winBalanceAdd',[usersController::class,'winBalanceAdd']);
+
+
+// Transection--------------
+
+Route::get('/transections',[transectionController::class,'transectionsIndex']);
+Route::get('/getTransectionData',[transectionController::class,'getTransectionData']);
+
+
+
+
+
+
+
+
+
+
+
 
 
 

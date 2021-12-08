@@ -14,7 +14,7 @@ class SliderTable extends Migration
     public function up()
     {
      Schema::create('slider', function (Blueprint $table) {
-         $table->integer('id');
+         $table->integer('id')->autoIncrement();
          $table->string('photo')->nullable();
          $table->string('link')->nullable();
          $table->string('title')->nullable();

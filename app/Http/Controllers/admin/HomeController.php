@@ -5,7 +5,9 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\admin\ContactModel;
-use App\Models\admin\CourseModel;
+use App\Models\admin\users;
+use App\Models\admin\order;
+use App\Models\admin\ProductsModel;
 use App\Models\admin\ProjectsModel;
 use App\Models\admin\ReviewModel;
 use App\Models\admin\ServicesModel;
@@ -16,20 +18,15 @@ class HomeController extends Controller
 {
     function HomeIndex(){
 
-    //    $totalcontact =ContactModel::count();
-    //    $totalcourse=CourseModel::count();
-    //    $totalproject=ProjectsModel::count();
-    //    $totalreview=ReviewModel::count();
-    //    $totalservice=ServicesModel::count();
-    //    $totalvisitor=VisitorModel::count();
-    //     return view('admin.home',[
-    //         'totalcontact'=>$totalcontact,
-    //         'totalcourse'=>$totalcourse,
-    //         'totalproject'=>$totalproject,
-    //         'totalreview'=>$totalreview,
-    //         'totalservice'=>$totalservice,
-    //         'totalvisitor'=>$totalvisitor
-    //     ]);
+       $totalproduct =ProductsModel::count();
+       $totalorder=order::count();
+       $totalusers=users::count();
+
+        return view('admin.home',[
+            'totalproduct'=>$totalproduct,
+            'totalorder'=>$totalorder,
+            'totalusers'=>$totalusers,
+        ]);
 
     return view('admin.home');
 

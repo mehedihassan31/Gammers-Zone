@@ -95,11 +95,6 @@ aria-hidden="true">
 
 
 
-
-
-
-
-
 @endsection
 
 @section('script')
@@ -176,7 +171,6 @@ $('#statusId1').click(function(){
 $('#statusId2').click(function(){
   var  id=$('#updateCourseid').html();
   var  status=$('#statusId2').text();
-
    statusUpdate(id,status);
 })
 $('#statusId3').click(function(){
@@ -186,37 +180,34 @@ $('#statusId3').click(function(){
 })
 
 function statusUpdate(id,status){
-    axios.post('/StatusUpdate',{
-      id:id,
-      status:status
-    }).then(function(response){
-      if(response.status==200){
-        if(response.data==1){
-          $('#updateCourseModal').modal('hide');
-          toastr.success("Update success");
-          getAllOrderData();
-        }else{
+  axios.post('/StatusUpdate',{
+                    id:id,
+                    status:status
+                  })
+                  .then(function(response){
 
-          $('#updateCourseModal').modal('hide');
-          toastr.error("Update fail");
-          getAllOrderData();
-        }
+                    if(response.data==1)
+                    {
+                      $('#updateCourseModal').modal('hide');
+                      toastr.success("Update success");
+                      getAllOrderData();
+                
+                    }else{
+                    
+                      $('#updateCourseModal').modal('hide');
+                      toastr.error("Update Faild");
+                      getAllOrderData();
+                    }
+                
+                
+                  }).catch(function (error) {
+                    $('#updateCourseModal').modal('hide');
+                    toastr.error("Something went wrong");
 
-      }else{
-        $('#updateCourseModal').modal('hide');
-        toastr.error("Something went wrong");
-      }
+                });
 
-
-    }).catch(function(error){
-      $('#updateCourseModal').modal('hide');
-      toastr.error("Something went wrong");
-
-    });
   
 }
-
-
 
 
 
