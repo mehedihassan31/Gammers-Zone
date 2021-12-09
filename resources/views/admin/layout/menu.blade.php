@@ -18,15 +18,15 @@
             <nav class="sidebar-nav">
                 <ul id="sidebarnav">
                     <li class="nav-devider mt-0" style="margin-bottom: 5px"></li>
-                    <li> <a href="{{url('/')}}" ><span> <i class="fas fa-home"></i> </span><span class="hide-menu">Dashboard</span></a></li>
-                    <li> <a href="{{url('/slider')}}" ><span> <i class="far fa-comments"></i> </span><span class="hide-menu">Slider</span></a></li>
-                   <li> <a href="{{url('/products')}}" ><span> <i class="fas fa-globe"></i> </span><span class="hide-menu">Products</span></a></li>
-                   <li> <a href="{{url('/order')}}" ><span> <i class="fas fa-users"></i> </span><span class="hide-menu">Order</span></a></li>
-                   <li> <a href="{{url('/users')}}" ><span> <i class="fas fa-book-open"></i> </span><span class="hide-menu">Users</span></a></li>
-                   <li> <a href="{{url('/transections')}}" ><span> <i class="fas fa-tasks"></i> </span><span class="hide-menu">Transections</span></a></li>
+                    <li> <a href="{{url('/admin')}}" ><span> <i class="fas fa-home"></i> </span><span class="hide-menu">Dashboard</span></a></li>
+                    <li> <a href="{{url('/admin/slider')}}" ><span> <i class="far fa-comments"></i> </span><span class="hide-menu">Slider</span></a></li>
+                   <li> <a href="{{url('/admin/products')}}" ><span> <i class="fas fa-globe"></i> </span><span class="hide-menu">Products</span></a></li>
+                   <li> <a href="{{url('/admin/order')}}" ><span> <i class="fas fa-users"></i> </span><span class="hide-menu">Order</span></a></li>
+                   <li> <a href="{{url('/admin/users')}}" ><span> <i class="fas fa-book-open"></i> </span><span class="hide-menu">Users</span></a></li>
+                   <li> <a href="{{url('/admin/transections')}}" ><span> <i class="fas fa-tasks"></i> </span><span class="hide-menu">Transections</span></a></li>
                    
-                   <li> <a href="{{url('/contact')}}" ><span> <i class="far fa-envelope"></i> </span><span class="hide-menu">Contact</span></a></li>
-                   <li> <a href="{{url('/reviews')}}" ><span> <i class="far fa-comments"></i> </span><span class="hide-menu">Reviews</span></a></li>
+                   <li> <a href="{{url('#')}}" ><span> <i class="far fa-envelope"></i> </span><span class="hide-menu">test1</span></a></li>
+                   <li> <a href="{{url('#')}}" ><span> <i class="far fa-comments"></i> </span><span class="hide-menu">test2</span></a></li>
                 </ul>
             </nav>
         </div>

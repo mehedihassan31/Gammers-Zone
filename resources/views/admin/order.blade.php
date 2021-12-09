@@ -102,7 +102,7 @@ aria-hidden="true">
     getAllOrderData();
     
     function getAllOrderData(){
-      axios.get('/getAllOrder')
+      axios.get('/admin/getAllOrder')
             .then(function(response){
               if(response.status==200){
                 $('#mainDivCourse').removeClass('d-none');
@@ -180,7 +180,7 @@ $('#statusId3').click(function(){
 })
 
 function statusUpdate(id,status){
-  axios.post('/StatusUpdate',{
+  axios.post('/admin/StatusUpdate',{
                     id:id,
                     status:status
                   })

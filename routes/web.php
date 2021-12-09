@@ -29,14 +29,16 @@ Route::get('/apidoc',function(){
 
 });
 
-Route::get('/login',[LoginController::class,'loginIndex']);
-Route::post('/onlogin',[LoginController::class,'onLogin']);
-Route::get('/logout',[LoginController::class,'onlogout']);
-Route::get('/',[HomeController::class,'HomeIndex']);
-Route::get('/visitor',[VisitorController::class,'VisitorIndex']);
+
+
+
+
+
+Route::prefix('admin')->group(function () {
+
 
 //Product admin-----------------
-
+Route::get('/',[HomeController::class,'HomeIndex']);
 Route::get('/products',[ProductsController::class,'ProductsIndex']);
 Route::get('/getProductsData',[ProductsController::class,'getProductsData']);
 Route::post('/ProductsDelete',[ProductsController::class,'productDelete']);
@@ -73,6 +75,24 @@ Route::post('/winBalanceAdd',[usersController::class,'winBalanceAdd']);
 
 Route::get('/transections',[transectionController::class,'transectionsIndex']);
 Route::get('/getTransectionData',[transectionController::class,'getTransectionData']);
+Route::post('/StatusConfirm',[transectionController::class,'StatusConfirm']);
+Route::post('/TransectionDelete',[transectionController::class,'TransectionDelete']);
+
+});
+
+
+
+
+
+
+
+
+Route::get('/login',[LoginController::class,'loginIndex']);
+Route::post('/onlogin',[LoginController::class,'onLogin']);
+Route::get('/logout',[LoginController::class,'onlogout']);
+
+
+
 
 
 
@@ -117,14 +137,6 @@ Route::get('/getcontactdata',[ContactController::class,'getContactData']);
 Route::post('/contactdelete',[ContactController::class,'ContactDelete']);
 
 
-// review
-Route::get('/reviews',[Reviewcontroller::class,'reviewsIndex']);
-Route::get('/getreviewsdata',[Reviewcontroller::class,'getreviewsData']);
-Route::post('/reviewdelete',[Reviewcontroller::class,'reviewDelete']);
-
-Route::post('/ReviewUpdate',[Reviewcontroller::class,'reviewUpdate']);
-Route::post('/reviewAdd',[Reviewcontroller::class,'reviewAdd']);
-Route::post('/ReviewDetails',[Reviewcontroller::class,'getreviewdetails']);
 
 
 

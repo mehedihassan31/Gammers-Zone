@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Models\admin;
-use App\Models\User;
-use App\Models\admin\ProductsModel;
+namespace App\Models;
 
+use App\Models\admin\ProductsModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class order extends Model
 {
     use HasFactory;
+
     protected $table="order";
     protected $primaryKey='id';
     public $incrementing=true;
@@ -21,6 +21,6 @@ class order extends Model
     }
 
     public function user() {
-        return $this->belongsTo(user::class,'user_id');
+        return $this->belongsTo(User::class,'user_id');
     }
 }

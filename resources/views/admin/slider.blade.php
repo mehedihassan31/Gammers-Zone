@@ -218,7 +218,7 @@
 <script type="text/javascript" >
 getSliderData();
 function getSliderData(){
-axios.get('/getSliderData')
+axios.get('/admin/getSliderData')
 .then(function (response){
 
   if(response.status==200)
@@ -294,7 +294,7 @@ $('#serconfmdeltebtn').click(function(event){
 })
 
 function sliderDelete(myFormdata){
-  axios.post('/SliderDelete',myFormdata)
+  axios.post('/admin/SliderDelete',myFormdata)
   .then(function(response){
     if(response.data==1)
     {
@@ -323,7 +323,7 @@ function sliderDelete(myFormdata){
 
 function sliderDetails(detailid){
 
-  axios.post('/SliderDetails',{id:detailid})
+  axios.post('/admin/SliderDetails',{id:detailid})
   .then(function(response){
 
     if(response.status==200){
@@ -385,7 +385,7 @@ function sliderUpdate(serid,serName,serDes,serImg){
 
   }else{
 
-                  axios.post('/SliderUpdate',{
+                  axios.post('/admin/SliderUpdate',{
                     id:serid,
                     name:serName,
                     des:serDes,
@@ -463,7 +463,7 @@ $('#serconfmaddbtn').click(function(){
 
 function sliderAdd(formData){
 
-    axios.post('/SliderAdd',formData)
+    axios.post('/admin/SliderAdd',formData)
                   .then(function(response){
 
                     if(response.data==1)

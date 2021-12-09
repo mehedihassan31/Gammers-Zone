@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\matchesController;
+use App\Http\Controllers\api\OrderController;
 use App\Http\Controllers\api\ProductsController;
 use App\Http\Controllers\api\SliderController;
+use App\Http\Controllers\api\transectionController;
+use App\Models\transection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\TextUI\XmlConfiguration\Group;
@@ -24,14 +27,29 @@ use PHPUnit\TextUI\XmlConfiguration\Group;
     
 // });
 Route::group(['middleware' => ['auth:sanctum']], function () {
-   Route::get('/sliderdata',[SliderController::class,"getSliderData"]);
+
+
    Route::post('/logout',[AuthController::class,"logout"]);
+
+//  slider--------------------  
+   Route::get('/sliderdata',[SliderController::class,"getSliderData"]);
+
+
+// product-----------------
    Route::get('/products',[ProductsController::class,'getAllProducts']);
+
+
+// match----------------------------
    Route::get('/matches',[matchesController::class,'getAllMatches']);
+
+
+// transection-------------------------------
+   Route::get('/transections',[transectionController::class,'getAllTransections']);
+   Route::post('/deposit',[transectionController::class,'makeDeposit']);
     
 });
 
 // Route::get('/sliderdata',[SliderController::class,"getSliderData"]);
 Route::post('/register',[AuthController::class,"register"]);
-
 Route::post('/login',[AuthController::class,"login"]);
+Route::post('/order',[OrderController::class,'getAllOrders']);

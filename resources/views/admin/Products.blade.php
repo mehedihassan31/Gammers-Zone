@@ -20,7 +20,7 @@
       </thead>
 
       <tbody id="servicetable">
-      
+    
         
       </tbody>
     </table>
@@ -215,7 +215,7 @@
 getProductsData();
 
 function getProductsData(){
-axios.get('/getProductsData')
+axios.get('/admin/getProductsData')
 .then(function (response){
 
   if(response.status==200)
@@ -281,7 +281,6 @@ $('.dataTables_length').addClass('bs-select');
 
 
 
-
 $('#serconfmdeltebtn').click(function(){
   var id=$(this).data('id');
   productDelete(id);
@@ -291,7 +290,7 @@ $('#serconfmdeltebtn').click(function(){
 
 function productDelete(deleteid){
 
-  axios.post('/ProductsDelete',{id:deleteid})
+  axios.post('/admin/ProductsDelete',{id:deleteid})
   .then(function(response){
 
     if(response.data==1)
@@ -318,7 +317,7 @@ function productDelete(deleteid){
 
 function productDetails(detailid){
 
-  axios.post('/ProductsDetails',{id:detailid})
+  axios.post('/admin/ProductsDetails',{id:detailid})
   .then(function(response){
 
     if(response.status==200){
@@ -353,8 +352,6 @@ function productDetails(detailid){
 
 
 
-
-
     //services edit confirm
     $('#serconfmEditbtn').click(function(){
       var id=$('#serviceeditid').html();
@@ -377,7 +374,7 @@ function productUpdate(id,diamond,price,saleprice){
 
   } else{
 
-                  axios.post('/ProductsUpdate',{
+                  axios.post('/admin/ProductsUpdate',{
                     id:id,
                     diamond:diamond,
                     price:price,
@@ -440,7 +437,7 @@ function serviceAdd(diamond,price,saleprice){
       }else if(price.length==0){
         toastr.error("Price is empty");
       }else{ 
-        axios.post('/ProductsAdd',{ 
+        axios.post('/admin/ProductsAdd',{ 
                         diamond:diamond,
                         price:price,
                         saleprice:saleprice

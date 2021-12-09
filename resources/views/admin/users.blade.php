@@ -137,7 +137,7 @@
 getUsersData();
 
 function getUsersData(){
-axios.get('/getUsersData')
+axios.get('/admin/getUsersData')
 .then(function (response){
 
   if(response.status==200)
@@ -214,7 +214,7 @@ $('#serconfmdeltebtn').click(function(){
 
 function productDelete(deleteid){
 
-  axios.post('/ProductsDelete',{id:deleteid})
+  axios.post('/admin/ProductsDelete',{id:deleteid})
   .then(function(response){
 
     if(response.data==1)
@@ -256,7 +256,7 @@ function balanceAdd(id,balance){
 if(balance.length==0){
   toastr.error("Balance is empty");
 } else{
-                axios.post('/balanceAdd',{
+                axios.post('/admin/balanceAdd',{
                   id:id,
                   balance:balance,
                 })
@@ -295,7 +295,7 @@ function winBalanceAdd(id,winbalance){
   if(winbalance.length==0){
     toastr.error("Win Balance is empty");
   } else{
-                  axios.post('/winBalanceAdd',{
+                  axios.post('/admin/winBalanceAdd',{
                     id:id,
                     winbalance:winbalance,
                   })

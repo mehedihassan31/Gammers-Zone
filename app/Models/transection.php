@@ -1,16 +1,21 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\admin\users;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class transection extends Model
 {
     use HasFactory;
-    protected $table='products';
+    protected $table='transction';
     protected $primaryKey='id';
     public $incrementing=true;
     public $keyType='int';
-    public $timestamps=true;
+    public $timestamps=false;
+
+    function user(){
+        return $this->belongsTo(users::class,'user_id');
+    }
 }
+ 
