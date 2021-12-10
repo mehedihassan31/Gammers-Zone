@@ -29,6 +29,11 @@ Route::get('/apidoc',function(){
 
 });
 
+Route::get('/',function(){
+    return view('welcome');
+
+});
+
 
 
 
@@ -135,8 +140,6 @@ Route::post('/ProjectDetails',[ProjectsController::class,'getProjectdetails']);
 Route::get('/contact',[ContactController::class,'ContactIndex']);
 Route::get('/getcontactdata',[ContactController::class,'getContactData']);
 Route::post('/contactdelete',[ContactController::class,'ContactDelete']);
-
-
 
 
 

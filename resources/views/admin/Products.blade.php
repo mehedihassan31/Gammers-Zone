@@ -1,4 +1,5 @@
 @extends('admin.layout.app')
+@section('title','Products')
 
 @section('content')
 
