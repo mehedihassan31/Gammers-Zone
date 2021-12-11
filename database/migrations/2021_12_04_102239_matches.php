@@ -24,7 +24,7 @@ class Matches extends Migration
             $table->string('room_id')->nullable();
             $table->string('room_password')->nullable();
             $table->string('totall_p')->nullable();
-            $table->integer('Entry Fee')->nullable();
+            $table->integer('Entry_Fee')->nullable();
             $table->dateTime('match_time')->nullable();
             $table->string('winning_price')->nullable();
             $table->string('runnerup_one')->nullable();

@@ -1,7 +1,5 @@
 @extends('admin.layout.app')
 @section('content')
-
-
 <div id="mainDivCourse" class="container d-none">
     <div class="row">
         <div class="col-md-12 p-5">
@@ -12,10 +10,15 @@
               <thead>
                 <tr>
                   <th class="th-sm">Name</th>
-                  <th class="th-sm">Course fee</th>
-                  <th class="th-sm">Class</th>
-                  <th class="th-sm">Enroll</th>
-                  <th class="th-sm">Details</th>
+                  <th class="th-sm">Device</th>
+                  <th class="th-sm">Type</th>
+                  <th class="th-sm">Version</th>
+                  <th class="th-sm">Map</th>
+                  <th class="th-sm">Match Type</th>
+                  <th class="th-sm">Room Id</th>
+                  <th class="th-sm">Room Password</th>
+                  <th class="th-sm">Totall Price</th>
+                  <th class="th-sm">Entry Fee</th>
                   <th class="th-sm">Edit</th>
                   <th class="th-sm">Delete</th>
                 </tr>
@@ -68,15 +71,29 @@ add modal --}}
        <div class="container">
        	<div class="row">
        		<div class="col-md-6">
-             	<input id="CourseNameId" type="text" id="" class="form-control mb-3" placeholder="Course Name">
-          	 	<input id="CourseDesId" type="text" id="" class="form-control mb-3" placeholder="Course Description">
-    		 	<input id="CourseFeeId" type="text" id="" class="form-control mb-3" placeholder="Course Fee">
-     			<input id="CourseEnrollId" type="text" id="" class="form-control mb-3" placeholder="Total Enroll">
+          <input id="gameNameId" type="text" id="" class="form-control mb-3" placeholder="Match Name">
+          <input id="gameDeviceId" type="text" id="" class="form-control mb-3" placeholder="Device">
+    		 	<input id="TypeId" type="text" id="" class="form-control mb-3" placeholder="Type">
+     			<input id="Version" type="text" id="" class="form-control mb-3" placeholder="Version">
+    		 	<input id="MapId" type="text" id="" class="form-control mb-3" placeholder="Map">
+     			<input id="gameTypeId" type="text" id="" class="form-control mb-3" placeholder="Game Type">
+           <input id="roomId" type="text" id="" class="form-control mb-3" placeholder="Room id">      
+     			<input id="roompasswordId" type="text" id="" class="form-control mb-3" placeholder="Room Password">
+     			<input id="totallPrice" type="text" id="" class="form-control mb-3" placeholder="Totall Price">
+     			<input id="entryFee" type="text" id="" class="form-control mb-3" placeholder="Entry Fee">
        		</div>
        		<div class="col-md-6">
-     			<input id="CourseClassId" type="text" id="" class="form-control mb-3" placeholder="Total Class">      
-     			<input id="CourseLinkId" type="text" id="" class="form-control mb-3" placeholder="Course Link">
-     			<input id="CourseImgId" type="text" id="" class="form-control mb-3" placeholder="Course Image">
+             <input id="matchtime" type="text" id="" class="form-control mb-3" placeholder="Time">
+     			<input id="winningprice" type="text" id="" class="form-control mb-3" placeholder="Winning Price">
+     			<input id="runnersFirstUp" type="text" id="" class="form-control mb-3" placeholder="First Runner's up ">
+     			<input id="runnersSecondUp" type="text" id="" class="form-control mb-3" placeholder="Second Runner's up ">
+     			<input id="perKill" type="text" id="" class="form-control mb-3" placeholder="Per Kill">
+     			<input id="totallprice" type="text" id="" class="form-control mb-3" placeholder="Total Price">
+     			<input id="gamelink" type="text" id="" class="form-control mb-3" placeholder="Game Link">
+     			<input id="category" type="text" id="" class="form-control mb-3" placeholder="Category">
+     			<input id="GameName" type="text" id="" class="form-control mb-3" placeholder="Game Name">
+     			<input id="GameDurationtype" type="text" id="" class="form-control mb-3" placeholder="Game Duration Type">
+
        		</div>
        	</div>
        </div>
@@ -95,7 +112,7 @@ add modal --}}
 
 
 {{-- delete modal --}}
-<div class="modal fade" id="deleteCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+{{-- <div class="modal fade" id="deleteCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -117,13 +134,13 @@ aria-hidden="true">
             </div>
           </div>
         </div>
-</div>
+</div> --}}
 
 
 
 {{-- Update modal --}}
 
-<div class="modal fade" id="updateCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+{{-- <div class="modal fade" id="updateCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -176,7 +193,7 @@ aria-hidden="true">
                   </div>
       </div>
     </div>
-</div>
+</div> --}}
     
 @endsection
 
@@ -184,30 +201,30 @@ aria-hidden="true">
 @section('script')
 <script>
 getOrderData();
-
-
-
-
 function getOrderData(){
-  axios.get('/getAllOrder')
+  axios.get('/admin/getGameData')
         .then(function(response){
           if(response.status==200){
             $('#mainDivCourse').removeClass('d-none');
             $('#loaderDivCourse').addClass('d-none');
-
             $('#coursedatatable').DataTable().destroy();
-            
+          
             $('#course_table').empty();
-
-            
+           
             var jsonData=response.data;
             $.each(jsonData, function(i){
               $('<tr>').html(
-                "<td class='td-sm'>"+jsonData[i].course_name+"</td>"+
-                "<td class='td-sm'>"+jsonData[i].course_fee+"</td>"+
-                "<td class='td-sm'>"+jsonData[i].course_totalclass+"</td>"+
-                "<td class='td-sm'>"+jsonData[i].course_totalenroll+"</td>"+
-                "<td> <a class='courseViewDetailsbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-eye'></i></a>Details</td>"+
+                "<td class='td-sm'>"+jsonData[i].name+"</td>"+
+                "<td class='td-sm'>"+jsonData[i].Device+"</td>"+
+                "<td class='td-sm'>"+jsonData[i].Type+"</td>"+
+                "<td class='td-sm'>"+jsonData[i].version+"</td>"+
+                "<td class='td-sm'>"+jsonData[i].map+"</td>"+
+                "<td class='td-sm'>"+jsonData[i].match_type+"</td>"+
+                "<td class='td-sm'>"+jsonData[i].room_id+"</td>"+
+                "<td class='td-sm'>"+jsonData[i].room_password+"</td>"+
+                "<td class='td-sm'>"+jsonData[i].totall_p+"</td>"+
+                "<td class='td-sm'>"+jsonData[i].Entry_Fee+"</td>"+
+                // "<td> <a class='courseViewDetailsbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-eye'></i></a>Details</td>"+
                 "<td> <a class='courseeditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit'></i></a>Edit</td>"+
                "<td><a class='courseDeletebtn'  data-id='"+jsonData[i].id+"' ><i class='fas fa-trash-alt'></i></a></td>"
               ).appendTo('#course_table');
@@ -220,10 +237,9 @@ function getOrderData(){
             });
 
 
-
             $('.courseeditbtn').click(function(){
               var id=$(this).data('id');
-              courseUpdatedetails(id);
+              // courseUpdatedetails(id);
               $('#updateCourseid').html(id);
               $('#updateCourseModal').modal('show');
               
@@ -265,7 +281,7 @@ $('#CourseAddConfirmBtn').click(function(){
 
 
 
-//course add method
+// course add method
 function courseAdd(CourseName,CourseDes,CourseFee,CourseEnroll,CourseClass,CourseLink,CourseImg){
 
   if(CourseName.length==0){
@@ -364,116 +380,116 @@ function courseDelete(deleteid){
 
 // update course
 
-function courseUpdatedetails(detailsid){
+// function courseUpdatedetails(detailsid){
 
-  axios.post('/CourseDetails',{
-    id:detailsid
-  })
-  .then(function(response){
-    if(response.status==200){
+//   axios.post('/CourseDetails',{
+//     id:detailsid
+//   })
+//   .then(function(response){
+//     if(response.status==200){
 
-      $('#courseEditFrom').removeClass('d-none');
-      $('#loaderDivUpdate').addClass('d-none');
+//       $('#courseEditFrom').removeClass('d-none');
+//       $('#loaderDivUpdate').addClass('d-none');
 
-      var jsonData=response.data;
+//       var jsonData=response.data;
 
-          $('#CourseNameUpdateId').val(jsonData[0].course_name);
-          $('#CourseDesUpdateId').val(jsonData[0].course_des);
-          $('#CourseFeeUpdateId').val(jsonData[0].course_fee);
-          $('#CourseEnrollUpdateId').val(jsonData[0].course_totalenroll);
-          $('#CourseClassUpdateId').val(jsonData[0].course_totalclass);
-          $('#CourseLinkUpdateId').val(jsonData[0].course_link);
-          $('#CourseImgUpdateId').val(jsonData[0].course_img);
+//           $('#CourseNameUpdateId').val(jsonData[0].course_name);
+//           $('#CourseDesUpdateId').val(jsonData[0].course_des);
+//           $('#CourseFeeUpdateId').val(jsonData[0].course_fee);
+//           $('#CourseEnrollUpdateId').val(jsonData[0].course_totalenroll);
+//           $('#CourseClassUpdateId').val(jsonData[0].course_totalclass);
+//           $('#CourseLinkUpdateId').val(jsonData[0].course_link);
+//           $('#CourseImgUpdateId').val(jsonData[0].course_img);
 
-    }else{
+//     }else{
 
-      $('#loaderDivUpdate').addClass('d-none');
-      $('#wrongDivUpdate').removeClass('d-none');
-    }
-  }).catch(function(error){
+//       $('#loaderDivUpdate').addClass('d-none');
+//       $('#wrongDivUpdate').removeClass('d-none');
+//     }
+//   }).catch(function(error){
 
-    $('#loaderDivUpdate').addClass('d-none');
-    $('#wrongDivUpdate').removeClass('d-none');
-  })
+//     $('#loaderDivUpdate').addClass('d-none');
+//     $('#wrongDivUpdate').removeClass('d-none');
+//   })
 
 
-}
+// }
 
 
 
 // Course update
 
 
-$('#CourseUpdateConfirmBtn').click(function(){
-  var  CourseId=$('#updateCourseid').html();
-  var  CourseName=$('#CourseNameUpdateId').val();
-  var  CourseDes=$('#CourseDesUpdateId').val();
-  var  CourseFee=$('#CourseFeeUpdateId').val();
-  var  CourseEnroll=$('#CourseEnrollUpdateId').val();
-  var  CourseClass=$('#CourseClassUpdateId').val();
-  var  CourseLink=$('#CourseLinkUpdateId').val();
-  var  CourseImg=$('#CourseImgUpdateId').val();
+// $('#CourseUpdateConfirmBtn').click(function(){
+//   var  CourseId=$('#updateCourseid').html();
+//   var  CourseName=$('#CourseNameUpdateId').val();
+//   var  CourseDes=$('#CourseDesUpdateId').val();
+//   var  CourseFee=$('#CourseFeeUpdateId').val();
+//   var  CourseEnroll=$('#CourseEnrollUpdateId').val();
+//   var  CourseClass=$('#CourseClassUpdateId').val();
+//   var  CourseLink=$('#CourseLinkUpdateId').val();
+//   var  CourseImg=$('#CourseImgUpdateId').val();
 
-courseUpdate(CourseId,CourseName,CourseDes,CourseFee,CourseEnroll,CourseClass,CourseLink,CourseImg);
-})
+// courseUpdate(CourseId,CourseName,CourseDes,CourseFee,CourseEnroll,CourseClass,CourseLink,CourseImg);
+// })
 
-function courseUpdate(CourseId,CourseName,CourseDes,CourseFee,CourseEnroll,CourseClass,CourseLink,CourseImg){
+// function courseUpdate(CourseId,CourseName,CourseDes,CourseFee,CourseEnroll,CourseClass,CourseLink,CourseImg){
 
-  if(CourseName.length==0){
-    toastr.error('Course Name is empty!');
-  }else if(CourseDes.length==0){
-    toastr.error('Course Des is empty!');
+//   if(CourseName.length==0){
+//     toastr.error('Course Name is empty!');
+//   }else if(CourseDes.length==0){
+//     toastr.error('Course Des is empty!');
 
-  }else if(CourseFee.length==0){
-    toastr.error('Course Fee is empty!');
-  }else if(CourseEnroll.length==0){
-    toastr.error('Course Enroll is empty!');
-  }else if(CourseClass.length==0){
-    toastr.error('Course Class is empty!');
-  }else if(CourseLink.length==0){
-    toastr.error('Course Link is empty!');
-  }else if(CourseImg.length==0){
-    toastr.error('Course Image is empty!');
-  }else{
-    $('#CourseUpdateConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
-    axios.post('/CourseUpdate',{
-      id: CourseId,
-      course_name: CourseName,
-      course_des: CourseDes,
-      course_fee: CourseFee,
-      course_totalenroll: CourseEnroll,
-      course_totalclass: CourseClass,
-      course_link: CourseLink,
-      course_img: CourseImg
-    })
-    .then(function(response){
-      $('#CourseUpdateConfirmBtn').html("Save");
-      if(response.status==200){
+//   }else if(CourseFee.length==0){
+//     toastr.error('Course Fee is empty!');
+//   }else if(CourseEnroll.length==0){
+//     toastr.error('Course Enroll is empty!');
+//   }else if(CourseClass.length==0){
+//     toastr.error('Course Class is empty!');
+//   }else if(CourseLink.length==0){
+//     toastr.error('Course Link is empty!');
+//   }else if(CourseImg.length==0){
+//     toastr.error('Course Image is empty!');
+//   }else{
+//     $('#CourseUpdateConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
+//     axios.post('/CourseUpdate',{
+//       id: CourseId,
+//       course_name: CourseName,
+//       course_des: CourseDes,
+//       course_fee: CourseFee,
+//       course_totalenroll: CourseEnroll,
+//       course_totalclass: CourseClass,
+//       course_link: CourseLink,
+//       course_img: CourseImg
+//     })
+//     .then(function(response){
+//       $('#CourseUpdateConfirmBtn').html("Save");
+//       if(response.status==200){
 
-        if(response.data==1){
-          $('#updateCourseModal').modal('hide');
-          toastr.success("Update success");
-          getCoursesData();
-        }else{
+//         if(response.data==1){
+//           $('#updateCourseModal').modal('hide');
+//           toastr.success("Update success");
+//           getCoursesData();
+//         }else{
 
-          $('#updateCourseModal').modal('hide');
-          toastr.error("Update fail");
-          getCoursesData();
-        }
+//           $('#updateCourseModal').modal('hide');
+//           toastr.error("Update fail");
+//           getCoursesData();
+//         }
 
-      }else{
-        $('#updateCourseModal').modal('hide');
-        toastr.error("Something went wrong");
-      }
+//       }else{
+//         $('#updateCourseModal').modal('hide');
+//         toastr.error("Something went wrong");
+//       }
 
 
-    }).catch(function(error){
-      $('#updateCourseModal').modal('hide');
-      toastr.error("Something went wrong");
+//     }).catch(function(error){
+//       $('#updateCourseModal').modal('hide');
+//       toastr.error("Something went wrong");
 
-    });
-  }
-}
+//     });
+//   }
+// }
 
 
 

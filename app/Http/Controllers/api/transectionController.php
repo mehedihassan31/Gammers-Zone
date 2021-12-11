@@ -34,9 +34,7 @@ class transectionController extends Controller
         }else{
             return response('Somethong Error');
         }
-    
-
-
    }
+
 
 }

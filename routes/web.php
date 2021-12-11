@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\ContactController;
 use App\Http\Controllers\admin\coursesController;
+use App\Http\Controllers\admin\GameController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\OrderController;
@@ -83,9 +84,17 @@ Route::get('/getTransectionData',[transectionController::class,'getTransectionDa
 Route::post('/StatusConfirm',[transectionController::class,'StatusConfirm']);
 Route::post('/TransectionDelete',[transectionController::class,'TransectionDelete']);
 
+
+// gamme (match)-------------------------
+Route::get('/games',[GameController::class,'GameIndex']);
+
+Route::get('/getGameData',[GameController::class,'getGamesData']);
+
+Route::post('/gameDelete',[GameController::class,'GameDelete']);
+Route::post('/gameAdd',[GameController::class,'GameAdd']);
+Route::post('/gameUpdate',[GameController::class,'GameUpdate']);
+
 });
-
-
 
 
 

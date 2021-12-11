@@ -46,13 +46,20 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 // transection-------------------------------
    Route::get('/transections',[transectionController::class,'getAllTransections']);
    Route::post('/deposit',[transectionController::class,'makeDeposit']);
+  
 
 
    // user---------------------------------------
+
+   Route::post('/getuser',[AuthController::class,'getUserData']);
    Route::post('/updateUser',[AuthController::class,'userDataUpdata']);
    Route::post('/updatePasskey',[AuthController::class,'userPassUpdata']);
 
 
+// order--------------------------------------------
+
+Route::post('/orderplace',[OrderController::class,'makeOrder']);
+Route::post('/orderlist',[OrderController::class,'getAllOrders']);
    
     
 });
@@ -60,5 +67,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 // Route::get('/sliderdata',[SliderController::class,"getSliderData"]);
 Route::post('/register',[AuthController::class,"register"]);
 Route::post('/login',[AuthController::class,"login"]);
-Route::post('/order',[OrderController::class,'getAllOrders']);
+
+
+
+
+
+
+
+
+
 

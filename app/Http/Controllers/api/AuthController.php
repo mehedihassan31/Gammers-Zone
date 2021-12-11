@@ -18,7 +18,7 @@ class AuthController extends Controller
             'username'=>'required|string|unique:users,username',
             'email'=>'required|string|unique:users,email',
             'phone'=>'required|string|unique:users,phone',
-            'reference'=>'required|string',
+            'reference'=>'nullable|string',
             'password'=>'required|string|confirmed'
         ]);
 
@@ -143,6 +143,14 @@ class AuthController extends Controller
 
 
 
+
+    function getUserData(Request $request){
+        $id=$request->input('id');
+        $user=User::where('id',$id)->get();
+
+
+        return response($user, 200);
+    }
 
 
 }
