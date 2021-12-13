@@ -44,7 +44,7 @@ class ProductsController extends Controller
 function getProductDetails(Request $req){
 
     $id=$req->input('id');
-   $results=json_encode(ProductsModel::where('id','=',$id)->get());
+   $results= (ProductsModel::where('id','=',$id)->get());
 
    return $results;
 

@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
 // product-----------------
-   Route::get('/products',[ProductsController::class,'getAllProducts']);
+   Route::get('/products/{id}',[ProductsController::class,'getAllProducts']);
 
 
 // match----------------------------
@@ -51,7 +51,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
    // user---------------------------------------
 
-   Route::post('/getuser',[AuthController::class,'getUserData']);
+   Route::get('/getuser/{id}',[AuthController::class,'getUserData']);
    Route::post('/updateUser',[AuthController::class,'userDataUpdata']);
    Route::post('/updatePasskey',[AuthController::class,'userPassUpdata']);
 

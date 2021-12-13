@@ -71,29 +71,46 @@ add modal --}}
        <div class="container">
        	<div class="row">
        		<div class="col-md-6">
-          <input id="gameNameId" type="text" id="" class="form-control mb-3" placeholder="Match Name">
-          <input id="gameDeviceId" type="text" id="" class="form-control mb-3" placeholder="Device">
-    		 	<input id="TypeId" type="text" id="" class="form-control mb-3" placeholder="Type">
-     			<input id="Version" type="text" id="" class="form-control mb-3" placeholder="Version">
-    		 	<input id="MapId" type="text" id="" class="form-control mb-3" placeholder="Map">
-     			<input id="gameTypeId" type="text" id="" class="form-control mb-3" placeholder="Game Type">
-           <input id="roomId" type="text" id="" class="form-control mb-3" placeholder="Room id">      
-     			<input id="roompasswordId" type="text" id="" class="form-control mb-3" placeholder="Room Password">
-     			<input id="totallPrice" type="text" id="" class="form-control mb-3" placeholder="Totall Price">
-     			<input id="entryFee" type="text" id="" class="form-control mb-3" placeholder="Entry Fee">
+          <input id="matchNameId" type="text"  class="form-control mb-3" placeholder="Match Name">
+          <input id="gameDeviceId" type="text"  class="form-control mb-3" placeholder="Device">
+    		 	<input id="TypeId" type="text" class="form-control mb-3" placeholder="Type">
+     			<input id="Version" type="text" class="form-control mb-3" placeholder="Version">
+    		 	<input id="MapId" type="text"  class="form-control mb-3" placeholder="Map">
+           <div class="mb-1">
+            <Label>Match type :   </Label>
+            <div class="custom-select" style="width:200px;">
+              <select id="matchTypeId" >
+                <option value="">Select</option>
+                <option value="1">Paid</option>
+                <option value="2">Unpaid</option>
+              </select>
+            </div>
+           </div>
+
+           <input id="roomId" type="text"  class="form-control mb-3" placeholder="Room id">      
+     			<input id="roompasswordId" type="text" i class="form-control mb-3" placeholder="Room Password">
+     			<input id="totallpeople" type="text"  class="form-control mb-3" placeholder="Totall People's">
+     			<input id="entryFee" type="text"  class="form-control mb-3" placeholder="Entry Fee">
        		</div>
        		<div class="col-md-6">
-             <input id="matchtime" type="text" id="" class="form-control mb-3" placeholder="Time">
-     			<input id="winningprice" type="text" id="" class="form-control mb-3" placeholder="Winning Price">
-     			<input id="runnersFirstUp" type="text" id="" class="form-control mb-3" placeholder="First Runner's up ">
-     			<input id="runnersSecondUp" type="text" id="" class="form-control mb-3" placeholder="Second Runner's up ">
-     			<input id="perKill" type="text" id="" class="form-control mb-3" placeholder="Per Kill">
-     			<input id="totallprice" type="text" id="" class="form-control mb-3" placeholder="Total Price">
-     			<input id="gamelink" type="text" id="" class="form-control mb-3" placeholder="Game Link">
-     			<input id="category" type="text" id="" class="form-control mb-3" placeholder="Category">
-     			<input id="GameName" type="text" id="" class="form-control mb-3" placeholder="Game Name">
-     			<input id="GameDurationtype" type="text" id="" class="form-control mb-3" placeholder="Game Duration Type">
-
+             <input id="matchtime" type="datetime-local"  class="form-control mb-3" placeholder="Time">
+     			<input id="winningprice" type="text"  class="form-control mb-3" placeholder="Winning Price">
+     			<input id="runnersFirstUp" type="text"  class="form-control mb-3" placeholder="First Runner's up ">
+     			<input id="runnersSecondUp" type="text"  class="form-control mb-3" placeholder="Second Runner's up ">
+     			<input id="perKill" type="text"  class="form-control mb-3" placeholder="Per Kill">
+     			<input id="totallprice" type="text" class="form-control mb-3" placeholder="Total Price">
+     			<input id="gamelink" type="text"  class="form-control mb-3" placeholder="Game Link">
+     			<input id="GameName" type="text"  class="form-control mb-3" placeholder="Game Name">
+           <div>
+                <Label>Game Type by Day</Label>
+                <div class="custom-select"  style="width:200px;">
+                  <select id="gametypebyday">
+                    <option value="">Select type:</option>
+                    <option value="1">Daily Matches</option>
+                    <option value="2">Tournaments / Scrims</option>
+                  </select>
+                </div>
+           </div>
        		</div>
        	</div>
        </div>
@@ -269,58 +286,130 @@ $('#addCoursebtn').click(function(){
 
 
 $('#CourseAddConfirmBtn').click(function(){
-  var  CourseName=$('#CourseNameId').val();
-  var  CourseDes=$('#CourseDesId').val();
-  var  CourseFee=$('#CourseFeeId').val();
-  var  CourseEnroll=$('#CourseEnrollId').val();
-  var  CourseClass=$('#CourseClassId').val();
-  var  CourseLink=$('#CourseLinkId').val();
-  var  CourseImg=$('#CourseImgId').val();
-  courseAdd(CourseName,CourseDes,CourseFee,CourseEnroll,CourseClass,CourseLink,CourseImg);
+  var  matchNameId=$('#matchNameId').val();
+  var  gameDeviceId=$('#gameDeviceId').val();
+  var  TypeId=$('#TypeId').val();
+  var  Version=$('#Version').val();
+  var  MapId=$('#MapId').val();
+  var  matchTypeId=$('#matchTypeId').val();
+  var  roomId=$('#roomId').val();
+  var  roompasswordId=$('#roompasswordId').val();
+  var  totallpeople=$('#totallpeople').val();
+  var  entryFee=$('#entryFee').val();
+  var  matchtime=$('#matchtime').val();
+
+  var  winningprice=$('#winningprice').val();
+  var  runnersFirstUp=$('#runnersFirstUp').val();
+  var  runnersSecondUp=$('#runnersSecondUp').val();
+  var  perKill=$('#perKill').val();
+  var  totallprice=$('#totallprice').val();
+  var  gamelink=$('#gamelink').val();
+  var  GameName=$('#GameName').val();
+  var  gametypebyday=$('#gametypebyday').val();
+
+  matchAdd(matchNameId,gameDeviceId,TypeId,Version,MapId,matchTypeId,roomId,roompasswordId,totallpeople,entryFee,matchtime,winningprice,runnersFirstUp,runnersSecondUp,perKill,totallprice,gamelink,GameName,gametypebyday);
 })
 
 
 
 // course add method
-function courseAdd(CourseName,CourseDes,CourseFee,CourseEnroll,CourseClass,CourseLink,CourseImg){
+function matchAdd(matchNameId,gameDeviceId,TypeId,Version,MapId,matchTypeId,roomId,roompasswordId,totallpeople,entryFee,matchtime,winningprice,runnersFirstUp,runnersSecondUp,perKill,totallprice,gamelink,GameName,gametypebyday){
 
-  if(CourseName.length==0){
-    toastr.error('Course Name is empty!');
-  }else if(CourseDes.length==0){
-    toastr.error('Course Des is empty!');
 
-  }else if(CourseFee.length==0){
-    toastr.error('Course Fee is empty!');
-  }else if(CourseEnroll.length==0){
-    toastr.error('Course Enroll is empty!');
-  }else if(CourseClass.length==0){
-    toastr.error('Course Class is empty!');
-  }else if(CourseImg.length==0){
-    toastr.error('Course Img is empty!');
-  }else if(CourseLink.length==0){
-    toastr.error('Course Link is empty!');
+alert( matchNameId+
+      gameDeviceId+
+      TypeId+
+      Version+
+      MapId+
+      matchTypeId+
+      roomId+
+      roompasswordId+
+      totallpeople+
+      entryFee+
+      matchtime+
+      winningprice+
+      runnersFirstUp+
+      runnersSecondUp+
+      perKill+
+      totallprice+
+      gamelink+
+      GameName+
+      gametypebyday)
+
+
+
+  if(matchNameId.length==0){
+    toastr.error('Match Name is empty!');
+  }else if(gameDeviceId.length==0){
+    toastr.error('Device is empty!');
+  }else if(TypeId.length==0){
+    toastr.error('Type Fee is empty!');
+  }else if(Version.length==0){
+    toastr.error('Version  empty!');
+  }else if(MapId.length==0){
+    toastr.error('Map is empty!');
+  }else if(matchTypeId.length==0){
+    toastr.error('Match type is empty!');
+  }else if(roomId.length==0){
+    toastr.error('Room Id is empty!');
+  }else if(roompasswordId.length==0){
+    toastr.error('Room Password is empty!');
+  }else if(totallpeople.length==0){
+    toastr.error('Total is empty!');
+  }else if(entryFee.length==0){
+    toastr.error('Entry fee  is empty!');
+  }else if(matchtime.length==0){
+    toastr.error('Match time is empty!');
+  }else if(winningprice.length==0){
+    toastr.error('Winning price is empty!');
+  }else if(runnersFirstUp.length==0){
+    toastr.error('Runners up First is empty!');
+  }else if(runnersSecondUp.length==0){
+    toastr.error('Runners up Second is empty!');
+  }else if(perKill.length==0){
+    toastr.error('Per kill is empty!');
+  }else if(totallprice.length==0){
+    toastr.error('Totall price is empty!');
+  }else if(gamelink.length==0){
+    toastr.error('Game Link is empty!');
+  }else if(GameName.length==0){
+    toastr.error('Game Name is empty!');
+  }else if(gametypebyday.length==0){
+    toastr.error('Game type BY day is empty!');
   }else{
     $('#CourseAddConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
-    axios.post('/CourseAdd',{
-      course_name: CourseName,
-      course_des: CourseDes,
-      course_fee: CourseFee,
-      course_totalenroll: CourseEnroll,
-      course_totalclass: CourseClass,
-      course_link: CourseLink,
-      course_img: CourseImg
+    axios.post('/admin/gameAdd',{
+      matchNameId: matchNameId,
+      gameDeviceId: gameDeviceId,
+      TypeId: TypeId,
+      Version: Version,
+      MapId: MapId,
+      matchTypeId :matchTypeId,
+      roomId:roomId,
+      roompasswordId:roompasswordId,
+      totallpeople:totallpeople,
+      entryFee:entryFee,
+      matchtime:matchtime,
+      winningprice:winningprice,
+      runnersFirstUp:runnersFirstUp,
+      runnersSecondUp:runnersSecondUp,
+      perKill:perKill,
+      totallprice:totallprice,
+      gamelink:gamelink,
+      GameName:GameName,
+      gametypebyday:gametypebyday
+
     })
     .then(function(response){
       $('#CourseAddConfirmBtn').html("Save");
       if(response.data==1){
           $('#addCourseModal').modal('hide');
           toastr.success("add success");
-          getCoursesData();
+          getOrderData();
         }else{
         $('#addCourseModal').modal('hide');
         toastr.error("Something Went Wrong!");
-        getCoursesData();
-
+        getOrderData();
       }
     }).catch(function(error){
       $('#addCourseModal').modal('hide');

@@ -141,14 +141,8 @@ class AuthController extends Controller
 
 
 
-
-
-
-    function getUserData(Request $request){
-        $id=$request->input('id');
-        $user=User::where('id',$id)->get();
-
-
+    function getUserData($id){
+        $user=User::findOrFail($id);
         return response($user, 200);
     }
 
