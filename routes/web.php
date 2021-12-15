@@ -90,7 +90,6 @@ Route::get('/games',[GameController::class,'GameIndex']);
 
 Route::get('/getGameData',[GameController::class,'getGamesData']);
 Route::post('/gameDelete',[GameController::class,'GameDelete']);
-
 Route::post('/gameAdd',[GameController::class,'GameAdd']);
 Route::post('/gameUpdate',[GameController::class,'GameUpdate']);
 

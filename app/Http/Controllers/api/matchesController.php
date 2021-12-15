@@ -8,10 +8,14 @@ use Illuminate\Http\Request;
 
 class matchesController extends Controller
 {
+
     function getAllMatches(){
 
         $matches=matches::all();
-
         return $matches;
     }
+
+    
+
+
 }

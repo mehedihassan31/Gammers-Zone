@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\gamesubscribeController;
 use App\Http\Controllers\api\matchesController;
 use App\Http\Controllers\api\OrderController;
 use App\Http\Controllers\api\ProductsController;
@@ -36,15 +37,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
 // product-----------------
-   Route::get('/products/{id}',[ProductsController::class,'getAllProducts']);
+   Route::get('/products/',[ProductsController::class,'getAllProducts']);
+
 
 
 // match----------------------------
    Route::get('/matches',[matchesController::class,'getAllMatches']);
+  
 
 
 // transection-------------------------------
-   Route::get('/transections',[transectionController::class,'getAllTransections']);
+   Route::get('/transections/{id}',[transectionController::class,'getAllTransections']);
    Route::post('/deposit',[transectionController::class,'makeDeposit']);
   
 
@@ -59,7 +62,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 // order--------------------------------------------
 
 Route::post('/orderplace',[OrderController::class,'makeOrder']);
-Route::post('/orderlist',[OrderController::class,'getAllOrders']);
+Route::get('/orderlist/{id}',[OrderController::class,'getAllOrders']);
    
     
 });
@@ -72,8 +75,4 @@ Route::post('/login',[AuthController::class,"login"]);
 
 
 
-
-
-
-
-
+Route::get('/matcheswithroomid',[gamesubscribeController::class,'getAllMatcheswithroomid']);

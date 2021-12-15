@@ -1,8 +1,8 @@
 @extends('admin.layout.app')
 @section('content')
-<div id="mainDivCourse" class="container d-none">
+<div id="mainDivCourse" class="container-fluid d-none">
     <div class="row">
-        <div class="col-md-12 p-5">
+        <div class="col-md-12 p-1">
 
                 <button id="addCoursebtn" class="btn btn-sm mr-3 btn-danger">Add New</button>
 
@@ -17,8 +17,10 @@
                   <th class="th-sm">Match Type</th>
                   <th class="th-sm">Room Id</th>
                   <th class="th-sm">Room Password</th>
-                  <th class="th-sm">Totall Price</th>
+                  <th class="th-sm">Totall People's</th>
                   <th class="th-sm">Entry Fee</th>
+                  <th class="th-sm">Match Time</th>
+                  <th class="th-sm">Winning Price</th>
                   <th class="th-sm">Edit</th>
                   <th class="th-sm">Delete</th>
                 </tr>
@@ -62,7 +64,7 @@ add modal --}}
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title">Add New Course</h5>
+        <h5 class="modal-title">Add New Game</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -81,8 +83,8 @@ add modal --}}
             <div class="custom-select" style="width:200px;">
               <select id="matchTypeId" >
                 <option value="">Select</option>
-                <option value="1">Paid</option>
-                <option value="2">Unpaid</option>
+                <option value="Paid">Paid</option>
+                <option value="Unpaid">Unpaid</option>
               </select>
             </div>
            </div>
@@ -129,7 +131,7 @@ add modal --}}
 
 
 {{-- delete modal --}}
-{{-- <div class="modal fade" id="deleteCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="deleteCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -151,7 +153,7 @@ aria-hidden="true">
             </div>
           </div>
         </div>
-</div> --}}
+</div>
 
 
 
@@ -241,6 +243,8 @@ function getOrderData(){
                 "<td class='td-sm'>"+jsonData[i].room_password+"</td>"+
                 "<td class='td-sm'>"+jsonData[i].totall_p+"</td>"+
                 "<td class='td-sm'>"+jsonData[i].Entry_Fee+"</td>"+
+                "<td class='td-sm'>"+jsonData[i].match_time+"</td>"+
+                "<td class='td-sm'>"+jsonData[i].winning_price+"</td>"+
                 // "<td> <a class='courseViewDetailsbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-eye'></i></a>Details</td>"+
                 "<td> <a class='courseeditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit'></i></a>Edit</td>"+
                "<td><a class='courseDeletebtn'  data-id='"+jsonData[i].id+"' ><i class='fas fa-trash-alt'></i></a></td>"
@@ -314,27 +318,6 @@ $('#CourseAddConfirmBtn').click(function(){
 
 // course add method
 function matchAdd(matchNameId,gameDeviceId,TypeId,Version,MapId,matchTypeId,roomId,roompasswordId,totallpeople,entryFee,matchtime,winningprice,runnersFirstUp,runnersSecondUp,perKill,totallprice,gamelink,GameName,gametypebyday){
-
-
-alert( matchNameId+
-      gameDeviceId+
-      TypeId+
-      Version+
-      MapId+
-      matchTypeId+
-      roomId+
-      roompasswordId+
-      totallpeople+
-      entryFee+
-      matchtime+
-      winningprice+
-      runnersFirstUp+
-      runnersSecondUp+
-      perKill+
-      totallprice+
-      gamelink+
-      GameName+
-      gametypebyday)
 
 
 
@@ -425,27 +408,27 @@ alert( matchNameId+
 
 $('#courseConfrmDeletebtn').click(function(){
 var id=$('#courseDeletebtnid').html();
- courseDelete(id);
+ gameDelete(id);
 })
 
 
-function courseDelete(deleteid){
+function gameDelete(deleteid){
 
   $('#courseConfrmDeletebtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
 
-  axios.post('/CourseDelete',{id: deleteid})
+  axios.post('/admin/gameDelete',{id: deleteid})
   .then(function(response){
     $('#courseConfrmDeletebtn').html("Yes");
     if(response.status==200){
       if(response.data==1){
         $('#deleteCourseModal').modal('hide');
         toastr.success("Delete success");
-        getCoursesData();
+        getOrderData();
 
       }else{
         $('#deleteCourseModal').modal('hide');
         toastr.error("Delete fail");
-        getCoursesData();
+        getOrderData();
 
       }
 

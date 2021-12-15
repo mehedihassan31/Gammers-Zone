@@ -10,19 +10,28 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
-    function getAllProducts($id){
+    function getAllProducts(){
         
         
         
-        $user=User::findOrFail($id);
         $products=product::get();
-        
-        $response=[
-            'balance'=>$user->balance,
-            'data'=>$products
-            ];
 
         
-        return response($response,201);
+        return response($products,201);
     }
+//     function getAllProductsById($id){
+        
+        
+//         $user=User::findOrFail($id);
+//         $products=product::get();
+        
+//         $response=[
+//             'balance'=>$user->balance,
+//             'data'=>$products
+//             ];
+
+        
+//         return response($response,201);
+//     }
+// }
 }

@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Response;
 class transectionController extends Controller
 {
     
-    function getAllTransections(Request $request){
+    function getAllTransections($id){
 
-        $userid=$request->input('user_id');
+        $userid=$id;
         
         $results=transection::where('user_id',$userid)->orderBy('id','desc')->get();
         return $results;
@@ -27,12 +27,20 @@ class transectionController extends Controller
     
         $results=transection::insert(['user_id'=>$userid,'ammount'=>$ammount,'number'=>$number,'pmethod'=>$pmethod]);
 
+        $response=[
+            
+            'message'=>"Deposit Successfull"
+            
+            ];
+  
+
+
         if($results==true)
         {
-            return response("Deposit Successfull") ;
+            return response($response,200) ;
 
         }else{
-            return response('Somethong Error');
+            return response(500);
         }
    }
 

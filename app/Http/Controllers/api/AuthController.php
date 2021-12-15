@@ -93,12 +93,18 @@ class AuthController extends Controller
         ]);
 
 
-        $response = [
-            'user' => $user,
-           
-        ];
+  
+        if($user==true){
+            return [
+                'message'=>"update successful"
+            ];
 
-        return response($response, 201);
+        }else{
+
+            return [
+                'message'=>" Update failed"
+            ];
+        }
 
     }
 

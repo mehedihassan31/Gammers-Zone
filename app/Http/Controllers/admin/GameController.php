@@ -29,16 +29,16 @@ class GameController extends Controller
 //     }
 
 
-//     function courseDelete(Request $request){
-//         $id=$request->input('id');
-//         $results=CourseModel::where('id','=',$id)->delete();
-//             if($results==true){
-//                 return 1 ;
-//             }else{
-//                 return 0;
-//             }
+    function GameDelete(Request $request){
+        $id=$request->input('id');
+        $results=Game::where('id','=',$id)->delete();
+            if($results==true){
+                return 1 ;
+            }else{
+                return 0;
+            }
                         
-//    }
+   }
 
 
 //    function courseUpdate(Request $req){

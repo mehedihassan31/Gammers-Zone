@@ -6,17 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Models\order;
 use App\Models\transection;
 use App\Models\User;
+use GrahamCampbell\ResultType\Result;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    function getAllOrders(Request $request){
+    function getAllOrders($id){
 
-        $userid=$request->input('user_id');
+        $userid=$id;
         
-        $results=order::with('product','user')->where('user_id',$userid)->orderBy('id','desc')->get();
-        return $results;
+        $results=order::with('product')->where('user_id',$userid)->orderBy('id','desc')->get();
+        
 
+    foreach(array($results) as $result)
+    {   
+            return $result;  
+
+    }
+        
+ 
+                
    }
 
 
