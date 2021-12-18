@@ -15,18 +15,12 @@ class OrderController extends Controller
 
         $userid=$id;
         
-        $results=order::with('product')->where('user_id',$userid)->orderBy('id','desc')->get();
-        
-
-    foreach(array($results) as $result)
-    {   
-            return $result;  
-
-    }
-        
- 
+        $results=order::with('product:id,diamond')->where('user_id',$userid)->orderBy('id','desc')->get();
+  
+            return $results;  
                 
    }
+
 
 
    function makeOrder(Request $request){

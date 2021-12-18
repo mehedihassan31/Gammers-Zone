@@ -58,11 +58,15 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
    Route::post('/updateUser',[AuthController::class,'userDataUpdata']);
    Route::post('/updatePasskey',[AuthController::class,'userPassUpdata']);
 
+   // match
+
+   Route::post('/joinmatch',[gamesubscribeController::class,'joinMatch']);
+
 
 // order--------------------------------------------
 
 Route::post('/orderplace',[OrderController::class,'makeOrder']);
-Route::get('/orderlist/{id}',[OrderController::class,'getAllOrders']);
+
    
     
 });
@@ -76,3 +80,7 @@ Route::post('/login',[AuthController::class,"login"]);
 
 
 Route::get('/matcheswithroomid',[gamesubscribeController::class,'getAllMatcheswithroomid']);
+
+Route::get('/orderlist/{id}',[OrderController::class,'getAllOrders']);
+Route::get('/ongoingmatch',[gamesubscribeController::class,'getongoingmatch']);
+Route::get('/getalluserbymatch/{matchid}',[gamesubscribeController::class,'getalluserbymatch']);

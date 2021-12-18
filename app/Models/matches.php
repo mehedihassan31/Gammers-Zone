@@ -15,6 +15,7 @@ class matches extends Model
     public $keyType='int';
     public $timestamps=true;
 
+
     public function gamesubscribe(){
         return $this->belongsToMany(gamesubscribe::class,'id');
       }
