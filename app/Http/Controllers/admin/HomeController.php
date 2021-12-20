@@ -28,7 +28,7 @@ class HomeController extends Controller
             'totalusers'=>$totalusers,
         ]);
 
-    return view('admin.home');
+
 
     }
 }

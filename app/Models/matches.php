@@ -16,9 +16,9 @@ class matches extends Model
     public $timestamps=true;
 
 
-    public function gamesubscribe(){
-        return $this->belongsToMany(gamesubscribe::class,'id');
-      }
+    // public function gamesubscribe(){
+    //     return $this->belongsToMany(gamesubscribe::class,'id');
+    //   }
 
 
 }

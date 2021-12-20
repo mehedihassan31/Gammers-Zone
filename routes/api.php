@@ -42,7 +42,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
 // match----------------------------
-   Route::get('/matches',[matchesController::class,'getAllMatches']);
+   // Route::get('/matches',[matchesController::class,'getAllMatches']);
+
+Route::get('/matches',[gamesubscribeController::class,'getAllMatcheswithroomid']);
   
 
 
@@ -58,6 +60,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
    Route::post('/updateUser',[AuthController::class,'userDataUpdata']);
    Route::post('/updatePasskey',[AuthController::class,'userPassUpdata']);
 
+   Route::get('/allmatchbyuser',[gamesubscribeController::class,'getallmatchbyuser']);
+
    // match
 
    Route::post('/joinmatch',[gamesubscribeController::class,'joinMatch']);
@@ -67,6 +71,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 Route::post('/orderplace',[OrderController::class,'makeOrder']);
 
+Route::get('/orderlist/{id}',[OrderController::class,'getAllOrders']);
+
    
     
 });
@@ -75,12 +81,9 @@ Route::post('/orderplace',[OrderController::class,'makeOrder']);
 Route::post('/register',[AuthController::class,"register"]);
 Route::post('/login',[AuthController::class,"login"]);
 
+Route::get('/results/{id}',[gamesubscribeController::class,"getResults"]);
 
 
 
-
-Route::get('/matcheswithroomid',[gamesubscribeController::class,'getAllMatcheswithroomid']);
-
-Route::get('/orderlist/{id}',[OrderController::class,'getAllOrders']);
 Route::get('/ongoingmatch',[gamesubscribeController::class,'getongoingmatch']);
 Route::get('/getalluserbymatch/{matchid}',[gamesubscribeController::class,'getalluserbymatch']);

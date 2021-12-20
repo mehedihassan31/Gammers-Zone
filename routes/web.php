@@ -9,10 +9,9 @@ use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductsController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\ProjectsController;
-use App\Http\Controllers\admin\Reviewcontroller;
 use App\Http\Controllers\admin\transectionController;
 use App\Http\Controllers\admin\usersController;
-use App\Http\Controllers\admin\VisitorController;
+use App\Http\Controllers\admin\GamesubscribeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -93,9 +92,16 @@ Route::post('/gameDelete',[GameController::class,'GameDelete']);
 Route::post('/gameAdd',[GameController::class,'GameAdd']);
 Route::post('/gameUpdate',[GameController::class,'GameUpdate']);
 
+// results
+Route::get('/results/{id}',[GamesubscribeController::class,'ResultIndex']);
+Route::get('/getAllsubsData',[usersController::class,'getAllsubsData']);
+
+Route::post('/UsersDelete',[usersController::class,'userDelete']);
+Route::post('/UsersDetails',[usersController::class,'getUserDetails']);
+Route::post('/balanceAdd',[usersController::class,'balanceAdd']);
+Route::post('/winBalanceAdd',[usersController::class,'winBalanceAdd']);
+    
 });
-
-
 
 
 
@@ -103,14 +109,6 @@ Route::post('/gameUpdate',[GameController::class,'GameUpdate']);
 Route::get('/login',[LoginController::class,'loginIndex']);
 Route::post('/onlogin',[LoginController::class,'onLogin']);
 Route::get('/logout',[LoginController::class,'onlogout']);
-
-
-
-
-
-
-
-
 
 
 

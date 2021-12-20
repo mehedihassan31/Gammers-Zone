@@ -246,7 +246,8 @@ function getOrderData(){
                 "<td class='td-sm'>"+jsonData[i].match_time+"</td>"+
                 "<td class='td-sm'>"+jsonData[i].winning_price+"</td>"+
                 // "<td> <a class='courseViewDetailsbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-eye'></i></a>Details</td>"+
-                "<td> <a class='courseeditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit'></i></a>Edit</td>"+
+                "<td> <a  href={{url('/admin/results')}}/"+jsonData[i].id+"><i class='fas fa-edit'></i>Results</a></td>"+
+                // "<td> <a class='courseeditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit'></i>Results</a></td>"+
                "<td><a class='courseDeletebtn'  data-id='"+jsonData[i].id+"' ><i class='fas fa-trash-alt'></i></a></td>"
               ).appendTo('#course_table');
             })

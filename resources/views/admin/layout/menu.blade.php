@@ -26,7 +26,7 @@
                    <li> <a href="{{url('/admin/transections')}}" ><span> <i class="fas fa-tasks"></i> </span><span class="hide-menu">Transections</span></a></li>
                    
                    <li> <a href="{{url('/admin/games')}}" ><span> <i class="far fa-envelope"></i> </span><span class="hide-menu">Games</span></a></li>
-                   <li> <a href="{{url('#')}}" ><span> <i class="far fa-comments"></i> </span><span class="hide-menu">test2</span></a></li>
+                   <li> <a href="{{url('/admin/results')}}" ><span> <i class="far fa-comments"></i> </span><span class="hide-menu">Results Publish</span></a></li>
                 </ul>
             </nav>
         </div>

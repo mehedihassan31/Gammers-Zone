@@ -18,6 +18,8 @@ class Gamesubscribe extends Migration
            $table->integer('user_id');
            $table->integer('match_id');
            $table->integer('range');
+           $table->string('price_money')->default(0);
+           $table->string('killbyuser')->default(0);
                      
        });
     }
