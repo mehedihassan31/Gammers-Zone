@@ -76,8 +76,8 @@ aria-hidden="true">
                                           </div>
                                       </div>
                                 </div>
-
                       </div>
+                      
                   <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</button>
                     {{-- <button  id="CourseUpdateConfirmBtn" type="button" class="btn  btn-sm  btn-danger">Save</button> --}}

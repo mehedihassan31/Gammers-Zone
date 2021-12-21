@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Transection extends Migration
+class Withdraw extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class Transection extends Migration
      */
     public function up()
     {
-        Schema::create('transction', function (Blueprint $table) {
+        Schema::create('withdraw', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->integer('user_id');
             $table->integer('ammount')->nullable()->default('0');
-            $table->integer('pmethod')->nullable();
+            $table->string('pmethod')->nullable();
             $table->integer('number')->nullable()->default('010000');
-            $table->string('status')->default('Pending');         
+            $table->string('status')->default('Pending');
+           
         });
     }
 
@@ -30,6 +31,6 @@ class Transection extends Migration
      */
     public function down()
     {
-
+        //
     }
 }

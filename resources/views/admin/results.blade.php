@@ -7,19 +7,18 @@
     <div class="row">
     <div class="col-md-12 p-5">
 
-        <h3 class="count-card-title text-center">{{$match_id}}</h3>
+        <Label>Game Id: </Label><h3 id="matchid">{{$match_id}}</h3>
 
     <table id="serviceDatatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
       <thead>
         <tr>
           <th class="th-sm">Name</th>
           <th class="th-sm">Username</th>
-          <th class="th-sm">Email</th>
-          <th class="th-sm">phone</th>
-          <th class="th-sm">Balance</th>
-          <th class="th-sm">Win Balance</th>
-          <th class="th-sm">$match</th>
-          <th class="th-sm">Add Balance</th>
+          <th class="th-sm">Game User Name</th>
+          <th class="th-sm">Phone </th>
+          <th class="th-sm">Price Money</th>
+          <th class="th-sm">Totall Kill</th>
+          <th class="th-sm">Add</th>
           <th class="th-sm">Delete</th>
         </tr>
       </thead>
@@ -75,7 +74,6 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-
         <div class="modal-body">
          <h6>Do you want to delete?</h6>
          <h6 id="serviceDeletebtn"></h6>
@@ -108,12 +106,13 @@
             <div>
                 <h5 id="serviceeditid" class="mt-4 text-center"> </h5>
                 <div class="form-outline mb-4">
-                  <input type="text" id="srid1" class="form-control" placeholder="Balance">
-                  <button data-id='' id='bconfmEditbtn' type="button" class="btn btn-sm btn-danger">Save</button>
+                  <input type="text" id="srid1" class="form-control" placeholder="Single Win Money">
+                  <button data-id='' id='pconfmEditbtn' type="button" class="btn btn-sm btn-danger">Save</button>
                 </div>
+
                 <div class="form-outline mb-4">
-                  <input type="text" id="srid2" class="form-control" placeholder="Win Balace">
-                  <button data-id='' id='winbconfmEditbtn' type="button" class="btn btn-sm btn-danger">Save</button>
+                  <input type="text" id="srid2" class="form-control" placeholder="Single kill">
+                  <button data-id='' id='killpconfmEditbtn' type="button" class="btn btn-sm btn-danger">Save</button>
                 </div>
             </div>
           </form>
@@ -140,11 +139,13 @@
 @section('script')
 <script type="text/javascript" >
 
+var matchid=$('#matchid').html();
+getUsersData(matchid);
+function getUsersData(id){
 
-getUsersData();
-function getUsersData(){
-axios.get('/admin/getUsersData')
-.then(function (response){
+axios.post('/admin/getAllsubsData',{
+  id:id,
+  }).then(function (response){
 
   if(response.status==200)
   {
@@ -157,13 +158,13 @@ axios.get('/admin/getUsersData')
     var jsonData=response.data;
     $.each(jsonData,function(i,item){
     $('<tr>').html(
-    "<td>"+jsonData[i].fname+" "+jsonData[i].lname +"</td>"+
-    "<td>"+jsonData[i].username+"</td>"+
-    "<td>"+jsonData[i].email+"</td>"+
-    "<td>"+jsonData[i].phone+"</td>"+
-    "<td>"+jsonData[i].balance+"</td>"+
-    "<td>"+jsonData[i].winbalance+"</td>"+
-    "<td> <a class='serviceeditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit inside-table-button'>add Balance</i></a></td>"+
+    "<td>"+jsonData[i].user.fname+" "+jsonData[i].user.lname +"</td>"+
+    "<td>"+jsonData[i].user.username+"</td>"+
+    "<td>"+jsonData[i].gamename+"</td>"+
+    "<td>"+jsonData[i].user.phone+"</td>"+
+    "<td>"+jsonData[i].price_money+"</td>"+
+    "<td>"+jsonData[i].killbyuser+"</td>"+
+    "<td> <a class='serviceeditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit inside-table-button'>add</i></a></td>"+
     "<td><a class='serviceDeletebtn'  data-id='"+jsonData[i].id+"' ><i class='fas fa-trash-alt'></i></a></td>"
      ).appendTo('#servicetable');
     });
@@ -211,30 +212,29 @@ $('.dataTables_length').addClass('bs-select');
 
 
 
-
 $('#serconfmdeltebtn').click(function(){
   var id=$(this).data('id');
-  productDelete(id);
+  resultDelete(id);
 
 
 })
 
-function productDelete(deleteid){
+function resultDelete(deleteid){
 
-  axios.post('/admin/ProductsDelete',{id:deleteid})
+  axios.post('/admin/ResultDelete',{id:deleteid})
   .then(function(response){
 
     if(response.data==1)
     {
       $('#deleteModal').modal('hide');
       toastr.success("Delete success");
-      getProductsData();
+      getUsersData(matchid)
 
     }else{
     
       $('#deleteModal').modal('hide');
       toastr.error("Delete Faild");
-      getProductsData();
+      getUsersData(matchid)
     }
 
   }).catch(function (error) {
@@ -252,33 +252,33 @@ function productDelete(deleteid){
 
 //add balance confirm-----------------------------------------------------------------------------------------------------
 
-    $('#bconfmEditbtn').click(function(){
+    $('#pconfmEditbtn').click(function(){
       var id=$('#serviceeditid').html();
-      var balance=$('#srid1').val();
-      balanceAdd(id, balance);
+      var pricemoney=$('#srid1').val();
+      pricemoneyAddd(id,pricemoney);
     })
 
-function balanceAdd(id,balance){
+function pricemoneyAddd(rid,pricemoney){
 
-if(balance.length==0){
-  toastr.error("Balance is empty");
+if(pricemoney.length==0){
+  toastr.error("pricemoney is empty");
 } else{
-                axios.post('/admin/balanceAdd',{
-                  id:id,
-                  balance:balance,
+                axios.post('/admin/pricemoneyAdd',{
+                  rid:rid,
+                  pricemoney:pricemoney,
                 })
                 .then(function(response){
                   if(response.data==1)
                   {
                     $('#EditModal').modal('hide');
                     toastr.success("Update success");
-                    getUsersData();
+                    getUsersData(matchid);
               
                   }else{
                   
                     $('#EditModal').modal('hide');
                     toastr.error("Update Faild");
-                    getUsersData();
+                    getUsersData(matchid);
                   }
                            
                 }).catch(function (error) {
@@ -291,20 +291,20 @@ if(balance.length==0){
 
 // add win balance------------------------------------------
 
-    $('#winbconfmEditbtn').click(function(){
+    $('#killpconfmEditbtn').click(function(){
       var id=$('#serviceeditid').html();
-      var winbalance=$('#srid2').val();
-      winBalanceAdd(id,winbalance);
+      var kill=$('#srid2').val();
+      killAdd(id,kill);
     })
 
     
-function winBalanceAdd(id,winbalance){
-  if(winbalance.length==0){
+function killAdd(id,kill){
+  if(kill.length==0){
     toastr.error("Win Balance is empty");
   } else{
-                  axios.post('/admin/winBalanceAdd',{
+                  axios.post('/admin/killAdd',{
                     id:id,
-                    winbalance:winbalance,
+                    kill:kill,
                   })
                   .then(function(response){
 
@@ -312,12 +312,12 @@ function winBalanceAdd(id,winbalance){
                     {
                       $('#EditModal').modal('hide');
                       toastr.success("Update success");
-                      getUsersData();
+                      getUsersData(matchid);
                 
                     }else{                  
                       $('#EditModal').modal('hide');
                       toastr.error("Update Faild");
-                      getUsersData();
+                      getUsersData(matchid);
                     }               
                   }).catch(function (error) {
                 

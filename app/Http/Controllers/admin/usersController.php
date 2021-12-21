@@ -19,8 +19,6 @@ class usersController extends Controller
     }
 
 
-
-
     function productDelete(Request $request){
         $id=$request->input('id');
         $results=users::where('id','=',$id)->delete();

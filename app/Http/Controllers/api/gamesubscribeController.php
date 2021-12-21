@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\gamesubscribe;
 use App\Models\matches;
 use Illuminate\Http\Request;
@@ -100,24 +101,60 @@ function getallmatchbyuser(){
 
 
 function joinMatch(Request $request){
-    $userid = Auth::user()->id;
-    $match_id=$request->input('match_id');
-
-    $results=gamesubscribe::where('user_id',$userid)->where('match_id',$match_id)->get();
-
-if($results->isEmpty()){
-    $res=gamesubscribe::insert(['user_id'=>$userid,'match_id'=>$match_id]);
-    if($res==true){
-        return response('Successfully join the game',200);
-    }else{
-        return response('Failed',400);
-    }
+    $userbalance = Auth::user()->balance;
     
-}else if(!$results->isEmpty()){
-    return response('You are Already registered ',400);
-}
+    $userid =Auth::user()->id;
+    // $userid =$request->input('userid');
+
+    $match_id=$request->input('match_id');
+    $gamename=$request->input('gamename');
+    $countdata=count($gamename);
+    $match_feeget=matches::where('id',$match_id)->select('Entry_Fee')->get();
+    $fee= $countdata*($match_feeget[0]->Entry_Fee);
+
+
+
+  
+    // $results=gamesubscribe::where('user_id',$userid)->where('match_id',$match_id)->get();
+
+    if($fee<=$userbalance){
+        // if($results->isEmpty()){
+
+            for($i=0;$i<$countdata;$i++){
+
+                $data= [
+                    'user_id'=>$userid,
+                    'match_id'=>$match_id[$i],
+                    'gamename'=>$gamename[$i],
+                ];
+
+                $res=gamesubscribe::insert($data);
+            }
+
+
+
+            $orderpay=User::where('id','=',$userid)->decrement('balance', $fee);
+        
+            if($res==true && $orderpay==true){
+                return response('Successfully join the game',200);
+            }else{
+                return response('Failed',400);
+            }
+            
+        // }else if(!$results->isEmpty()){
+        //     return response('You are Already registered ',200);
+        // }else{
+        //     return response('Something went wrong',400);
+        // }
+
+    }else{
+        return response('Insufficient balance',200);
+    }
+
 
 }
+
+
 
 
 function getResults($id){

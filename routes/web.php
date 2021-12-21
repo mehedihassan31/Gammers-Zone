@@ -83,6 +83,20 @@ Route::get('/getTransectionData',[transectionController::class,'getTransectionDa
 Route::post('/StatusConfirm',[transectionController::class,'StatusConfirm']);
 Route::post('/TransectionDelete',[transectionController::class,'TransectionDelete']);
 
+// Transection--------------
+
+Route::get('/withdraw',[transectionController::class,'withdrawIndex']);
+Route::get('/getwithdrawData',[transectionController::class,'getWithdrawData']);
+Route::post('/withdrawStatusConfirm',[transectionController::class,'withdrawStatusConfirm']);
+Route::post('/WithdrawDelete',[transectionController::class,'WithdrawDelete']);
+
+
+Route::post('/StatusConfirm',[transectionController::class,'StatusConfirm']);
+Route::post('/TransectionDelete',[transectionController::class,'TransectionDelete']);
+
+
+
+
 
 // gamme (match)-------------------------
 Route::get('/games',[GameController::class,'GameIndex']);
@@ -94,15 +108,18 @@ Route::post('/gameUpdate',[GameController::class,'GameUpdate']);
 
 // results
 Route::get('/results/{id}',[GamesubscribeController::class,'ResultIndex']);
-Route::get('/getAllsubsData',[usersController::class,'getAllsubsData']);
+Route::post('/getAllsubsData',[GamesubscribeController::class,'getAllsubsData']);
+Route::post('/pricemoneyAdd',[GamesubscribeController::class,'pricemoneyAdd']);
+Route::post('/killAdd',[GamesubscribeController::class,'killAdd']);
+Route::post('/ResultDelete',[GamesubscribeController::class,'ResultDelete']);
+
+
 
 Route::post('/UsersDelete',[usersController::class,'userDelete']);
 Route::post('/UsersDetails',[usersController::class,'getUserDetails']);
-Route::post('/balanceAdd',[usersController::class,'balanceAdd']);
-Route::post('/winBalanceAdd',[usersController::class,'winBalanceAdd']);
+
     
 });
-
 
 
 

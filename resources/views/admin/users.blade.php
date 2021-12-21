@@ -17,7 +17,7 @@
           <th class="th-sm">Balance</th>
           <th class="th-sm">Win Balance</th>
           <th class="th-sm">Add Balance</th>
-          <th class="th-sm">Delete</th>
+          {{-- <th class="th-sm">Delete</th> --}}
         </tr>
       </thead>
 
@@ -159,8 +159,8 @@ axios.get('/admin/getUsersData')
     "<td>"+jsonData[i].phone+"</td>"+
     "<td>"+jsonData[i].balance+"</td>"+
     "<td>"+jsonData[i].winbalance+"</td>"+
-    "<td> <a class='serviceeditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit inside-table-button'>add Balance</i></a></td>"+
-    "<td><a class='serviceDeletebtn'  data-id='"+jsonData[i].id+"' ><i class='fas fa-trash-alt'></i></a></td>"
+    "<td> <a class='serviceeditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit inside-table-button'>add Balance</i></a></td>"
+    // "<td><a class='serviceDeletebtn'  data-id='"+jsonData[i].id+"' ><i class='fas fa-trash-alt'></i></a></td>"
      ).appendTo('#servicetable');
     });
 
@@ -215,7 +215,7 @@ $('#serconfmdeltebtn').click(function(){
 
 })
 
-function productDelete(deleteid){
+function userDelete(deleteid){
 
   axios.post('/admin/ProductsDelete',{id:deleteid})
   .then(function(response){

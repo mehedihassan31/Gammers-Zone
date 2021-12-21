@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\admin\transection;
+use App\Models\withdraw;
 use App\Models\admin\users;
 use Illuminate\Http\Request;
 
@@ -60,8 +61,49 @@ class transectionController extends Controller
     }
 
 
+function withdrawIndex(){
+
+    return view("admin.withdraw");
+}
+
+function getWithdrawData(){
+
+    $results=withdraw::with('user')->orderBy('id','desc')->get();
+    return $results;
+}
+
+function withdrawStatusConfirm(Request $request){
+        
+    $id=$request->input('id');
+    $status=$request->input('status');
+    $statusupadte=withdraw::where('id','=',$id)->update(['status'=>$status]);
+
+    if($statusupadte)
+    {
+        return 1;
+
+    }else{
+        return 0;
+    }
+    
+
+}
 
 
+
+function WithdrawDelete(Request $request){
+    $id=$request->input('id');
+    $results=withdraw::where('id',$id)->delete();
+    if($results==true){
+        return 1;
+    
+    }else{
+        return 0;
+    }
+
+
+
+}
 
     
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\api\ProductsController;
 use App\Http\Controllers\api\SliderController;
 use App\Http\Controllers\api\transectionController;
 use App\Models\transection;
+use App\Models\withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\TextUI\XmlConfiguration\Group;
@@ -51,6 +52,10 @@ Route::get('/matches',[gamesubscribeController::class,'getAllMatcheswithroomid']
 // transection-------------------------------
    Route::get('/transections/{id}',[transectionController::class,'getAllTransections']);
    Route::post('/deposit',[transectionController::class,'makeDeposit']);
+
+   // withdraw-------------------------
+
+   Route::post('/withdraw',[transectionController::class,'withdrawReq']);
   
 
 
@@ -65,6 +70,10 @@ Route::get('/matches',[gamesubscribeController::class,'getAllMatcheswithroomid']
    // match
 
    Route::post('/joinmatch',[gamesubscribeController::class,'joinMatch']);
+   
+Route::get('/ongoingmatch',[gamesubscribeController::class,'getongoingmatch']);
+Route::get('/getalluserbymatch/{matchid}',[gamesubscribeController::class,'getalluserbymatch']);
+
 
 
 // order--------------------------------------------
@@ -72,6 +81,11 @@ Route::get('/matches',[gamesubscribeController::class,'getAllMatcheswithroomid']
 Route::post('/orderplace',[OrderController::class,'makeOrder']);
 
 Route::get('/orderlist/{id}',[OrderController::class,'getAllOrders']);
+
+
+Route::get('/results/{id}',[gamesubscribeController::class,"getResults"]);
+
+
 
    
     
@@ -81,9 +95,5 @@ Route::get('/orderlist/{id}',[OrderController::class,'getAllOrders']);
 Route::post('/register',[AuthController::class,"register"]);
 Route::post('/login',[AuthController::class,"login"]);
 
-Route::get('/results/{id}',[gamesubscribeController::class,"getResults"]);
 
 
-
-Route::get('/ongoingmatch',[gamesubscribeController::class,'getongoingmatch']);
-Route::get('/getalluserbymatch/{matchid}',[gamesubscribeController::class,'getalluserbymatch']);

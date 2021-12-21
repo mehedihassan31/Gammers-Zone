@@ -15,11 +15,11 @@ class gamesubscribe extends Model
     public $keyType='int';
     public $timestamps=false;
 
-    public function product() {
-        return $this->belongsTo(ProductsModel::class,'product_id');
+    public function match() {
+        return $this->belongsTo(matches::class,'match_id');
     }
 
-    public function user() {
-        return $this->belongsTo(user::class,'user_id');
+    public function User() {
+        return $this->belongsTo(User::class,'user_id');
     }
 }
