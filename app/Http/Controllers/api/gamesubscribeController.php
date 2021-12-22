@@ -16,7 +16,7 @@ class gamesubscribeController extends Controller
     function getAllMatcheswithroomid(){
 
         $userid = Auth::user()->id;
-            $matches=matches::get();
+            $matches=matches::where('match_time','>=',Carbon::now())->where('resultstatus','=','open')->get();
             $data= Array();
             foreach($matches as $key=>$m){
                 $match_id=$m->id;
@@ -77,7 +77,7 @@ class gamesubscribeController extends Controller
 
    function getongoingmatch(){
 
-    $results=matches::where('match_time','<=',Carbon::now())->get();
+    $results=matches::where('match_time','<=',Carbon::now())->where('resultstatus','=','open')->get();
     
     return response($results,200);
 
