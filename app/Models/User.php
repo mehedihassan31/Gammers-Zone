@@ -27,7 +27,7 @@ class User extends Authenticatable
         'phone',
         'balance',
         'winbalance',
-        'Dpbalance',
+        'refer',
         'password',
         'reference',
         

@@ -225,10 +225,8 @@ axios.get('/admin/getSliderData')
   {
     $('#maindiv').removeClass('d-none');
     $('#loaderdiv').addClass('d-none');
-
     $('#serviceDatatable').DataTable().destroy();
     $('#slidertable').empty();
-
     var jsonData=response.data;
     $.each(jsonData,function(i,item){
     $('<tr>').html(
@@ -239,7 +237,7 @@ axios.get('/admin/getSliderData')
      ).appendTo('#slidertable');
     });
 
-    //services delete
+  //services delete
 $('.serviceDeletebtn').click(function(event){
   var id=$(this).data('id');
   var photo =$(this).data('photo');
@@ -247,15 +245,9 @@ $('.serviceDeletebtn').click(function(event){
   $('#deleteModal').modal('show');
   event.preventDefault();
 
+
 })
 
-    //service edit icon
-    $('.serviceeditbtn').click(function(){
-       var id=$(this).data('id');
-      $('#serviceeditid').html(id);
-       serviceDetails(id);
-      $('#EditModal').modal('show')
-    })
 
 
 $('#serviceDatatable').DataTable({"order":false});
@@ -282,7 +274,6 @@ $('.dataTables_length').addClass('bs-select');
 
 
 
-
 $('#serconfmdeltebtn').click(function(event){
   var id=$(this).data('id');
   var photo =$(this).data('photo');
@@ -301,12 +292,14 @@ function sliderDelete(myFormdata){
       $('#deleteModal').modal('hide');
       toastr.success("Delete success");
       getSliderData();
+      location.reload();
 
     }else{
     
       $('#deleteModal').modal('hide');
       toastr.error("Delete Faild");
       getSliderData();
+      location.reload();
     }
 
 
@@ -319,118 +312,16 @@ function sliderDelete(myFormdata){
 }
 
 
-// each service update Details
-
-function sliderDetails(detailid){
-
-  axios.post('/admin/SliderDetails',{id:detailid})
-  .then(function(response){
-
-    if(response.status==200){
-
-      
-
-      $('#detailsf').removeClass('d-none');
-      $('#loaderdivd').addClass('d-none');
-      
-
-      var jsonData=response.data;
-
-      $('#srid1').val(jsonData[0].service_name);
-      $('#srid2').val(jsonData[0].service_des);
-      $('#srid3').val(jsonData[0].service_img);
-
-    }else{
-      $('#wrongdivd').removeClass('d-none');
-      $('#loaderdivd').addClass('d-none');
-      
-
-    }
-
-
-  }).catch(function (error) {
-
-    $('#wrongdivd').removeClass('d-none');
-    $('#loaderdivd').addClass('d-none');
-});
-
-
-}
-
-
-    //services edit confirm
-    $('#serconfmEditbtn').click(function(){
-      var id=$('#serviceeditid').html();
-      var name=$('#srid1').val();
-      var des=$('#srid2').val();
-      var img=$('#srid3').val();
-
-      sliderUpdate(id,name,des,img);
-
-    })
-
-    
-function sliderUpdate(serid,serName,serDes,serImg){
-
-  if(serName.length==0){
-
-    toastr.error("Name link emty");
-    
-  }else if(serDes.length==0){
-    toastr.error("Des link emty");
-
-  }
-  else if(serImg.length==0){
-    toastr.error("Image link emty");
-
-  }else{
-
-                  axios.post('/admin/SliderUpdate',{
-                    id:serid,
-                    name:serName,
-                    des:serDes,
-                    img:serImg
-                  })
-                  .then(function(response){
-
-                    if(response.data==1)
-                    {
-                      $('#EditModal').modal('hide');
-                      toastr.success("Update success");
-                      getSliderData();
-                
-                    }else{
-                    
-                      $('#EditModal').modal('hide');
-                      toastr.error("Update Faild");
-                      getSliderData();
-                    }
-                
-                
-                  }).catch(function (error) {
-                
-
-                });
-
-    }
 
 
 
-}
-
-
-// service add
+// silder add--------------------------------------
 
 $('#addnewbtn').click(function(){
 
 $('#addModal').modal('show');
 
 });
-
-
-
-
-
 
 
 $('#imgInput').change(function(){
@@ -445,7 +336,7 @@ reader.onload=function(event){
 
 
 
-$('#serconfmaddbtn').click(function(){
+$('#serconfmaddbtn').click(function(event){
   var title=$('#sraddid1').val();
   var link=$('#sraddid3').val();
   var PhotoFile= $('#imgInput').prop('files')[0];
@@ -454,6 +345,7 @@ $('#serconfmaddbtn').click(function(){
   formData.append('link',link);
   formData.append('photo',PhotoFile);
   sliderAdd(formData);
+  event.preventDefault();
 
 });
 

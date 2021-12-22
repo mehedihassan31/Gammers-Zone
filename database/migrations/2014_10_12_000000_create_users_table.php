@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->unique();
             $table->integer('balance');
             $table->integer('winbalance');
-            $table->integer('Dpbalance');
+            $table->boolean('refer')->default(0);
             $table->string('reference');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

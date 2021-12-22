@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Support\Facades\Auth;
 
 use Carbon\Carbon;
@@ -101,55 +100,104 @@ function getallmatchbyuser(){
 
 
 function joinMatch(Request $request){
+
+
+    //refer check-------------------------------------
+
+    $reference=Auth::user()->reference;
+    $refer=Auth::user()->refer;
+
+
+    // -------------------------------------
     $userbalance = Auth::user()->balance;
-    
     $userid =Auth::user()->id;
     // $userid =$request->input('userid');
-
     $match_id=$request->input('match_id');
     $gamename=$request->input('gamename');
     $countdata=count($gamename);
-    $match_feeget=matches::where('id',$match_id)->select('Entry_Fee')->get();
+    $match_feeget=matches::where('id',$match_id)->select('Entry_Fee','match_type')->get();
     $fee= $countdata*($match_feeget[0]->Entry_Fee);
+    $matchtype=$match_feeget[0]->match_type;
+
+    if($matchtype=='paid' && $refer==1){
+
+        if( $fee<=$userbalance){
+                for($i=0;$i<$countdata;$i++){
+    
+                    $data= [
+                        'user_id'=>$userid,
+                        'match_id'=>$match_id[$i],
+                        'gamename'=>$gamename[$i],
+                    ];
+    
+                    $res=gamesubscribe::insert($data);
+                }
+    
+                $orderpay=User::where('id','=',$userid)->decrement('balance', $fee);
+                $bonus=User::where('id','=',$userid)->increment('winbalance',5);
+                $makefalse=User::where('id','=',$userid)->update(['refer'=>false]);
+                $refererbonus=User::where('username','=',$reference)->increment('winbalance',10);
+           
+                if($res==true && $orderpay==true){
+
+
+                    return response('Successfully join the game. You get 5 tk refer bonus',200);
+                }else{
+                    return response('Failed',400);
+                }                
+        }else{
+            return response('Insufficient balance',200);
+        }
+    }elseif($matchtype=='paid' && $refer==0 ){
+
+        if( $fee<=$userbalance){
+                for($i=0;$i<$countdata;$i++){
+    
+                    $data= [
+                        'user_id'=>$userid,
+                        'match_id'=>$match_id[$i],
+                        'gamename'=>$gamename[$i],
+                    ];
+    
+                    $res=gamesubscribe::insert($data);
+                }
+    
+                $orderpay=User::where('id','=',$userid)->decrement('balance', $fee);
+            
+                if($res==true && $orderpay==true){
+                    return response('Successfully join the game',200);
+                }else{
+                    return response('Failed',400);
+                }                
+        }else{
+            return response('Insufficient balance',200);
+        }
+    }
+    else{
+        for($i=0;$i<$countdata;$i++){
+    
+            $data= [
+                'user_id'=>$userid,
+                'match_id'=>$match_id[$i],
+                'gamename'=>$gamename[$i],
+            ];
+
+            $res=gamesubscribe::insert($data);
+        }
+   
+        if($res==true){
+            return response('Successfully join the game',200);
+        }else{
+            return response('Failed',400);
+        }  
+
+    }
 
 
 
-  
     // $results=gamesubscribe::where('user_id',$userid)->where('match_id',$match_id)->get();
 
-    if($fee<=$userbalance){
-        // if($results->isEmpty()){
 
-            for($i=0;$i<$countdata;$i++){
-
-                $data= [
-                    'user_id'=>$userid,
-                    'match_id'=>$match_id[$i],
-                    'gamename'=>$gamename[$i],
-                ];
-
-                $res=gamesubscribe::insert($data);
-            }
-
-
-
-            $orderpay=User::where('id','=',$userid)->decrement('balance', $fee);
-        
-            if($res==true && $orderpay==true){
-                return response('Successfully join the game',200);
-            }else{
-                return response('Failed',400);
-            }
-            
-        // }else if(!$results->isEmpty()){
-        //     return response('You are Already registered ',200);
-        // }else{
-        //     return response('Something went wrong',400);
-        // }
-
-    }else{
-        return response('Insufficient balance',200);
-    }
 
 
 }

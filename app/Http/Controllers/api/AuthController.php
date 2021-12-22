@@ -12,6 +12,7 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
     function register(Request $request){
+        
         $fields=$request->validate([
             'fname'=>'required|string',
             'lname'=>'required|string',
@@ -20,25 +21,66 @@ class AuthController extends Controller
             'phone'=>'required|string|unique:users,phone',
             'reference'=>'nullable|string',
             'password'=>'required|string|confirmed'
+
         ]);
 
-        $user=User::create([
-            'fname'=>$fields['fname'],
-            'lname'=>$fields['lname'],
-            'username'=>$fields['username'],
-            'email'=>$fields['email'],
-            'phone'=>$fields['phone'],
-            'reference'=>$fields['reference'],
-            'password'=>bcrypt($fields['password'])
-        ]);
+        if($fields['reference']!=NULL){
+            $checkref=User::where('username',$fields['reference'])->count();
+            if($checkref==true){                
+                            $user=User::create([
+                                'fname'=>$fields['fname'],
+                                'lname'=>$fields['lname'],
+                                'username'=>$fields['username'],
+                                'email'=>$fields['email'],
+                                'phone'=>$fields['phone'],
+                                'refer'=>true,
+                                'reference'=>$fields['reference'],
+                                'password'=>bcrypt($fields['password']),
+                                
+                            ]);
+                            
+                            $token=$user->createToken('myToken')->plainTextToken;
+                            $response= [
+                                'user'=>$user,
+                                'token'=>$token
+                            ];
+
+                            return response($response,201);
+               
+
+            }else{
+
+                return response('Invalid refer code',200);
+
+            }
+
+        }else{
+
+            $user=User::create([
+                'fname'=>$fields['fname'],
+                'lname'=>$fields['lname'],
+                'username'=>$fields['username'],
+                'email'=>$fields['email'],
+                'phone'=>$fields['phone'],
+                'refer'=>false,
+                'reference'=>$fields['reference'],
+                'password'=>bcrypt($fields['password'])
+            ]);
+            
+            $token=$user->createToken('myToken')->plainTextToken;
+            $response= [
+                'user'=>$user,
+                'token'=>$token
+            ];
+    
+            return response($response,201);
+
+
+
+        }
+
         
-        $token=$user->createToken('myToken')->plainTextToken;
-        $response= [
-            'user'=>$user,
-            'token'=>$token
-        ];
 
-        return response($response,201);
     }
 
     function login(Request $request){
