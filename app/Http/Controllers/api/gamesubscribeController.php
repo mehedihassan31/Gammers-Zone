@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 class gamesubscribeController extends Controller
 {
     function getAllMatcheswithroomid(){
-
         $userid = Auth::user()->id;
             $matches=matches::where('match_time','>=',Carbon::now())->where('resultstatus','=','open')->get();
             $data= Array();
@@ -75,13 +74,6 @@ class gamesubscribeController extends Controller
 
 
 
-   function getongoingmatch(){
-
-    $results=matches::where('match_time','<=',Carbon::now())->where('resultstatus','=','open')->get();
-    
-    return response($results,200);
-
-}
 
 function getalluserbymatch($matchid){
     $results=gamesubscribe::with('user:id,username')->where('match_id',$matchid)->get();
@@ -213,6 +205,90 @@ function getResults($id){
     return $results;
 
 }
+
+
+
+
+function getongoingmatch(){
+
+    $results=matches::where('match_time','<=',Carbon::now())->where('resultstatus','=','open')->get();
+    
+    return response($results,200);
+
+}
+
+
+
+
+
+
+
+// Close Match Results
+
+function getAllCloseMatch(){
+    $userid = Auth::user()->id;
+        $matches=matches::where('match_time','<=',Carbon::now())->where('resultstatus','=','close')->get();
+        $data= Array();
+        foreach($matches as $key=>$m){
+            $match_id=$m->id;
+            $results=gamesubscribe::where('user_id',$userid)->where('match_id',$match_id)->get();
+        if($results->isEmpty()){
+            $data[$key]['id']= $m->id;
+            $data[$key]['name']= $m->name;
+            $data[$key]['Device']= $m->Device;
+            $data[$key]['Type']= $m->Type;
+            $data[$key]['version']= $m->version;
+            $data[$key]['map']= $m->map;
+            $data[$key]['match_type']= $m->match_type;
+            $data[$key]['totall_p']= $m->totall_p;
+            $data[$key]['Entry_Fee']= $m->Entry_Fee;
+            $data[$key]['match_time']= $m->match_time;
+            $data[$key]['winning_price']= $m->winning_price;
+            $data[$key]['runnerup_one']= $m->runnerup_one;
+            $data[$key]['runnerup_two']= $m->runnerup_two;
+            $data[$key]['per_kill']= $m->per_kill;
+            $data[$key]['total_price']= $m->total_price;
+            $data[$key]['registered_p']= $m->registered_p;
+            $data[$key]['game_link']= $m->game_link;
+            $data[$key]['category']= $m->category;
+            $data[$key]['game_name']= $m->game_name;
+            $data[$key]['game_type_by_date']= $m->game_type_by_date;
+            $data[$key]['joinornot']= false;    
+       
+        }else{               
+            $data[$key]['id']= $m->id;
+            $data[$key]['name']= $m->name;
+            $data[$key]['Device']= $m->Device;
+            $data[$key]['Type']= $m->Type;
+            $data[$key]['version']= $m->version;
+            $data[$key]['map']= $m->map;
+            $data[$key]['match_type']= $m->match_type;               
+            $data[$key]['room_id']= $m->room_id;
+            $data[$key]['room_password']= $m->room_password;
+            $data[$key]['totall_p']= $m->totall_p;
+            $data[$key]['Entry_Fee']= $m->Entry_Fee;
+            $data[$key]['match_time']= $m->match_time;
+            $data[$key]['winning_price']= $m->winning_price;
+            $data[$key]['runnerup_one']= $m->runnerup_one;
+            $data[$key]['runnerup_two']= $m->runnerup_two;
+            $data[$key]['per_kill']= $m->per_kill;
+            $data[$key]['total_price']= $m->total_price;
+            $data[$key]['registered_p']= $m->registered_p;
+            $data[$key]['game_link']= $m->game_link;
+            $data[$key]['category']= $m->category;
+            $data[$key]['game_name']= $m->game_name;
+            $data[$key]['game_type_by_date']= $m->game_type_by_date;
+            $data[$key]['joinornot']= true;    
+        }
+        }
+        return json_encode($data);
+}
+
+
+
+
+
+
 
 
 }

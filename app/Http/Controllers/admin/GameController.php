@@ -21,12 +21,30 @@ class GameController extends Controller
     }
 
 
-//     function getCoursedetails(Request $req){
 
-//        $id=$req->input('id');
-//        $results=json_encode(CourseModel::where('id','=',$id)->get());
-//        return $results;
-//     }
+
+
+function gameStatusConfirm(Request $request){
+        
+    $id=$request->input('id');
+    $status=$request->input('status');
+    $statusupadte=Game::where('id','=',$id)->update(['resultstatus'=>$status]);
+
+    if($statusupadte)
+    {
+        return 1;
+
+    }else{
+        return 0;
+    }
+    
+
+}
+
+
+
+
+
 
 
     function GameDelete(Request $request){

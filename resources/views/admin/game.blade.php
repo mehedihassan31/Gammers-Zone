@@ -22,6 +22,7 @@
                   <th class="th-sm">Match Time</th>
                   <th class="th-sm">Winning Price</th>
                   <th class="th-sm">Edit</th>
+                  <th class="th-sm">Match Status</th>
                   <th class="th-sm">Delete</th>
                 </tr>
               </thead>
@@ -157,6 +158,46 @@ aria-hidden="true">
 
 
 
+
+
+
+
+
+<div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Update Status</h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body  text-center">
+                                <div  id="courseEditFrom" class="container none">
+                                    <Label>Transection Id:</Label><h5 type="hidden"  id="updateCourseid"> </h5>
+                                      <div class="row">
+                                          <div class="card mx-auto">
+                                            {{-- <a  class="btn btn-primary" id="statusId">Pending</a> --}}
+                                            <a  class="btn btn-primary" id="statusId">close</a>
+                                          </div>
+                                      </div>
+                                </div>
+                      </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</button>
+                  </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
 {{-- Update modal --}}
 
 {{-- <div class="modal fade" id="updateCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -245,9 +286,8 @@ function getOrderData(){
                 "<td class='td-sm'>"+jsonData[i].Entry_Fee+"</td>"+
                 "<td class='td-sm'>"+jsonData[i].match_time+"</td>"+
                 "<td class='td-sm'>"+jsonData[i].winning_price+"</td>"+
-                // "<td> <a class='courseViewDetailsbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-eye'></i></a>Details</td>"+
-                "<td> <a  href={{url('/admin/results')}}/"+jsonData[i].id+"><i class='fas fa-edit'></i>Results</a></td>"+
-                // "<td> <a class='courseeditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit'></i>Results</a></td>"+
+                "<td> <a  href={{url('/admin/results')}}/"+jsonData[i].id+"><i class='fas fa-edit'>Results</i></a></td>"+
+                "<td> <a class='statusbtn' data-id='"+jsonData[i].id+"' >"+jsonData[i].resultstatus+"<i class='fas fa-edit'>Update Status</i></a></td>"+
                "<td><a class='courseDeletebtn'  data-id='"+jsonData[i].id+"' ><i class='fas fa-trash-alt'></i></a></td>"
               ).appendTo('#course_table');
             })
@@ -259,13 +299,17 @@ function getOrderData(){
             });
 
 
-            $('.courseeditbtn').click(function(){
+            $('.statusbtn').click(function(){
               var id=$(this).data('id');
-              // courseUpdatedetails(id);
               $('#updateCourseid').html(id);
-              $('#updateCourseModal').modal('show');
+              $('#statusModal').modal('show');
               
             })
+
+
+
+
+
 
             $('#coursedatatable').DataTable({"order":false});
             $('.dataTables_length').addClass('bs-select');
@@ -403,6 +447,47 @@ function matchAdd(matchNameId,gameDeviceId,TypeId,Version,MapId,matchTypeId,room
   }
 
 }
+
+
+// status update
+$('#statusId').click(function(){
+  var  id=$('#updateCourseid').html();
+  var  status=$('#statusId').text();
+   statusUpdate(id,status);
+})
+function statusUpdate(id,status){
+
+    axios.post('/admin/gameStatusConfirm',{
+                    id:id,
+                    status:status
+                  })
+                  .then(function(response){
+
+                    if(response.data==1)
+                    {
+                      $('#statusModal').modal('hide');
+                      toastr.success("Update success");
+                      getOrderData();
+                
+                    }else{
+                    
+                      $('#statusModal').modal('hide');
+                      toastr.error("Update Faild");
+                      getOrderData();
+                    }
+                
+                
+                  }).catch(function (error) {
+                    $('#statusModal').modal('hide');
+                    toastr.error("Something went wrong");
+
+                });
+}
+
+
+
+
+
 
 
 //delete course

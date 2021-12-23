@@ -111,11 +111,9 @@ aria-hidden="true">
                                           </div>
                                       </div>
                                 </div>
-
                       </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</button>
-                    {{-- <button  id="CourseUpdateConfirmBtn" type="button" class="btn  btn-sm  btn-danger">Save</button> --}}
                   </div>
       </div>
     </div>
@@ -149,7 +147,7 @@ axios.get('/admin/getwithdrawData')
     "<td>"+jsonData[i].number+"</td>"+
     "<td>"+jsonData[i].pmethod+"</td>"+
     "<td>"+jsonData[i].status+"</td>"+
-    "<td> <a class='serviceeditbtn' data-price='"+jsonData[i].ammount+"' data-user='"+jsonData[i].user.id+"' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit'>Status </i></a></td>"+
+    "<td> <a class='serviceeditbtn' data-price='"+jsonData[i].ammount+"' data-user='"+jsonData[i].user.id+"' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit'>Status</i></a></td>"+
     "<td><a class='serviceDeletebtn'  data-id='"+jsonData[i].id+"' ><i class='fas fa-trash-alt'></i></a></td>"
      ).appendTo('#servicetable');
     });
@@ -270,10 +268,6 @@ function statusUpdate(id,status){
                     toastr.error("Something went wrong");
 
                 });
-
-
-
-
 }
 
 

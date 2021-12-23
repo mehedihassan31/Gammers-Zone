@@ -12,6 +12,7 @@ use App\Http\Controllers\admin\ProjectsController;
 use App\Http\Controllers\admin\transectionController;
 use App\Http\Controllers\admin\usersController;
 use App\Http\Controllers\admin\GamesubscribeController;
+use App\Http\Controllers\admin\InformationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,9 +38,15 @@ Route::get('/',function(){
 
 
 
-
-
 Route::prefix('admin')->group(function () {
+
+
+    // Adminpanel Information
+Route::get('/information',[InformationController::class,'InformationIndex']);
+Route::get('/getinformationdata',[InformationController::class,'getInformationData']);
+Route::post('/informationUpdate',[InformationController::class,'InformationUpdate']);
+Route::post('/informationDetails',[InformationController::class,'getInformationdetails']);
+
 
 
 //Product admin-----------------
@@ -105,6 +112,7 @@ Route::get('/getGameData',[GameController::class,'getGamesData']);
 Route::post('/gameDelete',[GameController::class,'GameDelete']);
 Route::post('/gameAdd',[GameController::class,'GameAdd']);
 Route::post('/gameUpdate',[GameController::class,'GameUpdate']);
+Route::post('/gameStatusConfirm',[GameController::class,'gameStatusConfirm']);
 
 // results
 Route::get('/results/{id}',[GamesubscribeController::class,'ResultIndex']);
@@ -148,15 +156,6 @@ Route::post('/CourseAdd',[coursesController::class,'CourseAdd']);
 
 
 
-// Adminpanel Project
-Route::get('/projects',[ProjectsController::class,'ProjectsIndex']);
-Route::get('/getprojectsdata',[ProjectsController::class,'getProjectsData']);
-Route::post('/projectdelete',[ProjectsController::class,'ProjectDelete']);
-
-Route::post('/ProjectUpdate',[ProjectsController::class,'ProjectUpdate']);
-Route::post('/projectAdd',[ProjectsController::class,'ProjectAdd']);
-
-Route::post('/ProjectDetails',[ProjectsController::class,'getProjectdetails']);
 
 
 // Contact

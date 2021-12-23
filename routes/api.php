@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\gamesubscribeController;
+use App\Http\Controllers\api\InformationController;
 use App\Http\Controllers\api\matchesController;
 use App\Http\Controllers\api\OrderController;
 use App\Http\Controllers\api\ProductsController;
@@ -69,9 +70,10 @@ Route::get('/matches',[gamesubscribeController::class,'getAllMatcheswithroomid']
 
    // match
 
-   Route::post('/joinmatch',[gamesubscribeController::class,'joinMatch']);
+Route::post('/joinmatch',[gamesubscribeController::class,'joinMatch']);
    
 Route::get('/ongoingmatch',[gamesubscribeController::class,'getongoingmatch']);
+Route::get('/AllCloseMatch',[gamesubscribeController::class,'getAllCloseMatch']);
 Route::get('/getalluserbymatch/{matchid}',[gamesubscribeController::class,'getalluserbymatch']);
 
 
@@ -94,6 +96,8 @@ Route::get('/results/{id}',[gamesubscribeController::class,"getResults"]);
 // Route::get('/sliderdata',[SliderController::class,"getSliderData"]);
 Route::post('/register',[AuthController::class,"register"]);
 Route::post('/login',[AuthController::class,"login"]);
+
+Route::get('/information',[InformationController::class,"getInformationData"]);
 
 
 

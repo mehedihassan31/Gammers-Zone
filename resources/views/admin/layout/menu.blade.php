@@ -19,13 +19,14 @@
                 <ul id="sidebarnav">
                     <li class="nav-devider mt-0" style="margin-bottom: 5px"></li>
                     <li> <a href="{{url('/admin')}}" ><span> <i class="fas fa-home"></i> </span><span class="hide-menu">Dashboard</span></a></li>
-                    <li> <a href="{{url('/admin/slider')}}" ><span> <i class="far fa-comments"></i> </span><span class="hide-menu">Slider</span></a></li>
+                    <li> <a href="{{url('/admin/slider')}}" ><span> <i class="fas fa-tasks"></i> </span><span class="hide-menu">Slider</span></a></li>
                    <li> <a href="{{url('/admin/products')}}" ><span> <i class="fas fa-globe"></i> </span><span class="hide-menu">Products</span></a></li>
                    <li> <a href="{{url('/admin/order')}}" ><span> <i class="fas fa-users"></i> </span><span class="hide-menu">Order</span></a></li>
                    <li> <a href="{{url('/admin/users')}}" ><span> <i class="fas fa-book-open"></i> </span><span class="hide-menu">Users</span></a></li>
-                   <li> <a href="{{url('/admin/transections')}}" ><span> <i class="fas fa-tasks"></i> </span><span class="hide-menu">Transections</span></a></li>                  
+                   <li> <a href="{{url('/admin/transections')}}" ><span> <i class="fa fa-subway"></i> </span><span class="hide-menu">Transections</span></a></li>                  
                    <li> <a href="{{url('/admin/games')}}" ><span> <i class="far fa-envelope"></i> </span><span class="hide-menu">Games</span></a></li>
-                   <li> <a href="{{url('/admin/withdraw')}}" ><span> <i class="far fa-comments"></i> </span><span class="hide-menu">Withdraw</span></a></li>
+                   <li> <a href="{{url('/admin/withdraw')}}" ><span> <i class="fa fa-credit-card"></i> </span><span class="hide-menu">Withdraw</span></a></li>
+                   <li> <a href="{{url('/admin/information')}}" ><span> <i class="fa fa-inbox"></i> </span><span class="hide-menu">Info Add</span></a></li>
                 </ul>
             </nav>
         </div>
