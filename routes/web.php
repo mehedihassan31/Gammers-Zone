@@ -22,14 +22,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
-
-
-Route::get('/apidoc',function(){
-    return view('ApiDoc');
-
-});
-
 Route::get('/',function(){
     return view('welcome');
 
@@ -37,8 +29,7 @@ Route::get('/',function(){
 
 
 
-
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['loginCheck'])->group(function () {
 
 
     // Adminpanel Information
@@ -126,6 +117,10 @@ Route::post('/ResultDelete',[GamesubscribeController::class,'ResultDelete']);
 Route::post('/UsersDelete',[usersController::class,'userDelete']);
 Route::post('/UsersDetails',[usersController::class,'getUserDetails']);
 
+// Admin password update
+// Route::get('/adpassdupdate',[LoginController::class,'IndexPass']);
+// Route::post('/adpassdupdatereq',[LoginController::class,'updatePass']);
+
     
 });
 
@@ -139,29 +134,6 @@ Route::get('/logout',[LoginController::class,'onlogout']);
 
 
 
-
-
-
-
-
-//Adminpanel courses management
-
-Route::get('/courses',[coursesController::class,'CoursesIndex']);
-
-Route::get('/getCoursesData',[coursesController::class,'getCoursesData']);
-Route::post('/CourseDelete',[coursesController::class,'CourseDelete']);
-Route::post('/CourseDetails',[coursesController::class,'getCoursedetails']);
-Route::post('/CourseUpdate',[coursesController::class,'CourseUpdate']);
-Route::post('/CourseAdd',[coursesController::class,'CourseAdd']);
-
-
-
-
-
-// Contact
-Route::get('/contact',[ContactController::class,'ContactIndex']);
-Route::get('/getcontactdata',[ContactController::class,'getContactData']);
-Route::post('/contactdelete',[ContactController::class,'ContactDelete']);
 
 
 

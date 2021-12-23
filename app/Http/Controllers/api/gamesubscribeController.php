@@ -95,7 +95,6 @@ function joinMatch(Request $request){
 
 
     //refer check-------------------------------------
-
     $reference=Auth::user()->reference;
     $refer=Auth::user()->refer;
 
@@ -107,10 +106,16 @@ function joinMatch(Request $request){
     $match_id=$request->input('match_id');
     $gamename=$request->input('gamename');
     $countdata=count($gamename);
-    $match_feeget=matches::where('id',$match_id)->select('Entry_Fee','match_type')->get();
+    $match_feeget=matches::where('id',$match_id)->select('Entry_Fee','match_type','totall_p','registered_p')->get();
+    $totallplayer=$match_feeget[0]->totall_p;
+    $totallregplayer=$match_feeget[0]->registered_p;
     $fee= $countdata*($match_feeget[0]->Entry_Fee);
     $matchtype=$match_feeget[0]->match_type;
 
+
+if($totallregplayer<$totallplayer){
+
+    
     if($matchtype=='paid' && $refer==1){
 
         if( $fee<=$userbalance){
@@ -127,6 +132,9 @@ function joinMatch(Request $request){
     
                 $orderpay=User::where('id','=',$userid)->decrement('balance', $fee);
                 $bonus=User::where('id','=',$userid)->increment('winbalance',5);
+
+                $registercount=matches::where('id',$match_id)->increment('registered_p',$countdata);
+
                 $makefalse=User::where('id','=',$userid)->update(['refer'=>false]);
                 $refererbonus=User::where('username','=',$reference)->increment('winbalance',10);
            
@@ -155,6 +163,7 @@ function joinMatch(Request $request){
                 }
     
                 $orderpay=User::where('id','=',$userid)->decrement('balance', $fee);
+                $registercount=matches::where('id',$match_id)->increment('registered_p',$countdata);
             
                 if($res==true && $orderpay==true){
                     return response('Successfully join the game',200);
@@ -176,6 +185,7 @@ function joinMatch(Request $request){
 
             $res=gamesubscribe::insert($data);
         }
+        $registercount=matches::where('id',$match_id)->increment('registered_p',$countdata);
    
         if($res==true){
             return response('Successfully join the game',200);
@@ -184,6 +194,16 @@ function joinMatch(Request $request){
         }  
 
     }
+
+
+}else{
+
+    return response("Game full",400);
+}
+
+
+
+
 
 
 
@@ -211,10 +231,62 @@ function getResults($id){
 
 function getongoingmatch(){
 
-    $results=matches::where('match_time','<=',Carbon::now())->where('resultstatus','=','open')->get();
-    
-    return response($results,200);
-
+    $userid = Auth::user()->id;
+        $matches=matches::where('match_time','<=',Carbon::now())->where('resultstatus','=','open')->get();
+        $data= Array();
+        foreach($matches as $key=>$m){
+            $match_id=$m->id;
+            $results=gamesubscribe::where('user_id',$userid)->where('match_id',$match_id)->get();
+        if($results->isEmpty()){
+            $data[$key]['id']= $m->id;
+            $data[$key]['name']= $m->name;
+            $data[$key]['Device']= $m->Device;
+            $data[$key]['Type']= $m->Type;
+            $data[$key]['version']= $m->version;
+            $data[$key]['map']= $m->map;
+            $data[$key]['match_type']= $m->match_type;
+            $data[$key]['totall_p']= $m->totall_p;
+            $data[$key]['Entry_Fee']= $m->Entry_Fee;
+            $data[$key]['match_time']= $m->match_time;
+            $data[$key]['winning_price']= $m->winning_price;
+            $data[$key]['runnerup_one']= $m->runnerup_one;
+            $data[$key]['runnerup_two']= $m->runnerup_two;
+            $data[$key]['per_kill']= $m->per_kill;
+            $data[$key]['total_price']= $m->total_price;
+            $data[$key]['registered_p']= $m->registered_p;
+            $data[$key]['game_link']= $m->game_link;
+            $data[$key]['category']= $m->category;
+            $data[$key]['game_name']= $m->game_name;
+            $data[$key]['game_type_by_date']= $m->game_type_by_date;
+            $data[$key]['joinornot']= false;    
+       
+        }else{               
+            $data[$key]['id']= $m->id;
+            $data[$key]['name']= $m->name;
+            $data[$key]['Device']= $m->Device;
+            $data[$key]['Type']= $m->Type;
+            $data[$key]['version']= $m->version;
+            $data[$key]['map']= $m->map;
+            $data[$key]['match_type']= $m->match_type;               
+            $data[$key]['room_id']= $m->room_id;
+            $data[$key]['room_password']= $m->room_password;
+            $data[$key]['totall_p']= $m->totall_p;
+            $data[$key]['Entry_Fee']= $m->Entry_Fee;
+            $data[$key]['match_time']= $m->match_time;
+            $data[$key]['winning_price']= $m->winning_price;
+            $data[$key]['runnerup_one']= $m->runnerup_one;
+            $data[$key]['runnerup_two']= $m->runnerup_two;
+            $data[$key]['per_kill']= $m->per_kill;
+            $data[$key]['total_price']= $m->total_price;
+            $data[$key]['registered_p']= $m->registered_p;
+            $data[$key]['game_link']= $m->game_link;
+            $data[$key]['category']= $m->category;
+            $data[$key]['game_name']= $m->game_name;
+            $data[$key]['game_type_by_date']= $m->game_type_by_date;
+            $data[$key]['joinornot']= true;    
+        }
+        }
+        return json_encode($data);
 }
 
 
@@ -226,6 +298,8 @@ function getongoingmatch(){
 // Close Match Results
 
 function getAllCloseMatch(){
+
+
     $userid = Auth::user()->id;
         $matches=matches::where('match_time','<=',Carbon::now())->where('resultstatus','=','close')->get();
         $data= Array();

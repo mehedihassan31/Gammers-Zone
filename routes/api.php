@@ -51,7 +51,8 @@ Route::get('/matches',[gamesubscribeController::class,'getAllMatcheswithroomid']
 
 
 // transection-------------------------------
-   Route::get('/transections/{id}',[transectionController::class,'getAllTransections']);
+   Route::get('/transections',[transectionController::class,'getAllTransections']);
+   Route::get('/withdrawshistory',[transectionController::class,'getSingleWithdrawHistory']);
    Route::post('/deposit',[transectionController::class,'makeDeposit']);
 
    // withdraw-------------------------

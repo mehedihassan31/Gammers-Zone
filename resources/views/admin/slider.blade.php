@@ -170,19 +170,15 @@
         <form>
           <div id="serviceaddfrm" >
 
-            <h6></h6>
-              <!-- Name input -->
-
-
               <div class="mb-2">
                 <input id="imgInput" type="file" >
                 <img class=" imgpreview " src="{{asset('images/default-image.jpg')}}" alt="" id="imgpreview">
               </div>
 
-              <div class="form-outline mb-4">
+              <div class="form-outline mb-1">
                 <input type="text" id="sraddid1" class="form-control" placeholder="Title">
               </div>
-              <div class="form-outline mb-4">
+              <div class="form-outline mb-1">
                 <input type="text" id="sraddid3" class="form-control" placeholder="Link">
               </div>
           </div>

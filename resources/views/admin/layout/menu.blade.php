@@ -26,7 +26,8 @@
                    <li> <a href="{{url('/admin/transections')}}" ><span> <i class="fa fa-subway"></i> </span><span class="hide-menu">Transections</span></a></li>                  
                    <li> <a href="{{url('/admin/games')}}" ><span> <i class="far fa-envelope"></i> </span><span class="hide-menu">Games</span></a></li>
                    <li> <a href="{{url('/admin/withdraw')}}" ><span> <i class="fa fa-credit-card"></i> </span><span class="hide-menu">Withdraw</span></a></li>
-                   <li> <a href="{{url('/admin/information')}}" ><span> <i class="fa fa-inbox"></i> </span><span class="hide-menu">Info Add</span></a></li>
+                   <li> <a href="{{url('/admin/information')}}" ><span> <i class="fa fa-inbox"></i> </span><span class="hide-menu">Information</span></a></li>
+                   {{-- <li> <a href="{{url('/admin/adpassdupdate')}}" ><span> <i class="fa fa-inbox"></i> </span><span class="hide-menu">Password Change</span></a></li> --}}
                 </ul>
             </nav>
         </div>

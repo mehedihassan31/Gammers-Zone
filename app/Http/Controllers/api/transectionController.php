@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Response;
 class transectionController extends Controller
 {
     
-    function getAllTransections($id){
+    function getAllTransections(){
 
-        $userid=$id;
+        $userid=Auth::user()->id;
         
         $results=transection::where('user_id',$userid)->orderBy('id','desc')->get();
         return $results;
@@ -37,8 +37,6 @@ class transectionController extends Controller
             
             ];
   
-
-
         if($results==true)
         {
             return response($response,200) ;
@@ -54,12 +52,10 @@ class transectionController extends Controller
 function withdrawReq(Request $request){
 
     $userid= Auth::user()->id;
-
     $userbalance=Auth::user()->winbalance;
     $ammount=$request->input('ammount');
     $number=$request->input('number');
     $pmethod=$request->input('pmethod');
-
 
 if($userbalance>0 && $ammount<=$userbalance){
 
@@ -72,7 +68,6 @@ if($userbalance>0 && $ammount<=$userbalance){
         'message'=>"Withdraw Successfull"
         ];
 
-
     if($results==true)
     {
         return response($response,200) ;
@@ -81,18 +76,20 @@ if($userbalance>0 && $ammount<=$userbalance){
         return response("Withdraw Failed",500);
     }
 
-
 }else{
     return response("Insufficient win Balance",500);
-
+}
 
 }
 
 
+function getSingleWithdrawHistory(){
 
+    $userid= Auth::user()->id;
+    $results=withdraw::where('user_id',$userid)->orderBy('id','desc')->get();
+    return $results;
 
 }
-
 
 
 

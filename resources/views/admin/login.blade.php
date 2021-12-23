@@ -58,7 +58,7 @@ $('.loginForm').on('submit',function(event){
     })
     .then(function(response){
         if(response.status==200 && response.data==1){
-            window.location.href='/';
+            window.location.href='/admin/';
         
             toastr.success("Login success");
         }else{

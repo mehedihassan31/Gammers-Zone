@@ -87,8 +87,8 @@ margin: 0px  !important;
 
 
 .imgpreview{
-	width: 90%;
-	height: 320px;
+	width: 100%;
+	height: 150px;
 	object-fit: cover;
 	border:none;
 	margin-top:10px;

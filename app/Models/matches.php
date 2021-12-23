@@ -13,7 +13,7 @@ class matches extends Model
     protected $primaryKey='id';
     public $incrementing=true;
     public $keyType='int';
-    public $timestamps=true;
+    public $timestamps=false;
 
 
     // public function gamesubscribe(){

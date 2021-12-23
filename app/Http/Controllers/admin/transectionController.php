@@ -44,12 +44,16 @@ class transectionController extends Controller
         $userid=$request->input('userid');
         $ammount=$request->input('ammount');
         $status=$request->input('status');
+        $statuscheck=transection::where('id','=',$id)->select(['status'])->get();
 
-        $TransectionStatus=transection::where('id','=',$id)->decrement('ammount', $ammount);
+        $hascon=$statuscheck[0]->status;
+
+        if($hascon!='Confirmed'){
+                    // $TransectionStatus=transection::where('id','=',$id)->decrement('ammount', $ammount);
         $statusupadte=transection::where('id','=',$id)->update(['status'=>$status]);
         $results=users::where('id', $userid)->increment('balance', $ammount);
 
-        if($TransectionStatus==true && $results==true && $statusupadte)
+        if($results==true && $statusupadte)
         {
             return 1;
 
@@ -57,6 +61,12 @@ class transectionController extends Controller
             return 0;
         }
         
+        }else{
+
+            return 0;
+        }
+
+
     
     }
 

@@ -12,7 +12,7 @@
                     <th class="th-sm">Add Money Link</th>
                     <th class="th-sm">Add Money Link</th>
                     <th class="th-sm">Add Money Link</th>
-                    <th class="th-sm">Description</th>
+                    <th class="th-sm">Privency Policy And Term</th>
                     <th class="th-sm">Edit</th>
                     </tr>
                 </thead>
@@ -63,7 +63,7 @@ aria-hidden="true">
       <h5 id="updateProjectid"></h5>
       <div id="projectEditFrom"  class="container d-none">
 
-       
+        <h5 id="serviceeditid" class="mt-4 text-center"> </h5>
          <div class="row">
              <div class="col-md">
                <input id="ProjectNameUpdateId" type="text" id="" class="form-control mb-3" placeholder="how to Add Money Video Link">
@@ -125,14 +125,15 @@ function getprojectsdata(){
           "<td class='td-sm'>"+jsonData[i].addmoneyvlink+"</td>"+
           "<td class='td-sm'>"+jsonData[i].collectroomvlink+"</td>" +
           "<td class='td-sm'>"+jsonData[i].joinmatchvlink+"</td>" +
-          "<td class='td-sm'>"+jsonData[i].termspolicy+"</td>" +
-          "<td> <a class='projecteditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit'></i></a>Edit</td>"
+          "<td class='td-sm'>"+jsonData[i].termspolicy+"</td>"+
+          "<td> <a class='projecteditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit'>Edit</i></a></td>"
         ).appendTo('#project_table');
       })
 
 
       $('.projecteditbtn').click(function(){
-        var id = 0;
+        var id = $(this).data('id');
+        $('#serviceeditid').html(id);
         informationUpdatedetails(id);
         $('#updateProjectModal').modal('show');
         
@@ -190,7 +191,7 @@ function informationUpdatedetails(id){
 
 $('#ProjectUpdateConfirmBtn').click(function(){
   
-  var id=0;
+  var id=$('#serviceeditid').html();
   var addmoneyvlink=$('#ProjectNameUpdateId').val();
   var collectroomvlink=$('#ProjectDesUpdateId').val();
   var joinmatchvlink=$('#ProjectLinkUpdateId').val();
@@ -207,9 +208,9 @@ function updateProject(id,addmoneyvlink,collectroomvlink,joinmatchvlink,termspol
   }else if(collectroomvlink.length==0){
     toastr.error('Link is empty!');
   }else if(termspolicy.length==0){
-    toastr.error('Link is empty!');
+    toastr.error('Link  is empty!');
   }else if(joinmatchvlink.length==0){
-    toastr.error('Link is empty!');
+    toastr.error('Link  is empty!');
   }else{
   axios.post('/admin/informationUpdate',{
     id:id,
