@@ -103,6 +103,7 @@ Route::get('/getGameData',[GameController::class,'getGamesData']);
 Route::post('/gameDelete',[GameController::class,'GameDelete']);
 Route::post('/gameAdd',[GameController::class,'GameAdd']);
 Route::post('/gameUpdate',[GameController::class,'GameUpdate']);
+Route::post('/gameDetails',[GameController::class,'getGamedetails']);
 Route::post('/gameStatusConfirm',[GameController::class,'gameStatusConfirm']);
 
 // results
@@ -110,6 +111,7 @@ Route::get('/results/{id}',[GamesubscribeController::class,'ResultIndex']);
 Route::post('/getAllsubsData',[GamesubscribeController::class,'getAllsubsData']);
 Route::post('/pricemoneyAdd',[GamesubscribeController::class,'pricemoneyAdd']);
 Route::post('/killAdd',[GamesubscribeController::class,'killAdd']);
+Route::post('/rankAdd',[GamesubscribeController::class,'rankAdd']);
 Route::post('/ResultDelete',[GamesubscribeController::class,'ResultDelete']);
 
 

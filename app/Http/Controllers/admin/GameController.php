@@ -22,8 +22,6 @@ class GameController extends Controller
 
 
 
-
-
 function gameStatusConfirm(Request $request){
         
     $id=$request->input('id');
@@ -42,11 +40,6 @@ function gameStatusConfirm(Request $request){
 }
 
 
-
-
-
-
-
     function GameDelete(Request $request){
         $id=$request->input('id');
         $results=Game::where('id','=',$id)->delete();
@@ -59,30 +52,68 @@ function gameStatusConfirm(Request $request){
    }
 
 
-//    function courseUpdate(Request $req){
-//     $id=$req->input('id');
-//     $course_name=$req->input('course_name');
-//     $course_des=$req->input('course_des');
-//     $course_fee=$req->input('course_fee');
-//     $course_totalenroll=$req->input('course_totalenroll');
-//     $course_totalclass=$req->input('course_totalclass');
-//     $course_link=$req->input('course_link');
-//     $course_img= $req->input('course_img');
-//    $results=CourseModel::where('id','=',$id)->update([
-//     'course_name'=>$course_name,
-//    'course_des'=>$course_des,
-//    'course_fee'=>$course_fee,
-//    'course_totalenroll'=>$course_totalenroll,
-//    'course_totalclass'=>$course_totalclass,
-//    'course_link'=>$course_link,
-//    'course_img'=>$course_img
-//    ]);
-//    if($results==true){
-//     return 1 ;
-// }else{
-//     return 0;
-// }
-// }
+
+   function getGamedetails(Request $req){
+
+    $id=$req->input('id');
+    $results=json_encode(Game::where('id','=',$id)->get());
+    return $results;
+ }
+
+
+   function GameUpdate(Request $req){
+    $id=$req->input('id');
+    $matchNameId=$req->input('matchNameId'); 
+    $gameDeviceId=$req->input('gameDeviceId'); 
+    $TypeId=$req->input('TypeId'); 
+    $Version=$req->input('Version');
+    $MapId=$req->input('MapId'); 
+    $roomId=$req->input('roomId');
+    $roompasswordId=$req->input('roompasswordId');
+    $totallpeople=$req->input('totallpeople');
+    $entryFee=$req->input('entryFee');
+    $matchtime=$req->input('matchtime');
+    $winningprice=$req->input('winningprice');
+    $runnersFirstUp=$req->input('runnersFirstUp');
+    $runnersSecondUp=$req->input('runnersSecondUp');
+    $perKill=$req->input('perKill');
+    $totallprice=$req->input('totallprice');
+    $gamelink=$req->input('gamelink');
+    $GameName=$req->input('GameName');
+
+    $default_coin=$req->input('dcoin');
+    $cskill=$req->input('cskill');
+    $limited_ammo=$req->input('limitammo');
+    $round=$req->input('round');
+
+   $results=Game::where('id','=',$id)->update([
+    'name'=>$matchNameId,
+    'Device'=>$gameDeviceId,
+    'Type'=>$TypeId,
+    'version'=>$Version,
+    'map'=>$MapId,
+    'room_id'=>$roomId,
+    'room_password'=>$roompasswordId,
+    'totall_p'=>$totallpeople,
+    'Entry_Fee'=>$entryFee,
+    'winning_price'=>$winningprice,
+    'runnerup_one'=>$runnersFirstUp,
+    'runnerup_two'=>$runnersSecondUp,
+    'per_kill'=>$perKill,
+    'total_price'=>$totallprice,
+    'game_link'=>$gamelink,
+    'game_name'=>$GameName,
+    'default_coin'=>$default_coin,
+    'cskill'=>$cskill,
+    'limited_ammo'=>$limited_ammo,
+    'round'=>$round
+   ]);
+   if($results==true){
+    return 1 ;
+}else{
+    return 0;
+}
+}
 
 
 
@@ -107,6 +138,11 @@ function GameAdd(Request $req){
     $GameName=$req->input('GameName');
     $gametypebyday=$req->input('gametypebyday');
 
+    $default_coin=$req->input('dcoin');
+    $cskill=$req->input('chskill');
+    $limited_ammo=$req->input('limitammo');
+    $round=$req->input('round');
+
     $results=Game::insert([
         'name'=>$matchNameId,
         'Device'=>$gameDeviceId,
@@ -127,6 +163,10 @@ function GameAdd(Request $req){
         'game_link'=>$gamelink,
         'game_name'=>$GameName,
         'game_type_by_date'=>$gametypebyday,
+        'default_coin'=>$default_coin,
+        'cskill'=>$cskill,
+        'limited_ammo'=>$limited_ammo,
+        'round'=>$round
        ]);
    if($results==true){
     return 1 ;

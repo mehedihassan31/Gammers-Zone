@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\admin\users;
 use Illuminate\Support\Facades\Auth;
 
 use Carbon\Carbon;
@@ -98,10 +99,11 @@ function joinMatch(Request $request){
     $reference=Auth::user()->reference;
     $refer=Auth::user()->refer;
 
-
     // -------------------------------------
     $userbalance = Auth::user()->balance;
     $userid =Auth::user()->id;
+
+    
     // $userid =$request->input('userid');
     $match_id=$request->input('match_id');
     $gamename=$request->input('gamename');
@@ -114,11 +116,10 @@ function joinMatch(Request $request){
 
 
 if($totallregplayer<$totallplayer){
-
     
-    if($matchtype=='paid' && $refer==1){
+    if($matchtype=='Paid' && $refer==1){
 
-        if( $fee<=$userbalance){
+        if($fee<=$userbalance){
                 for($i=0;$i<$countdata;$i++){
     
                     $data= [
@@ -129,8 +130,9 @@ if($totallregplayer<$totallplayer){
     
                     $res=gamesubscribe::insert($data);
                 }
+
     
-                $orderpay=User::where('id','=',$userid)->decrement('balance', $fee);
+                $orderpay=User::where('id','=',$userid)->decrement('balance',$fee);
                 $bonus=User::where('id','=',$userid)->increment('winbalance',5);
 
                 $registercount=matches::where('id',$match_id)->increment('registered_p',$countdata);
@@ -140,7 +142,6 @@ if($totallregplayer<$totallplayer){
            
                 if($res==true && $orderpay==true){
 
-
                     return response('Successfully join the game. You get 5 tk refer bonus',200);
                 }else{
                     return response('Failed',400);
@@ -148,7 +149,7 @@ if($totallregplayer<$totallplayer){
         }else{
             return response('Insufficient balance',200);
         }
-    }elseif($matchtype=='paid' && $refer==0 ){
+    }elseif($matchtype=='Paid' && $refer==0 ){
 
         if( $fee<=$userbalance){
                 for($i=0;$i<$countdata;$i++){
@@ -162,7 +163,7 @@ if($totallregplayer<$totallplayer){
                     $res=gamesubscribe::insert($data);
                 }
     
-                $orderpay=User::where('id','=',$userid)->decrement('balance', $fee);
+                $orderpay=User::where('id','=',$userid)->decrement('balance',$fee);
                 $registercount=matches::where('id',$match_id)->increment('registered_p',$countdata);
             
                 if($res==true && $orderpay==true){
@@ -188,7 +189,7 @@ if($totallregplayer<$totallplayer){
         $registercount=matches::where('id',$match_id)->increment('registered_p',$countdata);
    
         if($res==true){
-            return response('Successfully join the game',200);
+            return response('Successfully join the free game',200);
         }else{
             return response('Failed',400);
         }  

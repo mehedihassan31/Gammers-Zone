@@ -53,7 +53,13 @@ class GamesubscribeController extends Controller
     function killAdd(Request $request){
         $id=$request->input('id');
         $kill=$request->input('kill');
+
+        $result=gamesubscribe::where('id', $id)->get();
+        $userid=$result[0]->user_id;
+        
         $results=gamesubscribe::where('id', $id)->increment('killbyuser', $kill);
+        $res=users::where('id', $userid)->increment('total_kill', $kill);
+
         if($results==true){
     
             return 1 ;
@@ -63,6 +69,27 @@ class GamesubscribeController extends Controller
         }
     
     }
+
+
+// rank add--------------------------
+
+    function rankAdd(Request $request){
+        $id=$request->input('id');
+        $rank=$request->input('rank');
+        $results=gamesubscribe::where('id', $id)->increment('rank', $rank);
+        if($results==true){
+            return 1 ;
+        }else{
+        
+            return 0;
+        }
+    
+    }
+
+
+
+
+
 
     function ResultDelete(Request $request){
 

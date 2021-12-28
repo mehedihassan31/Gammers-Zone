@@ -18,6 +18,7 @@
           <th class="th-sm">Phone </th>
           <th class="th-sm">Price Money</th>
           <th class="th-sm">Totall Kill</th>
+          <th class="th-sm">Rank</th>
           <th class="th-sm">Add</th>
           <th class="th-sm">Delete</th>
         </tr>
@@ -114,6 +115,12 @@
                   <input type="text" id="srid2" class="form-control" placeholder="Single kill">
                   <button data-id='' id='killpconfmEditbtn' type="button" class="btn btn-sm btn-danger">Save</button>
                 </div>
+
+                <div class="form-outline mb-4">
+                  <input type="text" id="srid3" class="form-control" placeholder="Rank">
+                  <button data-id='' id='rank' type="button" class="btn btn-sm btn-danger">Save</button>
+                </div>
+
             </div>
           </form>
         </div>
@@ -164,6 +171,7 @@ axios.post('/admin/getAllsubsData',{
     "<td>"+jsonData[i].user.phone+"</td>"+
     "<td>"+jsonData[i].price_money+"</td>"+
     "<td>"+jsonData[i].killbyuser+"</td>"+
+    "<td>"+jsonData[i].rank+"</td>"+
     "<td> <a class='serviceeditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit inside-table-button'>add</i></a></td>"+
     "<td><a class='serviceDeletebtn'  data-id='"+jsonData[i].id+"' ><i class='fas fa-trash-alt'></i></a></td>"
      ).appendTo('#servicetable');
@@ -319,10 +327,45 @@ function killAdd(id,kill){
                       toastr.error("Update Faild");
                       getUsersData(matchid);
                     }               
-                  }).catch(function (error) {
-                
+                  }).catch(function (error) {             
                 });
+    }
+}
 
+
+
+// add rank------------------------------------------
+
+$('#rank').click(function(){
+      var id=$('#serviceeditid').html();
+      var rank=$('#srid3').val();
+      rankAdd(id,rank);
+    })
+
+    
+function rankAdd(id,rank){
+  if(rank.length==0){
+    toastr.error("Rank is empty");
+  } else{
+                  axios.post('/admin/rankAdd',{
+                    id:id,
+                    rank:rank,
+                  })
+                  .then(function(response){
+
+                    if(response.data==1)
+                    {
+                      $('#EditModal').modal('hide');
+                      toastr.success("Update success");
+                      getUsersData(matchid);
+                
+                    }else{                  
+                      $('#EditModal').modal('hide');
+                      toastr.error("Update Faild");
+                      getUsersData(matchid);
+                    }               
+                  }).catch(function (error) {             
+                });
     }
 }
 

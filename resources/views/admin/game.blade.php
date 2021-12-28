@@ -14,15 +14,9 @@
                   <th class="th-sm">Type</th>
                   <th class="th-sm">Version</th>
                   <th class="th-sm">Map</th>
-                  <th class="th-sm">Match Type</th>
-                  <th class="th-sm">Room Id</th>
-                  <th class="th-sm">Room Password</th>
-                  <th class="th-sm">Totall People's</th>
-                  <th class="th-sm">Entry Fee</th>
-                  <th class="th-sm">Match Time</th>
-                  <th class="th-sm">Winning Price</th>
-                  <th class="th-sm">Edit</th>
+                  <th class="th-sm">Results</th>
                   <th class="th-sm">Match Status</th>
+                  <th class="th-sm">Edit and View</th>
                   <th class="th-sm">Delete</th>
                 </tr>
               </thead>
@@ -104,6 +98,12 @@ add modal --}}
      			<input id="totallprice" type="text" class="form-control mb-3" placeholder="Total Price">
      			<input id="gamelink" type="text"  class="form-control mb-3" placeholder="Game Link">
      			<input id="GameName" type="text"  class="form-control mb-3" placeholder="Game Name">
+
+           <input id="dcoin" type="text"  class="form-control mb-3" placeholder="Default Coin">
+           <input id="chskill" type="text" class="form-control mb-3" placeholder="Character Skill">
+           <input id="limitammo" type="text"  class="form-control mb-3" placeholder="Limited Ammo">
+           <input id="round" type="text"  class="form-control mb-3" placeholder="Round">
+           
            <div>
                 <Label>Game Type by Day</Label>
                 <div class="custom-select"  style="width:200px;">
@@ -176,7 +176,7 @@ aria-hidden="true">
                       </div>
                       <div class="modal-body  text-center">
                                 <div  id="courseEditFrom" class="container none">
-                                    <Label>Transection Id:</Label><h5 type="hidden"  id="updateCourseid"> </h5>
+                                    <Label>Transection Id:</Label><h5 type="hidden"  id="updatestatusid"> </h5>
                                       <div class="row">
                                           <div class="card mx-auto">
                                             {{-- <a  class="btn btn-primary" id="statusId">Pending</a> --}}
@@ -200,32 +200,57 @@ aria-hidden="true">
 
 {{-- Update modal --}}
 
-{{-- <div class="modal fade" id="updateCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="updateCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title">Update Course</h5>
+                        <h5 class="modal-title">Update Game And View</h5>
 
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
                       <div class="modal-body  text-center">
-                                <div id="courseEditFrom" class="container d-none">
-                                        <br><h5 id="updateCourseid"></h5>
+                                <div id="courseEditFrom" class="container ">
+                                        <br> <label>Match Id: </label><h5 id="updateCourseid"></h5>
                                       <div class="row">
                                           <div class="col-md-6">
-                                            <input id="CourseNameUpdateId" type="text" id="" class="form-control mb-3" placeholder="Course Name">
-                                              <input id="CourseDesUpdateId" type="text" id="" class="form-control mb-3" placeholder="Course Description">
-                                            <input id="CourseFeeUpdateId" type="text" id="" class="form-control mb-3" placeholder="Course Fee">
-                                            <input id="CourseEnrollUpdateId" type="text" id="" class="form-control mb-3" placeholder="Total Enroll">
-                                          </div>
-                                          <div class="col-md-6">
-                                            <input id="CourseClassUpdateId" type="text" id="" class="form-control mb-3" placeholder="Total Class">      
-                                            <input id="CourseLinkUpdateId" type="text" id="" class="form-control mb-3" placeholder="Course Link">
-                                            <input id="CourseImgUpdateId" type="text" id="" class="form-control mb-3" placeholder="Course Image">
-                                          </div>
+                                            <input id="matchupdateNameId" type="text"  class="form-control mb-3" placeholder="Match Name">
+                                            <input id="gameupdateDeviceId" type="text"  class="form-control mb-3" placeholder="Device">
+                                             <input id="TypeupdateId" type="text" class="form-control mb-3" placeholder="Type">
+                                             <input id="updateVersion" type="text" class="form-control mb-3" placeholder="Version">
+                                             <input id="updateMapId" type="text"  class="form-control mb-3" placeholder="Map">
+                                             <div class="mb-1">
+                                              <Label>Match type :  </Label>                                              
+                                                <h2 id="matchupdateTypeId">
+                                                </h2>
+                                              
+                                             </div>                                 
+                                             <input id="roomupdateId" type="text"  class="form-control mb-3" placeholder="Room id">      
+                                             <input id="roomupdatepasswordId" type="text" i class="form-control mb-3" placeholder="Room Password">
+                                             <input id="totallupdatepeople" type="text"  class="form-control mb-3" placeholder="Totall People's">
+                                             <input id="entryupdateFee" type="text"  class="form-control mb-3" placeholder="Entry Fee">
+                                             </div>
+                                             <div class="col-md-6">
+                                             <label>Match Time:</label> <h4 id="matchupdatetime" ></h4>
+                                             <input id="winningupdateprice" type="text"  class="form-control mb-3" placeholder="Winning Price">
+                                             <input id="runnersupdateFirstUp" type="text"  class="form-control mb-3" placeholder="First Runner's up ">
+                                             <input id="runnersupdateSecondUp" type="text"  class="form-control mb-3" placeholder="Second Runner's up ">
+                                             <input id="perupdateKill" type="text"  class="form-control mb-3" placeholder="Per Kill">
+                                             <input id="totallupdateprice" type="text" class="form-control mb-3" placeholder="Total Price">
+                                             <input id="gameupdatelink" type="text"  class="form-control mb-3" placeholder="Game Link">
+                                             <input id="GameupdateName" type="text"  class="form-control mb-3" placeholder="Game Name">
+
+                                             <input id="updatedcoin" type="text"  class="form-control mb-3" placeholder="Default Coin">
+                                             <input id="updatechskill" type="text" class="form-control mb-3" placeholder="Character Skill">
+                                             <input id="updatelimitammo" type="text"  class="form-control mb-3" placeholder="Limited Ammo">
+                                             <input id="updateround" type="text"  class="form-control mb-3" placeholder="Round">
+
+                                             </div>
+
+
+
                                       </div>
                                 </div>
 
@@ -253,7 +278,7 @@ aria-hidden="true">
                   </div>
       </div>
     </div>
-</div> --}}
+</div>
     
 @endsection
 
@@ -279,15 +304,9 @@ function getOrderData(){
                 "<td class='td-sm'>"+jsonData[i].Type+"</td>"+
                 "<td class='td-sm'>"+jsonData[i].version+"</td>"+
                 "<td class='td-sm'>"+jsonData[i].map+"</td>"+
-                "<td class='td-sm'>"+jsonData[i].match_type+"</td>"+
-                "<td class='td-sm'>"+jsonData[i].room_id+"</td>"+
-                "<td class='td-sm'>"+jsonData[i].room_password+"</td>"+
-                "<td class='td-sm'>"+jsonData[i].totall_p+"</td>"+
-                "<td class='td-sm'>"+jsonData[i].Entry_Fee+"</td>"+
-                "<td class='td-sm'>"+jsonData[i].match_time+"</td>"+
-                "<td class='td-sm'>"+jsonData[i].winning_price+"</td>"+
                 "<td> <a  href={{url('/admin/results')}}/"+jsonData[i].id+"><i class='fas fa-edit'>Results</i></a></td>"+
-                "<td> <a class='statusbtn' data-id='"+jsonData[i].id+"' >"+jsonData[i].resultstatus+"<i class='fas fa-edit'>Update Status</i></a></td>"+
+                "<td> <a class='statusbtn' data-id='"+jsonData[i].id+"' >"+jsonData[i].resultstatus+"<br><i class='fas fa-edit'>Update Status</i></a></td>"+
+                "<td> <a class='courseeditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit'>Update And Edit</i></a></td>"+
                "<td><a class='courseDeletebtn'  data-id='"+jsonData[i].id+"' ><i class='fas fa-trash-alt'></i></a></td>"
               ).appendTo('#course_table');
             })
@@ -299,17 +318,22 @@ function getOrderData(){
             });
 
 
-            $('.statusbtn').click(function(){
+            $('.courseeditbtn').click(function(){
               var id=$(this).data('id');
+              courseUpdatedetails(id);
               $('#updateCourseid').html(id);
-              $('#statusModal').modal('show');
+              $('#updateCourseModal').modal('show');
               
             })
 
 
 
-
-
+            $('.statusbtn').click(function(){
+              var id=$(this).data('id');
+              $('#updatestatusid').html(id);
+              $('#statusModal').modal('show');
+              
+            })
 
             $('#coursedatatable').DataTable({"order":false});
             $('.dataTables_length').addClass('bs-select');
@@ -346,7 +370,6 @@ $('#CourseAddConfirmBtn').click(function(){
   var  totallpeople=$('#totallpeople').val();
   var  entryFee=$('#entryFee').val();
   var  matchtime=$('#matchtime').val();
-
   var  winningprice=$('#winningprice').val();
   var  runnersFirstUp=$('#runnersFirstUp').val();
   var  runnersSecondUp=$('#runnersSecondUp').val();
@@ -355,16 +378,20 @@ $('#CourseAddConfirmBtn').click(function(){
   var  gamelink=$('#gamelink').val();
   var  GameName=$('#GameName').val();
   var  gametypebyday=$('#gametypebyday').val();
+  var  dcoin=$('#dcoin').val();
+  var  chskill=$('#chskill').val();
+  var  limitammo=$('#limitammo').val();
+  var  round=$('#round').val();
+  
+                                             
 
-  matchAdd(matchNameId,gameDeviceId,TypeId,Version,MapId,matchTypeId,roomId,roompasswordId,totallpeople,entryFee,matchtime,winningprice,runnersFirstUp,runnersSecondUp,perKill,totallprice,gamelink,GameName,gametypebyday);
+  matchAdd(matchNameId,gameDeviceId,TypeId,Version,MapId,matchTypeId,roomId,roompasswordId,totallpeople,entryFee,matchtime,winningprice,runnersFirstUp,runnersSecondUp,perKill,totallprice,gamelink,GameName,gametypebyday,dcoin,chskill,limitammo,round);
 })
 
 
 
 // course add method
-function matchAdd(matchNameId,gameDeviceId,TypeId,Version,MapId,matchTypeId,roomId,roompasswordId,totallpeople,entryFee,matchtime,winningprice,runnersFirstUp,runnersSecondUp,perKill,totallprice,gamelink,GameName,gametypebyday){
-
-
+function matchAdd(matchNameId,gameDeviceId,TypeId,Version,MapId,matchTypeId,roomId,roompasswordId,totallpeople,entryFee,matchtime,winningprice,runnersFirstUp,runnersSecondUp,perKill,totallprice,gamelink,GameName,gametypebyday,dcoin,chskill,limitammo,round){
 
   if(matchNameId.length==0){
     toastr.error('Match Name is empty!');
@@ -425,7 +452,11 @@ function matchAdd(matchNameId,gameDeviceId,TypeId,Version,MapId,matchTypeId,room
       totallprice:totallprice,
       gamelink:gamelink,
       GameName:GameName,
-      gametypebyday:gametypebyday
+      gametypebyday:gametypebyday,
+      dcoin:dcoin,
+      chskill:chskill,
+      limitammo:limitammo,
+      round:round,
 
     })
     .then(function(response){
@@ -451,7 +482,7 @@ function matchAdd(matchNameId,gameDeviceId,TypeId,Version,MapId,matchTypeId,room
 
 // status update
 $('#statusId').click(function(){
-  var  id=$('#updateCourseid').html();
+  var  id=$('#updatestatusid').html();
   var  status=$('#statusId').text();
    statusUpdate(id,status);
 })
@@ -483,8 +514,6 @@ function statusUpdate(id,status){
 
                 });
 }
-
-
 
 
 
@@ -536,118 +565,179 @@ function gameDelete(deleteid){
 
 
 
-// update course
+// update game details
 
-// function courseUpdatedetails(detailsid){
+function courseUpdatedetails(id){
 
-//   axios.post('/CourseDetails',{
-//     id:detailsid
-//   })
-//   .then(function(response){
-//     if(response.status==200){
+  axios.post('/admin/gameDetails',{
+    id:id,
+  }).then(function(response){
+    if(response.status==200){
 
-//       $('#courseEditFrom').removeClass('d-none');
-//       $('#loaderDivUpdate').addClass('d-none');
+      $('#courseEditFrom').removeClass('d-none');
+      $('#loaderDivUpdate').addClass('d-none');
+        var jsonData=response.data;
 
-//       var jsonData=response.data;
+        $('#matchupdateNameId').val(jsonData[0].name);
+        $('#gameupdateDeviceId').val(jsonData[0].Device);
+        $('#TypeupdateId').val(jsonData[0].Type);
+        $('#updateVersion').val(jsonData[0].version);
+        $('#updateMapId').val(jsonData[0].map);
+        $('#matchupdateTypeId').html(jsonData[0].match_type);
+        $('#roomupdateId').val(jsonData[0].room_id);
+        $('#roomupdatepasswordId').val(jsonData[0].room_password);
+        $('#totallupdatepeople').val(jsonData[0].totall_p);
+        $('#entryupdateFee').val(jsonData[0].Entry_Fee);
+        $('#matchupdatetime').html(jsonData[0].match_time);
+        $('#winningupdateprice').val(jsonData[0].winning_price);
+        $('#runnersupdateFirstUp').val(jsonData[0].runnerup_one);
+        $('#runnersupdateSecondUp').val(jsonData[0].runnerup_two);
+        $('#perupdateKill').val(jsonData[0].per_kill);
+        $('#totallupdateprice').val(jsonData[0].total_price);
+        $('#gameupdatelink').val(jsonData[0].game_link);
+        $('#GameupdateName').val(jsonData[0].game_name);
+        $('#updatedcoin').val(jsonData[0].default_coin);
+        $('#updatechskill').val(jsonData[0].cskill);
+        $('#updatelimitammo').val(jsonData[0].limited_ammo);
+        $('#updateround').val(jsonData[0].round);
+        
 
-//           $('#CourseNameUpdateId').val(jsonData[0].course_name);
-//           $('#CourseDesUpdateId').val(jsonData[0].course_des);
-//           $('#CourseFeeUpdateId').val(jsonData[0].course_fee);
-//           $('#CourseEnrollUpdateId').val(jsonData[0].course_totalenroll);
-//           $('#CourseClassUpdateId').val(jsonData[0].course_totalclass);
-//           $('#CourseLinkUpdateId').val(jsonData[0].course_link);
-//           $('#CourseImgUpdateId').val(jsonData[0].course_img);
+    }else{
 
-//     }else{
+      $('#loaderDivUpdate').addClass('d-none');
+      $('#wrongDivUpdate').removeClass('d-none');
+    }
+  }).catch(function(error){
 
-//       $('#loaderDivUpdate').addClass('d-none');
-//       $('#wrongDivUpdate').removeClass('d-none');
-//     }
-//   }).catch(function(error){
-
-//     $('#loaderDivUpdate').addClass('d-none');
-//     $('#wrongDivUpdate').removeClass('d-none');
-//   })
-
-
-// }
-
-
-
-// Course update
-
-
-// $('#CourseUpdateConfirmBtn').click(function(){
-//   var  CourseId=$('#updateCourseid').html();
-//   var  CourseName=$('#CourseNameUpdateId').val();
-//   var  CourseDes=$('#CourseDesUpdateId').val();
-//   var  CourseFee=$('#CourseFeeUpdateId').val();
-//   var  CourseEnroll=$('#CourseEnrollUpdateId').val();
-//   var  CourseClass=$('#CourseClassUpdateId').val();
-//   var  CourseLink=$('#CourseLinkUpdateId').val();
-//   var  CourseImg=$('#CourseImgUpdateId').val();
-
-// courseUpdate(CourseId,CourseName,CourseDes,CourseFee,CourseEnroll,CourseClass,CourseLink,CourseImg);
-// })
-
-// function courseUpdate(CourseId,CourseName,CourseDes,CourseFee,CourseEnroll,CourseClass,CourseLink,CourseImg){
-
-//   if(CourseName.length==0){
-//     toastr.error('Course Name is empty!');
-//   }else if(CourseDes.length==0){
-//     toastr.error('Course Des is empty!');
-
-//   }else if(CourseFee.length==0){
-//     toastr.error('Course Fee is empty!');
-//   }else if(CourseEnroll.length==0){
-//     toastr.error('Course Enroll is empty!');
-//   }else if(CourseClass.length==0){
-//     toastr.error('Course Class is empty!');
-//   }else if(CourseLink.length==0){
-//     toastr.error('Course Link is empty!');
-//   }else if(CourseImg.length==0){
-//     toastr.error('Course Image is empty!');
-//   }else{
-//     $('#CourseUpdateConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
-//     axios.post('/CourseUpdate',{
-//       id: CourseId,
-//       course_name: CourseName,
-//       course_des: CourseDes,
-//       course_fee: CourseFee,
-//       course_totalenroll: CourseEnroll,
-//       course_totalclass: CourseClass,
-//       course_link: CourseLink,
-//       course_img: CourseImg
-//     })
-//     .then(function(response){
-//       $('#CourseUpdateConfirmBtn').html("Save");
-//       if(response.status==200){
-
-//         if(response.data==1){
-//           $('#updateCourseModal').modal('hide');
-//           toastr.success("Update success");
-//           getCoursesData();
-//         }else{
-
-//           $('#updateCourseModal').modal('hide');
-//           toastr.error("Update fail");
-//           getCoursesData();
-//         }
-
-//       }else{
-//         $('#updateCourseModal').modal('hide');
-//         toastr.error("Something went wrong");
-//       }
+    $('#loaderDivUpdate').addClass('d-none');
+    $('#wrongDivUpdate').removeClass('d-none');
+  })
 
 
-//     }).catch(function(error){
-//       $('#updateCourseModal').modal('hide');
-//       toastr.error("Something went wrong");
 
-//     });
-//   }
-// }
+}
+
+
+//  game update
+
+$('#CourseUpdateConfirmBtn').click(function(){
+  
+  var  id=$('#updateCourseid').html();
+  var  matchNameId=$('#matchupdateNameId').val();
+  var  gameDeviceId=$('#gameupdateDeviceId').val();
+  var  TypeId=$('#TypeupdateId').val();
+  var  Version=$('#updateVersion').val();
+  var  MapId=$('#updateMapId').val();
+  var  roomId=$('#roomupdateId').val();
+  var  roompasswordId=$('#roomupdatepasswordId').val();
+  var  totallpeople=$('#totallupdatepeople').val();
+  var  entryFee=$('#entryupdateFee').val();
+
+  var  winningprice=$('#winningupdateprice').val();
+  var  runnersFirstUp=$('#runnersupdateFirstUp').val();
+  var  runnersSecondUp=$('#runnersupdateSecondUp').val();
+  var  perKill=$('#perupdateKill').val();
+  var  totallprice=$('#totallupdateprice').val();
+  var  gamelink=$('#gameupdatelink').val();
+  var  GameName=$('#GameupdateName').val();
+
+  var  dcoin=$('#updatedcoin').val();
+  var  cskill=$('#updatechskill').val();
+  var  limitammo=$('#updatelimitammo').val();
+  var  round=$('#updateround').val();
+
+
+
+  courseUpdate(id,matchNameId,gameDeviceId,TypeId,Version,MapId,roomId,roompasswordId,totallpeople,entryFee,winningprice,runnersFirstUp,runnersSecondUp,perKill,totallprice,gamelink,GameName,dcoin,cskill,limitammo,round);
+})
+
+function courseUpdate(id,matchNameId,gameDeviceId,TypeId,Version,MapId,roomId,roompasswordId,totallpeople,entryFee,winningprice,runnersFirstUp,runnersSecondUp,perKill,totallprice,gamelink,GameName,dcoin,cskill,limitammo,round){
+
+  if(matchNameId.length==0){
+    toastr.error('Match Name is empty!');
+  }else if(gameDeviceId.length==0){
+    toastr.error('Device is empty!');
+  }else if(TypeId.length==0){
+    toastr.error('Type Fee is empty!');
+  }else if(Version.length==0){
+    toastr.error('Version  empty!');
+  }else if(MapId.length==0){
+    toastr.error('Map is empty!');
+  }else if(roomId.length==0){
+    toastr.error('Room Id is empty!');
+  }else if(roompasswordId.length==0){
+    toastr.error('Room Password is empty!');
+  }else if(totallpeople.length==0){
+    toastr.error('Total is empty!');
+  }else if(entryFee.length==0){
+    toastr.error('Entry fee  is empty!');
+  }else if(winningprice.length==0){
+    toastr.error('Winning price is empty!');
+  }else if(runnersFirstUp.length==0){
+    toastr.error('Runners up First is empty!');
+  }else if(runnersSecondUp.length==0){
+    toastr.error('Runners up Second is empty!');
+  }else if(perKill.length==0){
+    toastr.error('Per kill is empty!');
+  }else if(totallprice.length==0){
+    toastr.error('Totall price is empty!');
+  }else if(gamelink.length==0){
+    toastr.error('Game Link is empty!');
+  }else if(GameName.length==0){
+    toastr.error('Game Name is empty!');
+  }else{
+    $('#CourseUpdateConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
+    axios.post('/admin/gameUpdate',{
+      id:id,
+      matchNameId: matchNameId,
+      gameDeviceId: gameDeviceId,
+      TypeId: TypeId,
+      Version: Version,
+      MapId: MapId,
+      roomId:roomId,
+      roompasswordId:roompasswordId,
+      totallpeople:totallpeople,
+      entryFee:entryFee,
+      winningprice:winningprice,
+      runnersFirstUp:runnersFirstUp,
+      runnersSecondUp:runnersSecondUp,
+      perKill:perKill,
+      totallprice:totallprice,
+      gamelink:gamelink,
+      GameName:GameName,
+      dcoin:dcoin,
+      cskill:cskill,
+      limitammo:limitammo,
+      round:round
+    })
+    .then(function(response){
+      $('#CourseUpdateConfirmBtn').html("Save");
+      if(response.status==200){
+
+        if(response.data==1){
+          $('#updateCourseModal').modal('hide');
+          toastr.success("Update success");
+          getOrderData();
+        }else{
+
+          $('#updateCourseModal').modal('hide');
+          toastr.error("Update fail");
+          getOrderData();
+        }
+
+      }else{
+        $('#updateCourseModal').modal('hide');
+        toastr.error("Something went wrong");
+      }
+
+
+    }).catch(function(error){
+      $('#updateCourseModal').modal('hide');
+      toastr.error("Something went wrong");
+
+    });
+  }
+}
 
 
 

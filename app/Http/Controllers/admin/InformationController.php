@@ -28,12 +28,19 @@ class InformationController extends Controller
         $collectroomvlink=$req->input('collectroomvlink');
         $joinmatchvlink=$req->input('joinmatchvlink');
         $termspolicy= $req->input('termspolicy');
+
+        $bkash=$req->input('bkash');
+        $nagad=$req->input('nagad');
+        $roket= $req->input('roket');
         
         $results=Information::where('id','=',$id)->update([
             'addmoneyvlink'=>$addmoneyvlink,
             'collectroomvlink'=>$collectroomvlink,
             'joinmatchvlink'=>$joinmatchvlink,
-            'termspolicy'=>$termspolicy  
+            'termspolicy'=>$termspolicy ,
+            'bkash'=>$bkash,
+            'nagad'=>$nagad,
+            'roket'=>$roket
            ]);
            if($results==true){
             return 1 ;

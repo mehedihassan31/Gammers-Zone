@@ -4,8 +4,10 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Models\gamesubscribe;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -191,7 +193,13 @@ class AuthController extends Controller
 
     function getUserData($id){
         $user=User::findOrFail($id);
-        return response($user, 200);
+        $results=gamesubscribe::with('match')->where('user_id',$id)->get();
+        $totall=count($results);
+        $response=[
+            "user"=>$user,
+            'Total_join'=>$totall
+        ];
+        return response($response, 200);
     }
 
 
