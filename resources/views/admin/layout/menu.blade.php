@@ -8,7 +8,20 @@
                  <li class="nav-item mt-3">ADMIN</li>
                 </ul>
                 <ul class="navbar-nav my-lg-0">
-                    <li class="nav-item"><a href="{{url('/logout')}}" class="btn btn-sm btn-danger">Logout</a></li>
+                    <li class="nav-item">
+                        <a  class="btn btn-sm btn-danger" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                      document.getElementById('logout-form').submit();">
+                         {{ __('Logout') }}
+                      </a>
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                    </li>
+
+
+
+                    {{-- <li class="nav-item"><a href="{{url('/logout')}}" class="btn btn-sm btn-danger">Logout</a></li> --}}
                 </ul>
             </div>
         </nav>

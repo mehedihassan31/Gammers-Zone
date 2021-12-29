@@ -197,7 +197,7 @@ class AuthController extends Controller
         $totall=count($results);
         $response=[
             "user"=>$user,
-            'Total_join'=>$totall
+            'total_join'=>$totall
         ];
         return response($response, 200);
     }

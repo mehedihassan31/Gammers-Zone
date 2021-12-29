@@ -1,19 +1,20 @@
 <?php
 
-use App\Http\Controllers\admin\ContactController;
-use App\Http\Controllers\admin\coursesController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\GameController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\OrderController;
-use App\Http\Controllers\admin\ProductsController;
-use App\Http\Controllers\admin\SliderController;
-use App\Http\Controllers\admin\ProjectsController;
-use App\Http\Controllers\admin\transectionController;
 use App\Http\Controllers\admin\usersController;
-use App\Http\Controllers\admin\GamesubscribeController;
+use App\Http\Controllers\admin\SliderController;
+use App\Http\Controllers\admin\ContactController;
+use App\Http\Controllers\admin\coursesController;
+use App\Http\Controllers\admin\ProductsController;
+use App\Http\Controllers\admin\ProjectsController;
 use App\Http\Controllers\admin\InformationController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\transectionController;
+use App\Http\Controllers\admin\GamesubscribeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +29,12 @@ Route::get('/',function(){
 });
 
 
+Auth::routes();
 
-Route::prefix('admin')->middleware(['loginCheck'])->group(function () {
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::prefix('admin')->middleware(['auth','loginCheck'])->group(function () {
 
 
     // Adminpanel Information
@@ -128,21 +133,9 @@ Route::post('/UsersDetails',[usersController::class,'getUserDetails']);
 
 
 
-Route::get('/login',[LoginController::class,'loginIndex']);
-Route::post('/onlogin',[LoginController::class,'onLogin']);
-Route::get('/logout',[LoginController::class,'onlogout']);
-
-
-
-
-
-
-
-
-
-
-
-
+// Route::get('/login',[LoginController::class,'loginIndex']);
+// Route::post('/onlogin',[LoginController::class,'onLogin']);
+// Route::get('/logout',[LoginController::class,'onlogout']);
 
 
 
