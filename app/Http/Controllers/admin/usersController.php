@@ -69,6 +69,18 @@ function winBalanceAdd(Request $request){
     }
 
 }
+function bannedornot(Request $request){
+    $id=$request->input('id');
+    $ban=$request->input('ban');
+    $results=users::where('id', $id)->update(['banned'=>$ban]);
+    if($results==true){
+        return 1 ;
+    }else{
+    
+        return 0;
+    }
+
+}
 
 
 

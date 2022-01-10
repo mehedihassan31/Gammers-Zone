@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 23, 2021 at 01:44 PM
+-- Generation Time: Jan 03, 2022 at 01:42 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -71,8 +71,30 @@ CREATE TABLE `gamesubscribe` (
   `match_id` int(11) NOT NULL,
   `range` int(11) DEFAULT NULL,
   `price_money` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `killbyuser` int(11) NOT NULL DEFAULT 0
+  `killbyuser` int(11) NOT NULL DEFAULT 0,
+  `rank` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `gamesubscribe`
+--
+
+INSERT INTO `gamesubscribe` (`id`, `user_id`, `gamename`, `match_id`, `range`, `price_money`, `killbyuser`, `rank`) VALUES
+(1, 1, 'hello4', 1, NULL, '0', 20, '1'),
+(2, 1, '6j', 1, NULL, '0', 0, '3'),
+(3, 1, 'hello4', 1, NULL, '0', 0, '2'),
+(4, 1, '6j', 1, NULL, '0', 0, '2'),
+(5, 1, 'hello4', 1, NULL, '0', 0, '0'),
+(6, 1, '6j', 1, NULL, '0', 0, '0'),
+(7, 1, 'hello4', 1, NULL, '0', 0, '0'),
+(8, 1, '6j', 1, NULL, '0', 0, '0'),
+(9, 1, 'hello4', 1, NULL, '0', 0, '0'),
+(10, 1, '6j', 1, NULL, '0', 0, '0'),
+(11, 1, 'hello4', 1, NULL, '0', 0, '0'),
+(12, 1, '6j', 1, NULL, '0', 0, '0'),
+(13, 1, 'hello4', 1, NULL, '0', 0, '0'),
+(14, 1, '6j', 1, NULL, '0', 0, '0'),
+(15, 1, 'jj', 2, 45, '022', 22, '022');
 
 -- --------------------------------------------------------
 
@@ -85,15 +107,18 @@ CREATE TABLE `information` (
   `addmoneyvlink` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `collectroomvlink` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `joinmatchvlink` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `termspolicy` text COLLATE utf8mb4_unicode_ci NOT NULL
+  `termspolicy` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bkash` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '01xxxxxxxxx',
+  `nagad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '01xxxxxxxxx',
+  `roket` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '01xxxxxxxxx'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `information`
 --
 
-INSERT INTO `information` (`id`, `addmoneyvlink`, `collectroomvlink`, `joinmatchvlink`, `termspolicy`) VALUES
-(1, '#', '#', '##', 'Policy hello');
+INSERT INTO `information` (`id`, `addmoneyvlink`, `collectroomvlink`, `joinmatchvlink`, `termspolicy`, `bkash`, `nagad`, `roket`) VALUES
+(1, '#W', '#@', '###', 'Policy hello1', '01xxxxxxxx1', '01xxxxxxxx1', '01xxxxxxxx1');
 
 -- --------------------------------------------------------
 
@@ -123,8 +148,23 @@ CREATE TABLE `matches` (
   `game_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `resultstatus` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'open',
   `game_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `game_type_by_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `game_type_by_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `default_coin` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cskill` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `limited_ammo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `round` int(255) DEFAULT NULL,
+  `reg_status` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'open'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `matches`
+--
+
+INSERT INTO `matches` (`id`, `name`, `Device`, `Type`, `version`, `map`, `match_type`, `room_id`, `room_password`, `totall_p`, `Entry_Fee`, `match_time`, `winning_price`, `runnerup_one`, `runnerup_two`, `per_kill`, `total_price`, `registered_p`, `game_link`, `resultstatus`, `game_name`, `game_type_by_date`, `default_coin`, `cskill`, `limited_ammo`, `round`, `reg_status`) VALUES
+(1, 'test1', 'mobile1', 'solo1', 'tpp1', 'bermuda1', 'Paid', '60121', '1234561', '45', 100, '2021-12-31 19:09:00', '10001', '111', '121', '131', '141', 12, '141', 'close', 'free fire1', '1', '11', '1', '12', 111, 'open'),
+(2, 'test', 'mobile', 'solo', 'tpp', 'bermuda', 'Paid', '6', '123456', '45', 100, '2022-01-21 19:22:00', '10', '11', '12', '13', '2000', 0, '11', 'close', 'free fire', '1', '1', '1', '1', 11, 'open'),
+(3, 'test', 'mobile', 'solo', 'tpp', 'bermuda', 'Paid', '6012', '123456', '45', 100, '2021-12-28 14:29:00', '10', '11', '12', '13', '14', 0, '#', 'close', 'free fire', '1', '1', '1', '1', 11, 'close'),
+(4, 'test', 'mobile', 'solo', 'tpp', 'bermuda', 'Paid', '6012', '123456', '45', 100, '2021-12-28 14:36:00', '10', '11', '12', '13', '14', 0, '#', 'open', 'free fire', '1', '11', '11', '11', 11, 'close');
 
 -- --------------------------------------------------------
 
@@ -184,6 +224,13 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('mehedihassan0031@gmail.com', '$2y$10$4XWcFjmar/3/qc9JGhoEx.zTrY7WCFJxorPbkcPIWGMImcFkIcY7K', '2021-12-30 10:48:51');
+
 -- --------------------------------------------------------
 
 --
@@ -222,7 +269,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (20, 'App\\Models\\User', 1, 'myToken', '8b499381754409d2af72344a42d08a517f9859bd2a1ac23f3fccb2e87ad86a34', '[\"*\"]', '2021-12-14 10:54:17', '2021-12-14 09:59:13', '2021-12-14 10:54:17'),
 (21, 'App\\Models\\User', 1, 'myToken', 'e839b9116d49d6ba91a39024d5abae15fc0859a5459c2ec824a6c75904481f15', '[\"*\"]', '2021-12-15 07:31:08', '2021-12-14 11:29:20', '2021-12-15 07:31:08'),
 (22, 'App\\Models\\User', 1, 'myToken', '1d5da803dda48e364145f608aaa2dd7eca36e639283d8bd756c37bc645aa5e31', '[\"*\"]', '2021-12-18 11:55:53', '2021-12-15 07:35:06', '2021-12-18 11:55:53'),
-(23, 'App\\Models\\User', 1, 'myToken', 'c3c14df141c613fe47e973478d8273baf460750459c500e4d774844855037936', '[\"*\"]', '2021-12-23 09:49:57', '2021-12-18 12:07:52', '2021-12-23 09:49:57'),
+(23, 'App\\Models\\User', 1, 'myToken', 'c3c14df141c613fe47e973478d8273baf460750459c500e4d774844855037936', '[\"*\"]', '2022-01-03 07:42:20', '2021-12-18 12:07:52', '2022-01-03 07:42:20'),
 (24, 'App\\Models\\User', 8, 'myToken', 'cff06d6acc0363d69f4247cd6eb46f2f9e99ac1f8ec5f7bc21c9b359066f589c', '[\"*\"]', NULL, '2021-12-22 08:38:43', '2021-12-22 08:38:43'),
 (25, 'App\\Models\\User', 9, 'myToken', '09300a2066d0bdd11812dd29b29fb43d2bfa23d021a9ef5886435d2f9e7c3a6b', '[\"*\"]', NULL, '2021-12-22 08:39:17', '2021-12-22 08:39:17'),
 (26, 'App\\Models\\User', 10, 'myToken', 'cc92868fa0b9feb1cdcb8f60affbbdc925a1a1f9c746328a0b9b8ba28b13534a', '[\"*\"]', NULL, '2021-12-22 09:05:14', '2021-12-22 09:05:14'),
@@ -238,7 +285,12 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (36, 'App\\Models\\User', 20, 'myToken', '2cdd4cdf2fdf747b793434f57ce1eb17bf0ae7feed623285c35d2d4bc96aaa3b', '[\"*\"]', NULL, '2021-12-22 09:36:39', '2021-12-22 09:36:39'),
 (37, 'App\\Models\\User', 21, 'myToken', '00fb86a8406ba0294a0b368525c558bf643448756b5a83deb4ac4ef47c0304ea', '[\"*\"]', NULL, '2021-12-22 09:37:26', '2021-12-22 09:37:26'),
 (38, 'App\\Models\\User', 22, 'myToken', '298822c9e5c5fee5d70d645f7da642c51b2be7a85fd09a4ca4c7b41e3258aa95', '[\"*\"]', NULL, '2021-12-22 09:38:05', '2021-12-22 09:38:05'),
-(39, 'App\\Models\\User', 1, 'myToken', 'a4db00c508f702a1d449ee757b23e525ae768aed51bf09ca5245f76064f4908e', '[\"*\"]', '2021-12-23 09:56:20', '2021-12-23 09:51:21', '2021-12-23 09:56:20');
+(39, 'App\\Models\\User', 1, 'myToken', 'a4db00c508f702a1d449ee757b23e525ae768aed51bf09ca5245f76064f4908e', '[\"*\"]', '2021-12-23 09:56:20', '2021-12-23 09:51:21', '2021-12-23 09:56:20'),
+(40, 'App\\Models\\User', 1, 'myToken', 'ee95c224fc6d9d6adc7f9f29183d0670e09add0834aeb510d7e565819c2d9205', '[\"*\"]', '2021-12-30 08:21:00', '2021-12-28 05:47:11', '2021-12-30 08:21:00'),
+(41, 'App\\Models\\User', 2, 'myToken', '2020821c9e1ca6a1087220b8e8719caf6f65dfe6e0f477b487d43dc1b17da1f4', '[\"*\"]', NULL, '2021-12-29 12:26:19', '2021-12-29 12:26:19'),
+(42, 'App\\Models\\User', 1, 'myToken', 'd3cb593595950981522328e5fc2446781e928e4a613efcad46a5b3b502762b58', '[\"*\"]', '2021-12-30 08:24:53', '2021-12-30 07:31:22', '2021-12-30 08:24:53'),
+(43, 'App\\Models\\User', 1, 'myToken', '55bb8b12ce456e0820f2ed5587e87d26ff33c009166220f751eab2061b5b855e', '[\"*\"]', NULL, '2021-12-30 08:29:51', '2021-12-30 08:29:51'),
+(44, 'App\\Models\\User', 1, 'myToken', '82797de4271a99b56ecee0c05bf69d34176efbb2e5df9fc879feec2586c64d5f', '[\"*\"]', '2021-12-30 09:38:14', '2021-12-30 09:37:22', '2021-12-30 09:38:14');
 
 -- --------------------------------------------------------
 
@@ -267,6 +319,15 @@ CREATE TABLE `slider` (
   `link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `slider`
+--
+
+INSERT INTO `slider` (`id`, `photo`, `link`, `title`) VALUES
+(2, 'http://127.0.0.1:8000/images/8-nov-3 (2).png', NULL, NULL),
+(3, 'http://127.0.0.1:8000/images/pubg.jpg', NULL, NULL),
+(4, 'http://127.0.0.1:8000/images/Free-Fire.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -297,15 +358,28 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `balance` int(11) DEFAULT 0,
+  `role` tinyint(11) NOT NULL DEFAULT 0,
   `winbalance` int(11) DEFAULT 0,
+  `total_kill` int(255) NOT NULL DEFAULT 0,
   `refer` tinyint(1) DEFAULT 0,
   `reference` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `banned` tinyint(1) NOT NULL DEFAULT 0,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `fname`, `lname`, `username`, `email`, `phone`, `balance`, `role`, `winbalance`, `total_kill`, `refer`, `reference`, `banned`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'mehedi1111', 'hassan1111', 'mehedi1111', 'mehedihassan0031@gmail.com', '0017883511', 300, 1, 300, 20, 0, NULL, 1, NULL, '$2y$10$B776unp2MS7rQYbKDI3XBefdholQDpxB4JGiZo/YCIJ/yOllaETxy', '10AO5ANgBBAep14IGH0AhgLTE3c7GUgKVnP07ZkL9KmddiOCy7v06f8PLgox', '2021-12-28 05:47:11', '2021-12-30 06:37:16'),
+(2, 'admin', 'admin', 'admin', 'admin@admin.com', '017000000', 0, 1, 0, 0, 0, NULL, 0, NULL, '$2y$10$f/Ybq0YNc7KyGkwbQ/QHh.iVVrAGyWwXvOOqKWZ9ng.kLVQCwB4P2', NULL, '2021-12-29 12:26:19', '2021-12-29 12:26:19'),
+(3, 'mehedi hassan', 'mehedi hassan', 'mehedi1', 'mehedihassan3112@gmail.com', NULL, 0, 0, 0, 0, 0, NULL, 0, NULL, '$2y$10$ixd73/GO4Yf2eDvQn.9JnOPqorek8WSmN/2ygtfWuwdNafjgTbQc2', NULL, '2021-12-31 10:30:15', '2021-12-31 10:30:15'),
+(4, 'hassan', 'hassan', 'mehedihassan', 'mehedi1@gmail.com', '01222', 0, 0, 0, 0, 0, NULL, 0, NULL, '$2y$10$krLNoXYWdXlHNQWah5Q3/.ccS4GfkslxOonlVtqNI9ir8AUEj9CzK', NULL, '2021-12-31 10:42:17', '2021-12-31 10:42:17');
 
 -- --------------------------------------------------------
 
@@ -437,7 +511,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `gamesubscribe`
 --
 ALTER TABLE `gamesubscribe`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `information`
@@ -449,7 +523,7 @@ ALTER TABLE `information`
 -- AUTO_INCREMENT for table `matches`
 --
 ALTER TABLE `matches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -467,7 +541,7 @@ ALTER TABLE `order`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -479,7 +553,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `slider`
 --
 ALTER TABLE `slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `transction`
@@ -491,7 +565,7 @@ ALTER TABLE `transction`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `withdraw`

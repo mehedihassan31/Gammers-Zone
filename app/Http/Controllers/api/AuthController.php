@@ -101,12 +101,39 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $token = $user->createToken('myToken')->plainTextToken;
 
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
+        if($user->banned=="0"){    
+                $token = $user->createToken('myToken')->plainTextToken;
+                $response = [
+                    'user' => $user,
+                    'token' => $token
+                ];
+        }else{
+
+            $response = [
+                 "user"=>[
+                        "id"=>1,
+                        "fname"=>"",
+                        "lname"=>"",
+                        "username"=>"",
+                        "email"=>"",
+                        "phone"=>"",
+                        "balance"=>0,
+                        "role"=>0,
+                        "winbalance"=>0,
+                        "total_kill"=>0,
+                        "refer"=>0,
+                        "reference"=>null,
+                        "banned"=>0,
+                        "email_verified_at"=>null,
+                        "created_at"=>"",
+                        "updated_at"=>""
+            ],
+                    "token"=> "",
+                    
+            ];
+        }
+
 
         return response($response, 201);
     }

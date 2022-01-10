@@ -16,7 +16,8 @@
           <th class="th-sm">phone</th>
           <th class="th-sm">Balance</th>
           <th class="th-sm">Win Balance</th>
-          <th class="th-sm">Add Balance</th>
+          <th class="th-sm">User Status</th>
+          <th class="th-sm">User Controll</th>
           {{-- <th class="th-sm">Delete</th> --}}
         </tr>
       </thead>
@@ -108,10 +109,24 @@
                   <input type="text" id="srid1" class="form-control" placeholder="Balance">
                   <button data-id='' id='bconfmEditbtn' type="button" class="btn btn-sm btn-danger">Save</button>
                 </div>
+
                 <div class="form-outline mb-4">
                   <input type="text" id="srid2" class="form-control" placeholder="Win Balace">
                   <button data-id='' id='winbconfmEditbtn' type="button" class="btn btn-sm btn-danger">Save</button>
                 </div>
+                
+                <div class="form-outline mb-4">
+                    <Label>Bann or Not:   </Label>
+                    <div class="custom-select" style="width:200px;">
+                      <select id="srid3" >
+                        <option value="">Select</option>
+                        <option value="1">Ban</option>
+                        <option value="0">Unban</option>
+                      </select>
+                    </div>
+                  <button data-id='' id='banned' type="button" class="btn btn-sm btn-danger">Save</button>
+                </div>
+
             </div>
           </form>
         </div>
@@ -159,7 +174,8 @@ axios.get('/admin/getUsersData')
     "<td>"+jsonData[i].phone+"</td>"+
     "<td>"+jsonData[i].balance+"</td>"+
     "<td>"+jsonData[i].winbalance+"</td>"+
-    "<td> <a class='serviceeditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit inside-table-button'>add Balance</i></a></td>"
+    "<td>"+jsonData[i].banned+"</td>"+
+    "<td> <a class='serviceeditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit inside-table-button'>Add & Controll</i></a></td>"
     // "<td><a class='serviceDeletebtn'  data-id='"+jsonData[i].id+"' ><i class='fas fa-trash-alt'></i></a></td>"
      ).appendTo('#servicetable');
     });
@@ -320,6 +336,41 @@ function winBalanceAdd(id,winbalance){
                 });
 
     }
+}
+
+
+// user banned or not------------------------------------------
+
+    $('#banned').click(function(){
+      var id=$('#serviceeditid').html();
+      var ban=$('#srid3').val();
+      banUser(id,ban);
+    })
+
+    
+function banUser(id,ban){
+                  axios.post('/admin/bannedornot',{
+                    id:id,
+                    ban:ban,
+                  })
+                  .then(function(response){
+
+                    if(response.data==1)
+                    {
+                      $('#EditModal').modal('hide');
+                      toastr.success("Update success");
+                      getUsersData();
+                
+                    }else{                  
+                      $('#EditModal').modal('hide');
+                      toastr.error("Update Faild");
+                      getUsersData();
+                    }               
+                  }).catch(function (error) {
+                
+                });
+
+    
 }
 
 

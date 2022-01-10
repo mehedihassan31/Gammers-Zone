@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\ForgotPasswordController;
 use App\Http\Controllers\api\gamesubscribeController;
 use App\Http\Controllers\api\InformationController;
 use App\Http\Controllers\api\matchesController;
@@ -89,6 +90,7 @@ Route::get('/orderlist/{id}',[OrderController::class,'getAllOrders']);
 Route::get('/results/{id}',[gamesubscribeController::class,"getResults"]);
 
 
+Route::get('/information',[InformationController::class,"getInformationData"]);
 
    
     
@@ -98,7 +100,8 @@ Route::get('/results/{id}',[gamesubscribeController::class,"getResults"]);
 Route::post('/register',[AuthController::class,"register"]);
 Route::post('/login',[AuthController::class,"login"]);
 
-Route::get('/information',[InformationController::class,"getInformationData"]);
+Route::post('password/reset',[ForgotPasswordController::class,"sendResetLinkEmail"]);
+
 
 
 

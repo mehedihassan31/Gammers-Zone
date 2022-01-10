@@ -4,9 +4,9 @@
     <div class="row">
         <div class="col-md-12 p-1">
 
-                <button id="addCoursebtn" class="btn btn-sm mr-3 btn-danger">Add New</button>
+                <button id="addGamebtn" class="btn btn-sm mr-3 btn-danger">Add New</button>
 
-            <table id="coursedatatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <table id="gamedatatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
               <thead>
                 <tr>
                   <th class="th-sm">Name</th>
@@ -51,7 +51,6 @@
 
 {{-- 
 add modal --}}
-
 
 
   <div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -120,7 +119,7 @@ add modal --}}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</button>
-        <button  id="CourseAddConfirmBtn" type="button" class="btn  btn-sm  btn-danger">Save</button>
+        <button  id="GameAddConfirmBtn" type="button" class="btn  btn-sm  btn-danger">Save</button>
       </div>
     </div>
   </div>
@@ -132,13 +131,13 @@ add modal --}}
 
 
 {{-- delete modal --}}
-<div class="modal fade" id="deleteCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="deleteGameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
 
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Delete course</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Delete Game</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -146,11 +145,11 @@ aria-hidden="true">
 
             <div class="modal-body">
             <h6>Do you want to delete?</h6>
-            <h2 id="courseDeletebtnid"></h2>
+            <h2 id="gameDeletebtnid"></h2>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">No</button>
-              <button data-id='' id='courseConfrmDeletebtn' type="button" class="btn btn-sm btn-danger">Yes</button>
+              <button data-id='' id='gameConfrmDeletebtn' type="button" class="btn btn-sm btn-danger">Yes</button>
             </div>
           </div>
         </div>
@@ -175,12 +174,19 @@ aria-hidden="true">
                         </button>
                       </div>
                       <div class="modal-body  text-center">
-                                <div  id="courseEditFrom" class="container none">
+                                <div  id="gameEditFrom" class="container none">
                                     <Label>Transection Id:</Label><h5 type="hidden"  id="updatestatusid"> </h5>
                                       <div class="row">
                                           <div class="card mx-auto">
-                                            {{-- <a  class="btn btn-primary" id="statusId">Pending</a> --}}
+                                            <label>Game:</label>
                                             <a  class="btn btn-primary" id="statusId">close</a>
+                                            
+                                          </div>
+                                          <div class="card mx-auto">
+
+                                            <label>Game Registration:</label>
+
+                                            <a  class="btn btn-primary" id="statusregId">close</a>
                                           </div>
                                       </div>
                                 </div>
@@ -198,9 +204,22 @@ aria-hidden="true">
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 {{-- Update modal --}}
 
-<div class="modal fade" id="updateCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="updateGameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -212,8 +231,8 @@ aria-hidden="true">
                         </button>
                       </div>
                       <div class="modal-body  text-center">
-                                <div id="courseEditFrom" class="container ">
-                                        <br> <label>Match Id: </label><h5 id="updateCourseid"></h5>
+                                <div id="gameEditFrom" class="container ">
+                                        <br> <label>Match Id: </label><h5 id="updateGameid"></h5>
                                       <div class="row">
                                           <div class="col-md-6">
                                             <input id="matchupdateNameId" type="text"  class="form-control mb-3" placeholder="Match Name">
@@ -274,7 +293,7 @@ aria-hidden="true">
                       </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</button>
-                    <button  id="CourseUpdateConfirmBtn" type="button" class="btn  btn-sm  btn-danger">Save</button>
+                    <button  id="GameUpdateConfirmBtn" type="button" class="btn  btn-sm  btn-danger">Save</button>
                   </div>
       </div>
     </div>
@@ -292,7 +311,7 @@ function getOrderData(){
           if(response.status==200){
             $('#mainDivCourse').removeClass('d-none');
             $('#loaderDivCourse').addClass('d-none');
-            $('#coursedatatable').DataTable().destroy();
+            $('#gamedatatable').DataTable().destroy();
           
             $('#course_table').empty();
            
@@ -305,7 +324,7 @@ function getOrderData(){
                 "<td class='td-sm'>"+jsonData[i].version+"</td>"+
                 "<td class='td-sm'>"+jsonData[i].map+"</td>"+
                 "<td> <a  href={{url('/admin/results')}}/"+jsonData[i].id+"><i class='fas fa-edit'>Results</i></a></td>"+
-                "<td> <a class='statusbtn' data-id='"+jsonData[i].id+"' >"+jsonData[i].resultstatus+"<br><i class='fas fa-edit'>Update Status</i></a></td>"+
+                "<td> <a class='statusbtn' data-id='"+jsonData[i].id+"' >G:"+jsonData[i].resultstatus+" GR:"+jsonData[i].reg_status+"<br><i class='fas fa-edit'>Update Status</i></a></td>"+
                 "<td> <a class='courseeditbtn' data-id='"+jsonData[i].id+"' ><i class='fas fa-edit'>Update And Edit</i></a></td>"+
                "<td><a class='courseDeletebtn'  data-id='"+jsonData[i].id+"' ><i class='fas fa-trash-alt'></i></a></td>"
               ).appendTo('#course_table');
@@ -313,16 +332,16 @@ function getOrderData(){
 
             $('.courseDeletebtn').click(function(){
               var id= $(this).data('id');
-              $('#deleteCourseModal').modal('show');
-              $('#courseDeletebtnid').html(id);
+              $('#deleteGameModal').modal('show');
+              $('#gameDeletebtnid').html(id);
             });
 
 
             $('.courseeditbtn').click(function(){
               var id=$(this).data('id');
               courseUpdatedetails(id);
-              $('#updateCourseid').html(id);
-              $('#updateCourseModal').modal('show');
+              $('#updateGameid').html(id);
+              $('#updateGameModal').modal('show');
               
             })
 
@@ -335,7 +354,7 @@ function getOrderData(){
               
             })
 
-            $('#coursedatatable').DataTable({"order":false});
+            $('#gamedatatable').DataTable({"order":false});
             $('.dataTables_length').addClass('bs-select');
 
           }else{
@@ -350,7 +369,7 @@ function getOrderData(){
 }
 
 
-$('#addCoursebtn').click(function(){
+$('#addGamebtn').click(function(){
   $('#addCourseModal').modal('show');
 
 })
@@ -358,7 +377,7 @@ $('#addCoursebtn').click(function(){
 
 
 
-$('#CourseAddConfirmBtn').click(function(){
+$('#GameAddConfirmBtn').click(function(){
   var  matchNameId=$('#matchNameId').val();
   var  gameDeviceId=$('#gameDeviceId').val();
   var  TypeId=$('#TypeId').val();
@@ -432,7 +451,7 @@ function matchAdd(matchNameId,gameDeviceId,TypeId,Version,MapId,matchTypeId,room
   }else if(gametypebyday.length==0){
     toastr.error('Game type BY day is empty!');
   }else{
-    $('#CourseAddConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
+    $('#GameAddConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
     axios.post('/admin/gameAdd',{
       matchNameId: matchNameId,
       gameDeviceId: gameDeviceId,
@@ -460,7 +479,7 @@ function matchAdd(matchNameId,gameDeviceId,TypeId,Version,MapId,matchTypeId,room
 
     })
     .then(function(response){
-      $('#CourseAddConfirmBtn').html("Save");
+      $('#GameAddConfirmBtn').html("Save");
       if(response.data==1){
           $('#addCourseModal').modal('hide');
           toastr.success("add success");
@@ -517,45 +536,92 @@ function statusUpdate(id,status){
 
 
 
+// status reg update
+$('#statusregId').click(function(){
+  var  id=$('#updatestatusid').html();
+  var  regstatus=$('#statusregId').text();
+   regstatusUpdate(id,regstatus);
+})
+function regstatusUpdate(id,regstatus){
+
+    axios.post('/admin/gameStatusReg',{
+                    id:id,
+                    regstatus:regstatus
+                  })
+                  .then(function(response){
+
+                    if(response.data==1)
+                    {
+                      $('#statusModal').modal('hide');
+                      toastr.success("Update success");
+                      getOrderData();
+                
+                    }else{
+                    
+                      $('#statusModal').modal('hide');
+                      toastr.error("Update Faild");
+                      getOrderData();
+                    }
+                
+                
+                  }).catch(function (error) {
+                    $('#statusModal').modal('hide');
+                    toastr.error("Something went wrong");
+
+                });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //delete course
 
-$('#courseConfrmDeletebtn').click(function(){
-var id=$('#courseDeletebtnid').html();
+$('#gameConfrmDeletebtn').click(function(){
+var id=$('#gameDeletebtnid').html();
  gameDelete(id);
 })
 
 
 function gameDelete(deleteid){
 
-  $('#courseConfrmDeletebtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
+  $('#gameConfrmDeletebtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
 
   axios.post('/admin/gameDelete',{id: deleteid})
   .then(function(response){
-    $('#courseConfrmDeletebtn').html("Yes");
+    $('#gameConfrmDeletebtn').html("Yes");
     if(response.status==200){
       if(response.data==1){
-        $('#deleteCourseModal').modal('hide');
+        $('#deleteGameModal').modal('hide');
         toastr.success("Delete success");
         getOrderData();
 
       }else{
-        $('#deleteCourseModal').modal('hide');
+        $('#deleteGameModal').modal('hide');
         toastr.error("Delete fail");
         getOrderData();
 
       }
 
     }else{
-      $('#deleteCourseModal').modal('hide');
+      $('#deleteGameModal').modal('hide');
       toastr.error("Something went wrong");
 
 
     }
 
   }).catch(function(error){
-    $('#deleteCourseModal').modal('hide');
+    $('#deleteGameModal').modal('hide');
       toastr.error("Something went wrong");
   })
 }
@@ -574,7 +640,7 @@ function courseUpdatedetails(id){
   }).then(function(response){
     if(response.status==200){
 
-      $('#courseEditFrom').removeClass('d-none');
+      $('#gameEditFrom').removeClass('d-none');
       $('#loaderDivUpdate').addClass('d-none');
         var jsonData=response.data;
 
@@ -620,9 +686,9 @@ function courseUpdatedetails(id){
 
 //  game update
 
-$('#CourseUpdateConfirmBtn').click(function(){
+$('#GameUpdateConfirmBtn').click(function(){
   
-  var  id=$('#updateCourseid').html();
+  var  id=$('#updateGameid').html();
   var  matchNameId=$('#matchupdateNameId').val();
   var  gameDeviceId=$('#gameupdateDeviceId').val();
   var  TypeId=$('#TypeupdateId').val();
@@ -648,10 +714,10 @@ $('#CourseUpdateConfirmBtn').click(function(){
 
 
 
-  courseUpdate(id,matchNameId,gameDeviceId,TypeId,Version,MapId,roomId,roompasswordId,totallpeople,entryFee,winningprice,runnersFirstUp,runnersSecondUp,perKill,totallprice,gamelink,GameName,dcoin,cskill,limitammo,round);
+  gameUpdate(id,matchNameId,gameDeviceId,TypeId,Version,MapId,roomId,roompasswordId,totallpeople,entryFee,winningprice,runnersFirstUp,runnersSecondUp,perKill,totallprice,gamelink,GameName,dcoin,cskill,limitammo,round);
 })
 
-function courseUpdate(id,matchNameId,gameDeviceId,TypeId,Version,MapId,roomId,roompasswordId,totallpeople,entryFee,winningprice,runnersFirstUp,runnersSecondUp,perKill,totallprice,gamelink,GameName,dcoin,cskill,limitammo,round){
+function gameUpdate(id,matchNameId,gameDeviceId,TypeId,Version,MapId,roomId,roompasswordId,totallpeople,entryFee,winningprice,runnersFirstUp,runnersSecondUp,perKill,totallprice,gamelink,GameName,dcoin,cskill,limitammo,round){
 
   if(matchNameId.length==0){
     toastr.error('Match Name is empty!');
@@ -686,7 +752,7 @@ function courseUpdate(id,matchNameId,gameDeviceId,TypeId,Version,MapId,roomId,ro
   }else if(GameName.length==0){
     toastr.error('Game Name is empty!');
   }else{
-    $('#CourseUpdateConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
+    $('#GameUpdateConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
     axios.post('/admin/gameUpdate',{
       id:id,
       matchNameId: matchNameId,
@@ -711,28 +777,28 @@ function courseUpdate(id,matchNameId,gameDeviceId,TypeId,Version,MapId,roomId,ro
       round:round
     })
     .then(function(response){
-      $('#CourseUpdateConfirmBtn').html("Save");
+      $('#GameUpdateConfirmBtn').html("Save");
       if(response.status==200){
 
         if(response.data==1){
-          $('#updateCourseModal').modal('hide');
+          $('#updateGameModal').modal('hide');
           toastr.success("Update success");
           getOrderData();
         }else{
 
-          $('#updateCourseModal').modal('hide');
+          $('#updateGameModal').modal('hide');
           toastr.error("Update fail");
           getOrderData();
         }
 
       }else{
-        $('#updateCourseModal').modal('hide');
+        $('#updateGameModal').modal('hide');
         toastr.error("Something went wrong");
       }
 
 
     }).catch(function(error){
-      $('#updateCourseModal').modal('hide');
+      $('#updateGameModal').modal('hide');
       toastr.error("Something went wrong");
 
     });

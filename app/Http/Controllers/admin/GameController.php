@@ -35,7 +35,21 @@ function gameStatusConfirm(Request $request){
     }else{
         return 0;
     }
-    
+
+}
+function gameStatusReg(Request $request){
+        
+    $id=$request->input('id');
+    $status=$request->input('regstatus');
+    $statusupadte=Game::where('id','=',$id)->update(['reg_status'=>$status]);
+
+    if($statusupadte)
+    {
+        return 1;
+
+    }else{
+        return 0;
+    }
 
 }
 
