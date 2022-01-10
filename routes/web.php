@@ -27,11 +27,36 @@ Route::get('/',function(){
 
 });
 
+// -----------------------------------------------------------user-------------------------------------------------------
+
 
 Auth::routes();
 Route::get('/home', [UserHomeController::class, 'index'])->name('home');
 Route::get('/profile', [UserController::class, 'IndexProfile'])->name('profile');
 Route::get('/userdashboard', [UserController::class, 'IndexDashboard'])->name('userdashboard');
+Route::get('/wallet', [UserController::class,'IndexWallet'])->name('wallet');
+
+Route::get('/mystatistics', [UserController::class,'IndexMystatistics'])->name('mystatistics');
+Route::get('/myorder', [UserController::class,'IndexMyorder'])->name('myorder');
+Route::get('/deposits', [UserController::class,'IndexDeposits'])->name('deposits');
+Route::get('/withdraw', [UserController::class,'IndexWithdraw'])->name('withdraw');
+Route::get('/transection', [UserController::class,'IndexTransection'])->name('transection');
+Route::get('/refer', [UserController::class,'IndexRefer'])->name('refer');
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-------------------------------------------------------Admin-----------------------------------------
+
 
 
 Route::prefix('admin')->middleware(['auth','loginCheck'])->group(function () {   
