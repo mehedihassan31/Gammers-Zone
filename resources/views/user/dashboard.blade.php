@@ -20,11 +20,12 @@
                 </div>
                 <div class="edit-info-area"></div>
                 <div class="main-info">
-                    <h5 class="title">mehedi hassan</h5>
+                    <h5 class="title">{{$userdata->fname}} {{$userdata->lname}}</h5>
                     <ul class="list">
                         <li>
-                            <p><span class="user-title">Email:</span> mehedihassan0031@gmail.com</p>
+                            <p><span class="user-title">Email:</span>{{$userdata->email}}</p>
                         </li>
+                    </ul>
                                                                                                                                                                                                                             </ul>
                 </div>
             </div>
@@ -40,44 +41,14 @@
                 </div>
                 <div class="edit-info-area"></div>
                 <div class="main-info">
-                    <h3 class="title w-title">Affiliate Bonus: 0৳</h3>
+                    <h3 class="title w-title">Income Balance: {{$userdata->winbalance}}৳</h3>
                     <hr>
-                    <h3 class="title w-title">Wallet Balance: 0৳</h3>
-                    <a href="https://angobilash.com/user/deposit/create" class="mybtn1 sm">
+                    <h3 class="title w-title">Deposit Balance: {{$userdata->balance}}৳</h3>
+                    <a href="{{route('deposits')}}" class="mybtn1 sm">
                         <i class="fas fa-plus"></i> Add Deposit
                     </a>
-                                                                                                                                        <hr>
-                        <h3 class="title w-title">Bonus point : 0</h3>
-                        
-                                                                                                                    <small>You Don't have enough point to convart. You need 1 points more.</small>
-                                                                                                            
-<!-- Modal -->
-<div class="modal fade" id="pointModal" tabindex="-1" aria-labelledby="pointModal" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-    <form method="post" action="https://angobilash.com/user/user_point/convert">
-        <input type="hidden" name="_token" value="O4SvqcINzOJvQMlBlWZx6ogEqBRWLnUu3InXbJqn">                        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
-                <label for="point">Point</label>
-                <select class="form-control" id="point" name="point">
-                    <option value="">Select Point</option>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </select>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
-    </form>
-</div>
-</div>
-</div>
 
-                                                    </div>
+                 </div>
             </div>
         </div>
     </div>

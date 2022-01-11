@@ -37,14 +37,27 @@ Route::get('/userdashboard', [UserController::class, 'IndexDashboard'])->name('u
 Route::get('/wallet', [UserController::class,'IndexWallet'])->name('wallet');
 
 Route::get('/mystatistics', [UserController::class,'IndexMystatistics'])->name('mystatistics');
+
 Route::get('/myorder', [UserController::class,'IndexMyorder'])->name('myorder');
+Route::post('/orderplace',[UserController::class,'makeOrder']);
+Route::get('/getorderlist',[UserController::class,'getAllOrders']);
+
+
+
+
 Route::get('/deposits', [UserController::class,'IndexDeposits'])->name('deposits');
+Route::get('/depositsbyid',[UserController::class,'getAllDeposits']);
+Route::post('/makedeposit',[UserController::class,'makeDeposit']);
+
 Route::get('/withdraw', [UserController::class,'IndexWithdraw'])->name('withdraw');
+Route::get('/withdrawshistory',[UserController::class,'getSingleWithdrawHistory']);
+Route::post('/reqwithdraw',[UserController::class,'withdrawReq']);
+
+
+
+
 Route::get('/transection', [UserController::class,'IndexTransection'])->name('transection');
 Route::get('/refer', [UserController::class,'IndexRefer'])->name('refer');
-
-
-
 
 
 

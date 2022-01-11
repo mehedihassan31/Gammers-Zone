@@ -6,9 +6,7 @@
 <div id="maindiv" class="container d-none">
     <div class="row">
     <div class="col-md-12 p-5">
-
       <button id="addnewbtn" class="btn btn-sm mr-3 btn-danger">Add New</button>
-
     <table id="serviceDatatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
       <thead>
         <tr>
@@ -413,9 +411,6 @@ $('#addnewbtn').click(function(){
 $('#addModal').modal('show');
 
 });
-
-
-
 
 
 $('#serconfmaddbtn').click(function(){

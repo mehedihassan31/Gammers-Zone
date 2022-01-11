@@ -72,7 +72,7 @@ aria-hidden="true">
                                           <div class="card mx-auto">
                                             <a  class="btn btn-primary" id="statusId1" >Pending</a>
                                             <a  class="btn btn-warning" id="statusId2">Processing</a>
-                                            <a  class="btn btn-primary" id="statusId3">Accepted</a>
+                                            <a  class="btn btn-primary" id="statusId3">Delivered</a>
                                           </div>
                                       </div>
                                 </div>

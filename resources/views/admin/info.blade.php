@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div >
+
 <div class="container mt-5">
   <div class="modal-content">
             <div class="modal-header">
@@ -37,7 +37,7 @@
     </div>
   </div>
 </div>
-</div>
+
 
 
 @endsection
